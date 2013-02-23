@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Fichero por lotes del validador de la Pr1.
+# Fichero por lotes del validador de la Pr3.
 # (c) Marco Antonio Gomez Martin, 2010
 #
 
@@ -9,4 +9,4 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-java -cp prog/check.jar es.fdi.gaia.validaPracticas.Valida Pr1 "$1"
+java -cp prog/check.jar es.fdi.gaia.validaPracticas.Valida Pr3 "$1"

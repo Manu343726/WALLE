@@ -1,5 +1,5 @@
 @echo off
-rem Fichero por lotes del comprobador de la Pr1.
+rem Fichero por lotes del comprobador de la Pr3.
 rem (c) Marco Antonio Gomez Martin, 2010
 rem El %1\.. es para intentar que funcione desde el explorador
 rem pero puede que s�lo lo haga si el directorio del usuario
@@ -10,8 +10,8 @@ if "_Opc_"=="-g" goto grafico
 if "%1"=="" goto error
 cd %1\..
 :grafico
-echo Validando la entrega de la Pr1...
-java -cp "%dirname%/prog/check.jar" es.fdi.gaia.validaPracticas.Valida Pr1 %1
+echo Validando la entrega de la Pr3...
+java -cp "%dirname%/prog/check.jar" es.fdi.gaia.validaPracticas.Valida Pr3 %1
 pause
 goto end
 :error
