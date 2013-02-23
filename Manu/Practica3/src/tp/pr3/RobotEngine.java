@@ -215,7 +215,10 @@ public class RobotEngine {
 		return this.cityMap.lookForStreet(this.currentPlace, this.direction);
 	}
 	
-
+	public void requestHelp()
+	{
+		System.out.println(Interpreter.interpreterHelp());
+	}
 
 	
 	

@@ -1,17 +1,18 @@
 package tp.pr3.instructions;
 
+import tp.pr3.Interpreter;
 import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
-public class MoveInstruction implements Instruction {
+public class HelpInstruction implements Instruction {
 	RobotEngine _engine;
 	NavigationModule _navigation;
 	ItemContainer _items;
 	
-	private static  String[] VALIDINSTRUCTIONS = {"MOVE","MOVER"};
+	private static  String[] VALIDINSTRUCTIONS = {"HELP","AYUDA"};
 	
 	@Override
 	public void configureContext(RobotEngine engine,
@@ -23,8 +24,8 @@ public class MoveInstruction implements Instruction {
 	}
 
 	@Override
-	public void execute() throws InstructionExecutionException{
-		_navigation.move();
+	public void execute() throws InstructionExecutionException {
+		_engine.requestHelp();
 	}
 
 	@Override
@@ -45,5 +46,4 @@ public class MoveInstruction implements Instruction {
 		
 		throw new WrongInstructionFormatException();
 	}
-
 }
