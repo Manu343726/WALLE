@@ -1,0 +1,12 @@
+turn left
+tUrn lEft
+TURN LEFT
+turn left
+turn right
+turn right
+turn right
+turn right
+turn
+turn UNKNOWN
+turn algo
+quit

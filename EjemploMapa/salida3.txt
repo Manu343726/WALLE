@@ -1,0 +1,28 @@
+PUERTA DEL SOL
+You are at the PUERTA DEL SOL, the center of Madrid. 
+Ufff, there are a lot of streets, but all of them are full of garbage.
+You should walk around this place to look for some interesting
+objects to pick up.
+Note that there is a big clock. Remember, leave the square before 
+night. It can be dangerous
+WALL·E is looking at direction NORTH
+
+WALL·E > The valid instructions for WALL·E are:
+  MOVE
+  TURN <LEFT | RIGHT>
+  HELP
+  QUIT
+
+WALL·E > The valid instructions for WALL·E are:
+  MOVE
+  TURN <LEFT | RIGHT>
+  HELP
+  QUIT
+
+WALL·E > The valid instructions for WALL·E are:
+  MOVE
+  TURN <LEFT | RIGHT>
+  HELP
+  QUIT
+
+WALL·E > WALL·E says: I have communication problems. Bye bye

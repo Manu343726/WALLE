@@ -1,0 +1,69 @@
+PUERTA DEL SOL
+You are at the PUERTA DEL SOL, the center of Madrid. 
+Ufff, there are a lot of streets, but all of them are full of garbage.
+You should walk around this place to look for some interesting
+objects to pick up.
+Note that there is a big clock. Remember, leave the square before 
+night. It can be dangerous
+WALL·E is looking at direction NORTH
+
+WALL·E > WALL·E is looking at direction WEST
+
+WALL·E > WALL·E is looking at direction SOUTH
+
+WALL·E > The valid instructions for WALL·E are:
+  MOVE
+  TURN <LEFT | RIGHT>
+  HELP
+  QUIT
+
+WALL·E > WALL·E says: Moving in direction SOUTH
+JACINTO BENAVENTE
+If you are cold you can start a fire with the wheels of those old buses
+WALL·E is looking at direction SOUTH
+
+WALL·E > WALL·E is looking at direction EAST
+
+WALL·E > WALL·E says: Moving in direction EAST
+NEPTUNO
+Watch Wall-e! Another fountain! Perhaps this one has water for drinking
+If you are cold, use that red and white scarf
+WALL·E is looking at direction EAST
+
+WALL·E > WALL·E is looking at direction SOUTH
+
+WALL·E > WALL·E says: I do not understand. Please repeat
+
+WALL·E > WALL·E says: Moving in direction SOUTH
+ATOCHA
+You have a lot of old trains here, but they do not work
+All trains were destroyed during the crisis of 2013
+Take all the iron you find
+WALL·E is looking at direction SOUTH
+
+WALL·E > WALL·E says: I do not understand. Please repeat
+
+WALL·E > WALL·E is looking at direction EAST
+
+WALL·E > WALL·E is looking at direction NORTH
+
+WALL·E > WALL·E says: Moving in direction NORTH
+NEPTUNO
+Watch Wall-e! Another fountain! Perhaps this one has water for drinking
+If you are cold, use that red and white scarf
+WALL·E is looking at direction NORTH
+
+WALL·E > WALL·E says: Moving in direction NORTH
+CIBELES
+Arggg, the fountain is ugly! The water is very dirty. 
+You should leave before the lions attack you
+WALL·E is looking at direction NORTH
+
+WALL·E > WALL·E says: Moving in direction NORTH
+COLON
+Sometime ago, Spanish people concentrates here to watch football 
+in a big screen.
+Wall-e, did you know that in Spain there were very good football teams?.
+Look for cans! People throw cans after watching football!
+WALL·E is looking at direction NORTH
+WALL·E says: I am at my spaceship. Shutting down... Bye bye
