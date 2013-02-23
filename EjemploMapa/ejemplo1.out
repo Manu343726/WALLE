@@ -1,0 +1,108 @@
+PUERTA DEL SOL
+You are at the PUERTA DEL SOL, the center of Madrid. 
+Ufff, there are a lot of streets, but all of them are full of garbage.
+You should walk around this place to look for some interesting
+objects to pick up.
+Note that there is a big clock. Remember, leave the square before 
+night. It can be dangerous
+The place contains these objects: 
+   Coal
+   grapes
+   newspapers
+   Spaceballs-card
+
+   * My power is 50
+   * My recycled material is: 0
+WALL·E is looking at direction NORTH
+WALL·E > ---Orden: scan---
+WALL·E says: My inventory is empty
+WALL·E > ---Orden: pick spaceballs-card---
+WALL·E says: I am happy! Now I have  spaceballs-card
+WALL·E > ---Orden: pick grapes---
+WALL·E says: I am happy! Now I have  grapes
+WALL·E > ---Orden: pick newspapers---
+WALL·E says: I am happy! Now I have  newspapers
+WALL·E > ---Orden: scan---
+WALL·E says: I am carrying the following items
+   grapes
+   newspapers
+   Spaceballs-card
+
+WALL·E > ---Orden: scan spaceballs-card---
+WALL·E says: Spaceballs-card: This is the kind of combination an idiot would have on his luggage
+WALL·E > ---Orden: help---
+The valid instructions for WALL-E are:
+     MOVE
+     TURN <LEFT | RIGHT>
+     PICK <id>
+     SCAN [ <id> ]
+     OPERATE <id>
+     HELP
+     QUIT
+
+WALL·E > ---Orden: operate grapes---
+   * My power is 51
+   * My recycled material is: 0
+WALL·E says: What a pity! I have no more grapes in my inventory
+WALL·E > ---Orden: operate newspapers---
+   * My power is 51
+   * My recycled material is: 5
+WALL·E says: What a pity! I have no more newspapers in my inventory
+WALL·E > ---Orden: operate spaceballs-card---
+WALL·E says: I have problems using the object spaceballs-card
+WALL·E > ---Orden: turn right---
+   * My power is 50
+   * My recycled material is: 5
+WALL·E is looking at direction EAST
+WALL·E > ---Orden: operate spaceballs-card---
+WALL·E > ---Orden: move---
+WALL·E says: Moving in direction EAST
+CIBELES
+Arggg, the fountain is ugly! The water is very dirty. 
+You should leave before the lions attack you
+The place contains these objects: 
+   Spaceballs-card
+   walle-card
+   water
+   white-scarf
+
+   * My power is 45
+   * My recycled material is: 5
+WALL·E is looking at direction EAST
+WALL·E > ---Orden: scan---
+WALL·E says: I am carrying the following items
+   Spaceballs-card
+
+WALL·E > ---Orden: pick spaceballs-card---
+WALL·E says: I am stupid! I had already the object spaceballs-card
+WALL·E > ---Orden: pick walle-card---
+WALL·E says: I am happy! Now I have  walle-card
+WALL·E > ---Orden: pick water---
+WALL·E says: I am happy! Now I have  water
+WALL·E > ---Orden: scan water---
+WALL·E says: water: to put out possible fires// power = 11, times = 3
+WALL·E > ---Orden: operate water---
+   * My power is 56
+   * My recycled material is: 5
+WALL·E > ---Orden: operate water---
+   * My power is 67
+   * My recycled material is: 5
+WALL·E > ---Orden: operate water---
+   * My power is 78
+   * My recycled material is: 5
+WALL·E says: What a pity! I have no more water in my inventory
+WALL·E > ---Orden: move---
+WALL·E says: Arrggg, there is a street but it is closed!
+WALL·E > ---Orden: scan walle-card---
+WALL·E says: walle-card: I lost it when I was looking for garbage
+WALL·E > ---Orden: operate walle-card---
+WALL·E > ---Orden: move---
+WALL·E says: Moving in direction EAST
+PUERTA DE ALCALA
+Ok, finally you have found your spaceship....
+The place is empty. There are no objects to pick
+
+   * My power is 73
+   * My recycled material is: 5
+WALL·E is looking at direction EAST
+WALL·E says: I am at my space ship. Bye Bye

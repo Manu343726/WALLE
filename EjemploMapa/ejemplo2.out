@@ -1,0 +1,25 @@
+PUERTA DEL SOL
+You are at the PUERTA DEL SOL, the center of Madrid. 
+Ufff, there are a lot of streets, but all of them are full of garbage.
+You should walk around this place to look for some interesting
+objects to pick up.
+Note that there is a big clock. Remember, leave the square before 
+night. It can be dangerous
+The place contains these objects: 
+   Coal
+   grapes
+   newspapers
+   Spaceballs-card
+
+   * My power is 50
+   * My recycled material is: 0
+WALL·E is looking at direction NORTH
+WALL·E > ---Orden: pick Coal---
+WALL·E says: I am happy! Now I have  Coal
+WALL·E > ---Orden: scan coal---
+WALL·E says: Coal: Be careful with this fuel because it is extremely contaminant// power = -80, times = 1
+WALL·E > ---Orden: operate coal---
+   * My power is 0
+   * My recycled material is: 0
+WALL·E says: What a pity! I have no more coal in my inventory
+WALL·E says: I run out of fuel. I cannot move. Shutting down...

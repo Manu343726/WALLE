@@ -1,0 +1,25 @@
+scan
+pick spaceballs-card
+pick grapes
+pick newspapers
+scan
+scan spaceballs-card
+help
+operate grapes
+operate newspapers
+operate spaceballs-card
+turn right
+operate spaceballs-card
+move
+scan
+pick spaceballs-card
+pick walle-card
+pick water
+scan water
+operate water
+operate water
+operate water
+move
+scan walle-card
+operate walle-card
+move
