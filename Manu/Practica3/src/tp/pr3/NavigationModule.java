@@ -58,4 +58,9 @@ public class NavigationModule {
 		else
 			throw new InstructionExecutionException();
 	}
+	
+	public void scanCurrentPlace()
+	{
+		_currentPlace.toString();
+	}
 }

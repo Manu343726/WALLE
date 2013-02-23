@@ -62,9 +62,9 @@ public class Place {
 		return this.itemContainer.pickItem(id);
 	}
 	
-	public void dropItem(Item it)
+	public boolean dropItem(Item it)
 	{
-		this.itemContainer.addItem(it);
+		return this.itemContainer.addItem(it);
 	}
 	
 	public boolean existItem(String id)
