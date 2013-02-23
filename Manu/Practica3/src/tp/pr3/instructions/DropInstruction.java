@@ -1,17 +1,19 @@
 package tp.pr3.instructions;
 
+import tp.pr3.Item;
 import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
-public class HelpInstruction implements Instruction {
+public class DropInstruction implements Instruction {
 	RobotEngine _engine;
 	NavigationModule _navigation;
 	ItemContainer _items;
+	String _id;
 	
-	private static  String[] VALIDINSTRUCTIONS = {"HELP","AYUDA"};
+	private static  String[] VALIDINSTRUCTIONS = {"DROP","SOLTAR"};
 	
 	@Override
 	public void configureContext(RobotEngine engine,
@@ -20,11 +22,17 @@ public class HelpInstruction implements Instruction {
 		_engine = engine;
 		_navigation = navigation;
 		_items = robotContainer;
+		_id="";
 	}
 
 	@Override
 	public void execute() throws InstructionExecutionException {
-		_engine.requestHelp();
+		Item item = _items.pickItem(_id);
+		
+		if(item != null)
+			_navigation.dropItemAtCurrentPlace(item);
+		else
+			throw new InstructionExecutionException();
 	}
 
 	@Override
@@ -32,17 +40,23 @@ public class HelpInstruction implements Instruction {
 		String help = "";
 		
 		for(String instruction : VALIDINSTRUCTIONS)
-			help += instruction + " | ";
+			help += instruction + " <id> | ";
 		
 		return help.substring(0,help.length() - 3);//Si java no es eficiente, yo tampoco
 	}
 
 	@Override
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
-		for(String instruction : VALIDINSTRUCTIONS)
-			if(cad.compareToIgnoreCase(instruction) == 0)
-				return this; //Ésto le va a encantar a Alberto...
+		String[] words = cad.split(" ");
 		
-		throw new WrongInstructionFormatException();
+		if(words.length == 2)
+			if(words[0].equals(VALIDINSTRUCTIONS[0]) || words[0].equals(VALIDINSTRUCTIONS[1]))
+				_id = words[1];
+			else
+				throw new WrongInstructionFormatException();
+		else
+			throw new WrongInstructionFormatException();
+		
+		return this;
 	}
 }
