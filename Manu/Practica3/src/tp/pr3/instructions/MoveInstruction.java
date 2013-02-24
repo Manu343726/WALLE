@@ -11,7 +11,8 @@ public class MoveInstruction implements Instruction {
 	NavigationModule _navigation;
 	ItemContainer _items;
 	
-	private static  String[] VALIDINSTRUCTIONS = {"MOVE","MOVER"};
+	private static final String[] VALIDINSTRUCTIONS = {"MOVE","MOVER"};
+	public static final int EXECUTIONFUEL = -5;//Igual que en TurnInstruction, ¡nunca hard-coding!
 	
 	@Override
 	public void configureContext(RobotEngine engine,
@@ -25,6 +26,8 @@ public class MoveInstruction implements Instruction {
 	@Override
 	public void execute() throws InstructionExecutionException{
 		_navigation.move();
+		_engine.addFuel(EXECUTIONFUEL);
+		_engine.printRobotState(true, true, true);
 	}
 
 	@Override

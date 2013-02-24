@@ -22,7 +22,6 @@ public class PickInstruction implements Instruction {
 		_engine = engine;
 		_navigation = navigation;
 		_items = robotContainer;
-		_id="";
 	}
 
 	@Override

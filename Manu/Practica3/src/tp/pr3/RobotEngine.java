@@ -15,6 +15,8 @@ public class RobotEngine {
 	private int fuelAmount;
 	private ItemContainer itemContainer;
 	
+	private NavigationModule _navigation;
+	
 	
 	//WALL-E'S MESSAGES
 	private final static String WALL_E = "WALL·E";
@@ -89,11 +91,11 @@ public class RobotEngine {
 				System.out.println(NOTUNDERSTAND);			
 			else{
 				switch(instruction.getAction()){
-				case HELP: 
+				case HELP://YA REFACTORIZADO
 					System.out.println(Interpreter.interpreterHelp()); break;
 				case QUIT: 
 					quit = true; break;
-				case TURN:
+				case TURN://YA REFACTORIZADO
 					this.direction = this.direction.rotate(instruction.getRotation());
 					this.fuelAmount = this.fuelAmount - 1;
 					
@@ -101,7 +103,7 @@ public class RobotEngine {
 					System.out.println(MYRECYCLEDMATERIALIS + this.recycledMaterial);
 					System.out.println(ISLOOKINGAT + this.direction.toString());
 					break;
-				case MOVE:
+				case MOVE://YA REFACTORIZADO
 					street = this.cityMap.lookForStreet(this.currentPlace, this.direction);
 					
 					if(street == null)
@@ -225,4 +227,24 @@ public class RobotEngine {
 		//LALALALALALALALALA
 	}
 	
+	public void printRobotState()
+	{
+		printRobotState(false,false,true);//Esas cosas que habría hecho con parametros opcionales....
+	}
+	
+	public void printRobotState(boolean printIsMoving, boolean printJump, boolean printLookingAt)
+	{
+		if(printIsMoving)
+		{
+	        System.out.println(ISMOVING + this.direction.toString());
+		    System.out.println(this.currentPlace.toString());
+		}
+		
+		if(printJump) System.out.println();
+		
+		System.out.println(WallEsMessages.MYPOWERIS + this.fuelAmount);
+		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + this.recycledMaterial);
+		
+		if(printLookingAt) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+	}
 }

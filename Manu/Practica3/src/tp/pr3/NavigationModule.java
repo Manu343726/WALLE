@@ -53,10 +53,13 @@ public class NavigationModule {
 	{
 		Street currentStreet = getHeadingStreet();
 		
-		if(currentStreet != null && currentStreet.isOpen())
-			_currentPlace = currentStreet.nextPlace(_currentPlace);
+		if(currentStreet != null)
+			if(currentStreet.isOpen())
+				_currentPlace = currentStreet.nextPlace(_currentPlace);
+			else
+				throw new InstructionExecutionException(WallEsMessages.STREETCLOSED);
 		else
-			throw new InstructionExecutionException();
+			throw new InstructionExecutionException(WallEsMessages.NOSTREET);
 	}
 	
 	public void scanCurrentPlace()
