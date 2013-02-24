@@ -220,6 +220,9 @@ public class RobotEngine {
 		System.out.println(Interpreter.interpreterHelp());
 	}
 
-	
+	public void requestQuit()
+	{
+		//LALALALALALALALALA
+	}
 	
 }
