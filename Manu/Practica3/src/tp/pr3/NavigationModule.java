@@ -61,6 +61,6 @@ public class NavigationModule {
 	
 	public void scanCurrentPlace()
 	{
-		_currentPlace.toString();
+		System.out.println(_currentPlace.toString());
 	}
 }
