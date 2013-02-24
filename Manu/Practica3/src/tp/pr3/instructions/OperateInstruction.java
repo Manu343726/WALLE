@@ -1,9 +1,11 @@
 package tp.pr3.instructions;
 
+import tp.pr3.CodeCard;
 import tp.pr3.Item;
 import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
+import tp.pr3.WallEsMessages;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
@@ -13,7 +15,7 @@ public class OperateInstruction implements Instruction {
 	ItemContainer _items;
 	String _id;
 	
-	private static  String[] VALIDINSTRUCTIONS = {"OPERATE","OPERAR"};
+	private static final String[] VALIDINSTRUCTIONS = {"OPERATE","OPERAR"};
 	
 	@Override
 	public void configureContext(RobotEngine engine,
@@ -26,12 +28,24 @@ public class OperateInstruction implements Instruction {
 
 	@Override
 	public void execute() throws InstructionExecutionException {
-		Item item = _items.pickItem(_id);
+		Item item = _items.getItem(_id);
 		
 		if(item != null)
-			item.use(_engine,_navigation.getCurrentPlace());
+			if(item.use(_engine,_navigation.getCurrentPlace()))
+			{
+				if(item.getClass() != CodeCard.class)//Otra guarrada derivada del maravilloso diseño de la práctica...
+					_engine.printRobotState(RobotEngine.PRINT_ONLYPOWERANDMATERIAL);
+			
+				if(!item.canBeUsed())
+				{
+					System.out.println(WallEsMessages.WHATAPITY1 + item.getId() + WallEsMessages.WHATAPITY2);
+					_items.pickItem(_id);
+				}
+			}
+			else
+				throw new InstructionExecutionException(WallEsMessages.IHAVEPROBLEMS + item.getId());
 		else
-			throw new InstructionExecutionException();
+			throw new InstructionExecutionException(WallEsMessages.IHAVENOT);
 	}
 
 	@Override

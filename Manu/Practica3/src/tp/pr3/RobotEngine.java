@@ -16,7 +16,28 @@ public class RobotEngine {
 	private ItemContainer itemContainer;
 	
 	private NavigationModule _navigation;
+	private boolean _quit;
 	
+	/***************************************************************************************************\
+	 * PARÁMETROS DE LA FUNCIÓN "PRINTROBOTSTATE":  													*
+	 * 																									*	
+	 * La función tiene tres parámetros:																*
+	 *  - PrintIsMoving: Indica si se muestra hacia donde se mueve WALL-E								*
+	 *  - PrintJump: Indica si se muestra una línea entre "WALL-E is moving..." y "My power is..."		*
+	 *  - PringLookingAt: Indica si se muestra hacia donde mira WALL-E									*
+	 * 																									*
+	 * Éstos tres parámetros son codificados en los tres bits menos significativos de un entero.		*
+	 * Puede parecer muy enrevesado, pero lo hago por el simple hecho de que de ésta manera las			*
+	 * llamadas a la función quedan mucho más claras, comparadas con "printRobotState(true,true,true)"	*
+	 * por ejemplo. 																					*	
+	 \**************************************************************************************************/
+	public static final int PRINT_ONLYPOWERANDMATERIAL = 0x0; //000
+	public static final int PRINT_ISMOVING             = 0x4; //100
+	public static final int PRINT_JUMP 	               = 0x2; //010
+	public static final int PRINT_LOOKINGAT            = 0x1; //001	
+	private static final int LSBMASK = 0x1;
+	private static final int TRUE  = 1;
+	private static final int FALSE = 0;
 	
 	//WALL-E'S MESSAGES
 	private final static String WALL_E = "WALL·E";
@@ -61,17 +82,37 @@ public class RobotEngine {
 		this.fuelAmount = 50;
 		this.recycledMaterial = 0;
 		this.itemContainer = new ItemContainer();
+		_quit = false;
 	}
 	
 	
 	/* PUBLIC METHODS */
+	public void printRobotState()
+	{
+		printRobotState(PRINT_LOOKINGAT);
+	}
+	
+	public void printRobotState(int params)
+	{//Y por que #!x¿?¿#¡ no hay casting de entero a bool? 
+		if(((params >> 2) & LSBMASK) == TRUE)
+		{
+	        System.out.println(ISMOVING + this.direction.toString());
+		    System.out.println(this.currentPlace.toString());
+		}
+		
+		if(((params >> 1) & LSBMASK) == TRUE) System.out.println();
+		
+		System.out.println(WallEsMessages.MYPOWERIS + this.fuelAmount);
+		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + this.recycledMaterial);
+		
+		if((params & LSBMASK) == TRUE) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+	}
+	
 	/**
 	 * Starts the robot engine. Gets user instructions, processes the instructions and makes the necessary changes
 	 */
 	@SuppressWarnings("incomplete-switch")
 	public void startEngine(){
-		
-		boolean quit = false;
 		Scanner sc = new Scanner(System.in);
 		Instruction instruction = null;
 		Street street = null;
@@ -93,8 +134,8 @@ public class RobotEngine {
 				switch(instruction.getAction()){
 				case HELP://YA REFACTORIZADO
 					System.out.println(Interpreter.interpreterHelp()); break;
-				case QUIT: 
-					quit = true; break;
+				case QUIT://YA REFACTORIZADO
+					_quit = true; break;
 				case TURN://YA REFACTORIZADO
 					this.direction = this.direction.rotate(instruction.getRotation());
 					this.fuelAmount = this.fuelAmount - 1;
@@ -125,7 +166,7 @@ public class RobotEngine {
 						}
 					}
 					break;
-				case PICK:
+				case PICK://YA REFACTORIZADO
 					item = this.currentPlace.pickItem(instruction.getId());
 					if(item == null)
 						//No esta ese objeto en ese lugar (Laura)
@@ -134,7 +175,7 @@ public class RobotEngine {
 						if(this.itemContainer.getItem(item.getId()) != null){
 							//Walle ya tiene el objeto (Laura)
 							System.out.println(ALREADYHAVEOBJECT + instruction.getId());//Para que encaje con el validador (la id que has metido en la instruccion es en minusculas)
-							//Lo volvemos a poner en el lugar (Laura)
+							//Lo volvemos a poner en el lugar (Laura)    
 							this.currentPlace.addItem(item);//No es un poco absurdo sacarlo y volverlo a meter?....
 						}
 						else{
@@ -144,7 +185,7 @@ public class RobotEngine {
 						}
 					}
 					break;
-				case SCAN:
+				case SCAN://YA REFACTORIZADO
 					if(instruction.getId() == ""){//Se deben mostrar todos los elementos
 						if(this.itemContainer.numberOfItems() == 0)//el contenedor esta vacio
 							System.out.println(INVENTORYEMPTY);
@@ -161,7 +202,7 @@ public class RobotEngine {
 						    System.out.println(WALLESAYS + item.toString());
 					}	
 					break;
-				case OPERATE:
+				case OPERATE://YA REFACTORIZADO
 					item = this.itemContainer.getItem(instruction.getId());
 					if(item == null)
 						System.out.println(IHAVENOT);
@@ -183,9 +224,9 @@ public class RobotEngine {
 					break;
 				}
 			}	
-		}while(!quit && !this.currentPlace.isSpaceship() && this.fuelAmount > 0);
+		}while(!_quit && !this.currentPlace.isSpaceship() && this.fuelAmount > 0);
 		
-		if(quit)
+		if(_quit)
 			System.out.print(ENDAPPLICATION);
 		else if(this.fuelAmount == 0)
 			System.out.print(NOFUEL);
@@ -224,27 +265,6 @@ public class RobotEngine {
 
 	public void requestQuit()
 	{
-		//LALALALALALALALALA
-	}
-	
-	public void printRobotState()
-	{
-		printRobotState(false,false,true);//Esas cosas que habría hecho con parametros opcionales....
-	}
-	
-	public void printRobotState(boolean printIsMoving, boolean printJump, boolean printLookingAt)
-	{
-		if(printIsMoving)
-		{
-	        System.out.println(ISMOVING + this.direction.toString());
-		    System.out.println(this.currentPlace.toString());
-		}
-		
-		if(printJump) System.out.println();
-		
-		System.out.println(WallEsMessages.MYPOWERIS + this.fuelAmount);
-		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + this.recycledMaterial);
-		
-		if(printLookingAt) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+		_quit=true;
 	}
 }

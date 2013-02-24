@@ -47,7 +47,6 @@ public class ScanInstruction implements Instruction {
 				System.out.println(WallEsMessages.WALLESAYS + item.toString());
 			else
 				throw new InstructionExecutionException(WallEsMessages.IHAVENOT);
-				
 		}
 	}
 

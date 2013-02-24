@@ -4,6 +4,7 @@ import tp.pr3.Item;
 import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
+import tp.pr3.WallEsMessages;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
@@ -29,9 +30,18 @@ public class PickInstruction implements Instruction {
 		Item item = _navigation.pickItemFromCurrentPlace(_id);
 		
 		if(item != null)
-			_items.addItem(item);
+			if(_items.getItem(_id) == null)
+			{
+				_items.addItem(item);
+				System.out.println(WallEsMessages.NOWIHAVE + item.getId());
+			}
+			else
+			{
+				_navigation.dropItemAtCurrentPlace(item);//Absurdo, pero es cualpa del absurdo diseño de la práctica...
+				System.out.println(WallEsMessages.ALREADYHAVEOBJECT + item.getId());
+			}
 		else
-			throw new InstructionExecutionException();
+			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id);
 	}
 
 	@Override
