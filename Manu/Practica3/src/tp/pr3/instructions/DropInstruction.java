@@ -42,7 +42,7 @@ public class DropInstruction implements Instruction {
 		for(String instruction : VALIDINSTRUCTIONS)
 			help += instruction + " <id> | ";
 		
-		return help.substring(0,help.length() - 3);//Si java no es eficiente, yo tampoco
+		return help.substring(0,help.length() - 8);//Si java no es eficiente, yo tampoco
 	}
 
 	@Override
