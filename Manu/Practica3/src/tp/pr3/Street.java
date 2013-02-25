@@ -2,6 +2,8 @@
 
 package tp.pr3;
 
+import tp.pr3.items.CodeCard;
+
 
 /***
  * Represents a street as its starting place, its final place, and its direction.
@@ -71,21 +73,21 @@ public class Street {
 	}
 	
 	public boolean open(CodeCard card){
-		if(this.code == card.getCode())
-			this.isOpen = true;
-		return this.isOpen;
-	}
-	
-	public boolean close(CodeCard card){
-		if(this.code == card.getCode()){
-			this.isOpen = false;
-			
+		if(code.equalsIgnoreCase(card.getCode()))
+		{
+			isOpen = true;
 			return true;
 		}
 		else
 			return false;
 	}
 	
-	
-	
+	public boolean close(CodeCard card){
+		if(this.code.equalsIgnoreCase(card.getCode())){//Podría haber hecho isOpen && code == card.getCode() ...
+			this.isOpen = false;
+			return true;
+		}
+		else
+			return false;
+	}
 }

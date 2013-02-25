@@ -1,4 +1,7 @@
-package tp.pr3;
+package tp.pr3.items;
+
+import tp.pr3.Interpreter;
+import tp.pr3.List;
 
 public class ItemContainer {
 	private List<Item> ItemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
@@ -17,6 +20,11 @@ public class ItemContainer {
 			this.ItemCollection.add(pos, item);
 			return true;
 		}
+	}
+	
+	public boolean containsItem(String id)
+	{
+		return search(id) < 0;
 	}
 	
 	public Item getItem(String id){

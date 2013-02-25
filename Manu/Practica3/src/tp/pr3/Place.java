@@ -2,6 +2,9 @@
 
 package tp.pr3;
 
+import tp.pr3.items.Item;
+import tp.pr3.items.ItemContainer;
+
 
 /***
  * Represents a place, with its name and description.  

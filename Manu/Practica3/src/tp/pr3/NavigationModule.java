@@ -1,13 +1,14 @@
 package tp.pr3;
 
 import tp.pr3.instructions.exceptions.*;
+import tp.pr3.items.Item;
 
 public class NavigationModule {
 	private City _city;
 	private Place _currentPlace;
 	private Direction _currentDirection;
 	
-	public boolean   atSpaceShip()       {return _currentPlace.isSpaceship();}
+	public boolean   atSpaceship()       {return _currentPlace.isSpaceship();}
 	public Direction getCurrentHeading() {return _currentDirection;}
 	public Place     getCurrentPlace()   {return _currentPlace;}
  	
@@ -21,7 +22,7 @@ public class NavigationModule {
 	
 	public void rotate(Rotation rotation)
 	{
-		_currentDirection.rotate(rotation);
+		_currentDirection = _currentDirection.rotate(rotation);
 	}
 	
 	public Item pickItemFromCurrentPlace(String id)

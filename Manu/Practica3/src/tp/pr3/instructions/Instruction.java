@@ -2,6 +2,7 @@ package tp.pr3.instructions;
 
 import tp.pr3.*;
 import tp.pr3.instructions.exceptions.*;
+import tp.pr3.items.ItemContainer;
 
 /*Si, usar el preprocesador de C en java es muy friki, pero funciona: http://stackoverflow.com/questions/6525059/can-i-have-macros-in-java-source-files
 

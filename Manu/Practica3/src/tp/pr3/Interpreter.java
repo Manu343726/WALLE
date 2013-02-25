@@ -113,15 +113,15 @@ public class Interpreter {
 	 */
 	public static String interpreterHelp(){
 		return ("The valid instructions for WALL-E are:" 
-	            + LINE_SEPARATOR + "     " + new MoveInstruction().getHelp() 
-				+ LINE_SEPARATOR + "     " + new TurnInstruction().getHelp() 
-				+ LINE_SEPARATOR + "     " + new PickInstruction().getHelp()
-				+ LINE_SEPARATOR + "     " + new DropInstruction().getHelp()
-				+ LINE_SEPARATOR + "     " + new ScanInstruction().getHelp()
-				+ LINE_SEPARATOR + "     " + new RadarInstruction().getHelp()
-				+ LINE_SEPARATOR + "     " + new OperateInstruction().getHelp()
-	            + LINE_SEPARATOR + "     " + new HelpInstruction().getHelp()
-				+ LINE_SEPARATOR + "     " + new QuitInstruction().getHelp()
+	            + LINE_SEPARATOR + "     " + new MoveInstruction().getHelp()    //El colmo del absurdo
+				+ LINE_SEPARATOR + "     " + new TurnInstruction().getHelp()    //" " " " " " " " " " 
+				+ LINE_SEPARATOR + "     " + new PickInstruction().getHelp()    //" " " " " " " " " " 
+				+ LINE_SEPARATOR + "     " + new DropInstruction().getHelp()    //" " " " " " " " " " 
+				+ LINE_SEPARATOR + "     " + new ScanInstruction().getHelp()    //" " " " " " " " " " 
+				+ LINE_SEPARATOR + "     " + new RadarInstruction().getHelp()   //" " " " " " " " " " 
+				+ LINE_SEPARATOR + "     " + new OperateInstruction().getHelp() //" " " " " " " " " " 
+	            + LINE_SEPARATOR + "     " + new HelpInstruction().getHelp()    //" " " " " " " " " " 
+				+ LINE_SEPARATOR + "     " + new QuitInstruction().getHelp()    //" " " " " " " " " " 
 				+ LINE_SEPARATOR);
 	}
 }

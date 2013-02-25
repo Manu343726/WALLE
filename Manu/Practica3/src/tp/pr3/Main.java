@@ -2,6 +2,10 @@
 
 package tp.pr3;
 
+import tp.pr3.items.CodeCard;
+import tp.pr3.items.Fuel;
+import tp.pr3.items.Garbage;
+
 
 public class Main {
 	

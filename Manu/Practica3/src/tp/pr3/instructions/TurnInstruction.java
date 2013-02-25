@@ -1,11 +1,11 @@
 package tp.pr3.instructions;
 
-import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.Rotation;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr3.items.ItemContainer;
 
 public class TurnInstruction implements Instruction {
 	RobotEngine _engine;
@@ -47,7 +47,7 @@ public class TurnInstruction implements Instruction {
 		String[] words = cad.split(" ");
 		
 		if(words.length == 2)
-			if(words[0].equals(VALIDINSTRUCTIONS[0]) || words[0].equals(VALIDINSTRUCTIONS[1]))
+			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
 			{
 				_rotation = Rotation.parse(words[1]);
 				

@@ -1,12 +1,12 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Item;
-import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.WallEsMessages;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr3.items.Item;
+import tp.pr3.items.ItemContainer;
 
 public class ScanInstruction implements Instruction {
 	RobotEngine _engine;
@@ -64,13 +64,25 @@ public class ScanInstruction implements Instruction {
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 		String[] words = cad.split(" ");
 		
-		if(words.length == 2)
-			if(words[0].equals(VALIDINSTRUCTIONS[0]) || words[0].equals(VALIDINSTRUCTIONS[1]))
-				_id = words[1];
+		switch(words.length)
+		{
+		case 1:
+			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
+				_id="";
 			else
 				throw new WrongInstructionFormatException();
-		else
+			
+			break;
+		case 2:
+			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
+				_id=words[1];
+			else
+				throw new WrongInstructionFormatException();
+			
+			break;
+		default: 
 			throw new WrongInstructionFormatException();
+		}
 		
 		return this;
 	}

@@ -47,7 +47,7 @@ public class RobotEngine {
 	public RobotEngine(City city, Place place, Direction direction){
 		_navigation = new NavigationModule(city,place);
 		_navigation.initHeading(direction);//Para que ponerlo en el constructor....pa que....
-		this.fuelAmount = 50;
+		this.fuelAmount = 100;
 		this.recycledMaterial = 0;
 		_quit = false;
 	}
@@ -79,32 +79,17 @@ public class RobotEngine {
 	 * Starts the robot engine. Gets user instructions, processes the instructions and makes the necessary changes
 	 */
 	public void startEngine(){
-		Instruction instruction;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println(_navigation.getCurrentPlace().toString());
 		
-		System.out.println(WallEsMessages.MYPOWERIS + this.fuelAmount);
-	    System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + this.recycledMaterial);
-		System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading());
+		printRobotState(PRINT_LOOKINGAT);
 		
 		do{
 			System.out.print(WallEsMessages.HEADER);
-			instruction = Interpreter.generateInstruction(sc.nextLine());
 			
-			if(instruction != null)
-			{
-				try
-				{
-					instruction.execute();
-				}catch(InstructionExecutionException ex){
-					System.out.println(ex.getMessage());
-				}
-			}
-			else
-				System.out.println(WallEsMessages.NOTUNDERSTAND);
-			
-		}while(!_quit && !_navigation.atSpaceShip() && this.fuelAmount > 0);
+			comunicateRobot(Interpreter.generateInstruction(sc.nextLine()));
+		}while(!_quit && !_navigation.atSpaceship() && this.fuelAmount > 0);
 		
 		if(_quit)
 			System.out.print(WallEsMessages.ENDAPPLICATION);
@@ -146,5 +131,20 @@ public class RobotEngine {
 	public void requestQuit()
 	{
 		_quit=true;
+	}
+	
+	public void comunicateRobot(Instruction instruction)
+	{
+		if(instruction != null)
+		{
+			try
+			{
+				instruction.execute();
+			}catch(InstructionExecutionException ex){
+				System.out.println(ex.getMessage());
+			}
+		}
+		else
+			System.out.println(WallEsMessages.NOTUNDERSTAND);
 	}
 }

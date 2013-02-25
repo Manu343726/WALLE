@@ -1,4 +1,9 @@
-package tp.pr3;
+package tp.pr3.items;
+
+import tp.pr3.NavigationModule;
+import tp.pr3.Place;
+import tp.pr3.RobotEngine;
+import tp.pr3.Street;
 
 public class CodeCard extends Item {
 	
@@ -17,9 +22,9 @@ public class CodeCard extends Item {
 		return this.code;
 	}
 	
-	public boolean use(RobotEngine r, Place p){
+	public boolean use(RobotEngine r, NavigationModule navigation){
 		if(this.canBeUsed()){
-		    Street street = r.getHeadingStreet();
+		    Street street = navigation.getHeadingStreet();
 		    if(street == null)
 			    return false;
 		    else{

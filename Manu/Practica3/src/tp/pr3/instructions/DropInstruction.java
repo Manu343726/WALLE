@@ -1,11 +1,12 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Item;
-import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
+import tp.pr3.WallEsMessages;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr3.items.Item;
+import tp.pr3.items.ItemContainer;
 
 public class DropInstruction implements Instruction {
 	RobotEngine _engine;
@@ -29,9 +30,12 @@ public class DropInstruction implements Instruction {
 		Item item = _items.pickItem(_id);
 		
 		if(item != null)
-			_navigation.dropItemAtCurrentPlace(item);
+			if(!_navigation.findItemInCurrentPlace(_id))
+				_navigation.dropItemAtCurrentPlace(item);
+			else
+				throw new InstructionExecutionException();
 		else
-			throw new InstructionExecutionException();
+			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id);
 	}
 
 	@Override
@@ -49,7 +53,7 @@ public class DropInstruction implements Instruction {
 		String[] words = cad.split(" ");
 		
 		if(words.length == 2)
-			if(words[0].equals(VALIDINSTRUCTIONS[0]) || words[0].equals(VALIDINSTRUCTIONS[1]))
+			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
 				_id = words[1];
 			else
 				throw new WrongInstructionFormatException();

@@ -1,12 +1,12 @@
 package tp.pr3.instructions;
 
-import tp.pr3.Item;
-import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.WallEsMessages;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr3.items.Item;
+import tp.pr3.items.ItemContainer;
 
 public class PickInstruction implements Instruction {
 	RobotEngine _engine;
@@ -37,8 +37,8 @@ public class PickInstruction implements Instruction {
 			}
 			else
 			{
-				_navigation.dropItemAtCurrentPlace(item);//Absurdo, pero es cualpa del absurdo diseño de la práctica...
-				System.out.println(WallEsMessages.ALREADYHAVEOBJECT + item.getId());
+				_navigation.dropItemAtCurrentPlace(item);
+				throw new InstructionExecutionException(WallEsMessages.ALREADYHAVEOBJECT + item.getId());
 			}
 		else
 			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id);
@@ -59,7 +59,7 @@ public class PickInstruction implements Instruction {
 		String[] words = cad.split(" ");
 		
 		if(words.length == 2)
-			if(words[0].equals(VALIDINSTRUCTIONS[0]) || words[0].equals(VALIDINSTRUCTIONS[1]))
+			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
 				_id = words[1];
 			else
 				throw new WrongInstructionFormatException();

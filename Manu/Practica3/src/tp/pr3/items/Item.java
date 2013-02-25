@@ -1,6 +1,9 @@
 //OK//
 
-package tp.pr3;
+package tp.pr3.items;
+
+import tp.pr3.RobotEngine;
+import tp.pr3.NavigationModule;
 
 public abstract class Item {
 	
@@ -13,7 +16,7 @@ public abstract class Item {
 	}
 	
 	public abstract boolean canBeUsed();
-	public abstract boolean use(RobotEngine r, Place p);
+	public abstract boolean use(RobotEngine r, NavigationModule navigation);
 	
 	public String getId(){
 		return this.id;

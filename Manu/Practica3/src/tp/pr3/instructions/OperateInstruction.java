@@ -1,13 +1,13 @@
 package tp.pr3.instructions;
 
-import tp.pr3.CodeCard;
-import tp.pr3.Item;
-import tp.pr3.ItemContainer;
 import tp.pr3.NavigationModule;
 import tp.pr3.RobotEngine;
 import tp.pr3.WallEsMessages;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr3.items.CodeCard;
+import tp.pr3.items.Item;
+import tp.pr3.items.ItemContainer;
 
 public class OperateInstruction implements Instruction {
 	RobotEngine _engine;
@@ -31,7 +31,7 @@ public class OperateInstruction implements Instruction {
 		Item item = _items.getItem(_id);
 		
 		if(item != null)
-			if(item.use(_engine,_navigation.getCurrentPlace()))
+			if(item.use(_engine,_navigation))
 			{
 				if(item.getClass() != CodeCard.class)//Otra guarrada derivada del maravilloso diseño de la práctica...
 					_engine.printRobotState(RobotEngine.PRINT_ONLYPOWERANDMATERIAL);
@@ -63,7 +63,7 @@ public class OperateInstruction implements Instruction {
 		String[] words = cad.split(" ");
 		
 		if(words.length == 2)
-			if(words[0].equals(VALIDINSTRUCTIONS[0]) || words[0].equals(VALIDINSTRUCTIONS[1]))
+			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
 				_id = words[1];
 			else
 				throw new WrongInstructionFormatException();
