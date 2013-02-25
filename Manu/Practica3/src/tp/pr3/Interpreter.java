@@ -2,6 +2,9 @@
 
 package tp.pr3;
 
+import tp.pr3.instructions.*;
+import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
+
 
 /**
  * Represents an interpreter which is responsible for translating user input into instructions for the simulation
@@ -26,53 +29,83 @@ public class Interpreter {
 	 * @return a new instruction from the given line. If the line contains wrong syntax, returns a not valid instruction
 	 */
 	public static Instruction generateInstruction(String line){
-		String words[] = line.split(" ");
-		
-		switch(words.length){
-		case 1: //MOVE, QUIT, HELP, SCAN, PICK, OPERATE or UNKNOWN
-			if (words[0].equalsIgnoreCase("QUIT"))
-				return new Instruction(Action.QUIT);
-			else if (words[0].equalsIgnoreCase("HELP"))
-				return new Instruction(Action.HELP);
-			else if (words[0].equalsIgnoreCase("MOVE"))
-				return new Instruction(Action.MOVE);
-			else if (words[0].equalsIgnoreCase("SCAN"))
-				return new Instruction(Action.SCAN, "");
-			else if (words[0].equalsIgnoreCase("PICK"))
-				return new Instruction(Action.PICK, "");
-			else if (words[0].equalsIgnoreCase("OPERATE"))
-				return new Instruction(Action.OPERATE, "");
-			else
-				return new Instruction(Action.UNKNOWN);
-			
-		case 2: //TURN <RIGHT|LEFT|UNKNOWN>, PICK <id>, SCAN <id>, OPERATE <id> or UNKNOWN
-			if(words[0].equalsIgnoreCase("TURN"))
-				if(words[1].equalsIgnoreCase("RIGHT"))
-					return new Instruction(Action.TURN, Rotation.RIGHT);
-			
-				else if(words[1].equalsIgnoreCase("LEFT"))
-					return new Instruction(Action.TURN, Rotation.LEFT);
-			
-				else
-					return new Instruction(Action.TURN, Rotation.UNKNOWN);
-			
-			else if(words[0].equalsIgnoreCase("PICK"))
-				return new Instruction(Action.PICK, words[1]);
-			
-			else if(words[0].equalsIgnoreCase("SCAN"))
-				return new Instruction(Action.SCAN, words[1]);
-			
-			else if(words[0].equalsIgnoreCase("OPERATE"))
-				return new Instruction(Action.OPERATE, words[1]);
-			
-			else
-				return new Instruction(Action.UNKNOWN);
-			
-		default: //UNKNOWN
-			return new Instruction(Action.UNKNOWN);
+		Instruction instruction;
+		try
+		{
+			instruction = new DropInstruction();
+			instruction = instruction.parse(line);
 		}
-
-
+		catch(WrongInstructionFormatException ex1)
+		{
+			try
+			{
+				instruction = new HelpInstruction();
+				instruction = instruction.parse(line);
+			}
+			catch(WrongInstructionFormatException ex2)
+			{
+				try
+				{
+					instruction = new MoveInstruction();
+					instruction = instruction.parse(line);
+				}
+				catch(WrongInstructionFormatException ex3)
+				{
+					try
+					{
+						instruction = new OperateInstruction();
+						instruction = instruction.parse(line);
+					}
+					catch(WrongInstructionFormatException ex4)
+					{
+						try
+						{
+							instruction = new PickInstruction();
+							instruction = instruction.parse(line);
+						}
+						catch(WrongInstructionFormatException ex5)
+						{
+							try
+							{
+								instruction = new QuitInstruction();
+								instruction = instruction.parse(line);
+							}
+							catch(WrongInstructionFormatException ex6)
+							{
+								try
+								{
+									instruction = new RadarInstruction();
+									instruction = instruction.parse(line);
+								}
+								catch(WrongInstructionFormatException ex7)
+								{
+									try
+									{
+										instruction = new ScanInstruction();
+										instruction = instruction.parse(line);
+									}
+									catch(WrongInstructionFormatException ex8)
+									{
+										try
+										{
+											instruction = new TurnInstruction();
+											instruction = instruction.parse(line);
+										}
+										catch(WrongInstructionFormatException ex9)
+										{
+											instruction = null;
+											System.out.println(ex9.getMessage());
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return instruction;
 	}
 	/**
 	 * Returns information of all valid instructions
@@ -80,13 +113,15 @@ public class Interpreter {
 	 */
 	public static String interpreterHelp(){
 		return ("The valid instructions for WALL-E are:" 
-	            + LINE_SEPARATOR + "     MOVE" 
-				+ LINE_SEPARATOR + "     TURN <LEFT | RIGHT>" 
-				+ LINE_SEPARATOR + "     PICK <id>"
-				+ LINE_SEPARATOR + "     SCAN [ <id> ]"
-				+ LINE_SEPARATOR + "     OPERATE <id>"
-	            + LINE_SEPARATOR + "     HELP"
-				+ LINE_SEPARATOR + "     QUIT"
+	            + LINE_SEPARATOR + "     " + new MoveInstruction().getHelp() 
+				+ LINE_SEPARATOR + "     " + new TurnInstruction().getHelp() 
+				+ LINE_SEPARATOR + "     " + new PickInstruction().getHelp()
+				+ LINE_SEPARATOR + "     " + new DropInstruction().getHelp()
+				+ LINE_SEPARATOR + "     " + new ScanInstruction().getHelp()
+				+ LINE_SEPARATOR + "     " + new RadarInstruction().getHelp()
+				+ LINE_SEPARATOR + "     " + new OperateInstruction().getHelp()
+	            + LINE_SEPARATOR + "     " + new HelpInstruction().getHelp()
+				+ LINE_SEPARATOR + "     " + new QuitInstruction().getHelp()
 				+ LINE_SEPARATOR);
 	}
 }
