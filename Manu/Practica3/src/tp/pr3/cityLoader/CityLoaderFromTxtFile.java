@@ -43,7 +43,7 @@ public class CityLoaderFromTxtFile {
 		return new City(streets.toArray());
 	}
 	
-	public void loadPlaces(List<Place> places, Scanner reader) throws WrongCityFormatException
+	private void loadPlaces(List<Place> places, Scanner reader) throws WrongCityFormatException
 	{
 		int placeIndex = 0;
 		int newPlaceIndex;
@@ -87,7 +87,7 @@ public class CityLoaderFromTxtFile {
 			throw new WrongCityFormatException();
 	}
 	
-	void loadStreets(List<Street> streets,List<Place> places, Scanner reader)throws WrongCityFormatException
+	private void loadStreets(List<Street> streets,List<Place> places, Scanner reader)throws WrongCityFormatException
 	{
 		int streetIndex = 0;
 		int newStreetIndex;
@@ -156,7 +156,7 @@ public class CityLoaderFromTxtFile {
 		}
 	}
 	
-	void loadItems(List<Place> places,Scanner reader) throws WrongCityFormatException
+	private void loadItems(List<Place> places,Scanner reader) throws WrongCityFormatException
 	{
 		int itemIndex = 0;
 		int newItemIndex;
