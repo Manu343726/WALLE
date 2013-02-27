@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import tp.pr3.City;
+import tp.pr3.Direction;
 import tp.pr3.List;
 import tp.pr3.Place;
 import tp.pr3.Street;
@@ -42,7 +43,7 @@ public class cityLoaderFromTxtFile {
 			
 			if(!end)
 			{
-				newPlaceIndex = reader.nextInt(); //indice del place
+				newPlaceIndex = reader.nextInt();
 				
 				if((placeIndex==0 && newPlaceIndex==0) || (placeIndex>0 && newPlaceIndex == placeIndex + 1))
 				{
@@ -51,14 +52,9 @@ public class cityLoaderFromTxtFile {
 					
 					switch(reader.next())
 					{
-					case "noSpaceShip":
-						isSpaceship = false;
-						break;
-					case "spaceShip":
-						isSpaceship = true;
-						break;
-					default:
-						throw new WrongCityFormatException();
+					case "noSpaceShip" : isSpaceship = false; break;
+					case "spaceShip"   : isSpaceship = true;  break;
+					default            : throw new WrongCityFormatException(); 
 					}
 				}	
 				else
@@ -77,6 +73,9 @@ public class cityLoaderFromTxtFile {
 		int newStreetIndex;
 		String streetName;
 		String streetDescription;
+		Direction streetDirection;
+		boolean streetOpen;
+		String streetCode;
 		int beginIndex=0,endIndex=1;
 		boolean end = false;
 		
@@ -95,7 +94,30 @@ public class cityLoaderFromTxtFile {
 					
 					if(beginIndex < placesCount)
 					{
+						streetDirection = Direction.parse(reader.next());
 						
+						if(streetDirection != Direction.UNKNOWN)
+						{
+							reader.next();//Place (end)
+							endIndex = reader.nextInt();
+							
+							if(endIndex < placesCount)
+							{
+								switch(reader.next().toLowerCase())
+								{
+								case "open"   : streetOpen = true;  break;
+								case "closed" : streetOpen = false; break;
+								default       : throw new WrongCityFormatException();
+								}
+								
+								if(!streetOpen)
+									streetCode = reader.next();
+							}
+							else
+								throw new WrongCityFormatException();
+						}
+						else
+							throw new WrongCityFormatException();
 					}
 					else
 						throw new WrongCityFormatException();

@@ -55,4 +55,16 @@ public enum Direction {
 			return Direction.UNKNOWN;
 		}
 	}
+	
+	public static Direction parse(String str)
+	{
+		switch(str.toUpperCase())
+		{
+		case "NORTH" : return Direction.NORTH;
+		case "SOUTH" : return Direction.SOUTH;
+		case "EAST"  : return Direction.EAST;
+		case "WEST"  : return Direction.WEST;
+		default      : return Direction.UNKNOWN;	
+		}
+	}
 }
