@@ -63,8 +63,50 @@ public class cityLoaderFromTxtFile {
 				}	
 				else
 					throw new WrongCityFormatException(); //Place inicial no tiene indice cero o los indices no son consecutivos
+			
+				places.add(new Place(placeName,isSpaceship,placeDescription));
 			}
 		}
+		
+		if(!end) throw new WrongCityFormatException();
+	}
+	
+	void loadStreets(List<Street> streets,int placesCount, Scanner reader)throws WrongCityFormatException
+	{
+		int streetIndex = 0;
+		int newStreetIndex;
+		String streetName;
+		String streetDescription;
+		int beginIndex=0,endIndex=1;
+		boolean end = false;
+		
+		while(!end && reader.hasNext())
+		{
+			end = reader.next().equals("EndStreets"); //Street
+			
+			if(!end)
+			{
+				newStreetIndex = reader.nextInt();
+				
+				if((streetIndex == 0 && newStreetIndex == 0) || (streetIndex > 0 && newStreetIndex == (streetIndex + 1)))
+				{
+					reader.next();//Place (Begin)
+					beginIndex = reader.nextInt();
+					
+					if(beginIndex < placesCount)
+					{
+						
+					}
+					else
+						throw new WrongCityFormatException();
+				}
+				else
+					throw new WrongCityFormatException();//Street inicial no tiene indice cero o los indices no son consecutivos
+					
+			}
+		}
+		
+		if(!end) throw new WrongCityFormatException();
 	}
 	
 }
