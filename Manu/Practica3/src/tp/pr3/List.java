@@ -69,5 +69,10 @@ public class List<T> extends GenericContainer<T> {
 		else
 			throw new ArrayIndexOutOfBoundsException("Parameter 'index' must be between 0 and " + (_count-1));
 	}
+	
+	public T[] toArray()
+	{
+		return _items.clone();
+	}
 
 }

@@ -3,7 +3,7 @@ package tp.pr3.testprofesor;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-//import tp.pr3.cityLoader.testprofesor.CityLoaderTest;
+import tp.pr3.cityLoader.testprofesor.CityLoaderTest;
 import tp.pr3.instructions.testprofesor.*;
 import tp.pr3.items.testprofesor.*;
 
@@ -29,8 +29,8 @@ import tp.pr3.items.testprofesor.*;
 						QuitInstructionTest.class,
 						RadarInstructionTest.class,
 						ScanInstructionTest.class,
-						TurnInstructionTest.class//,
-						//CityLoaderTest.class
+						TurnInstructionTest.class,
+						CityLoaderTest.class
 					} ) 
 
 

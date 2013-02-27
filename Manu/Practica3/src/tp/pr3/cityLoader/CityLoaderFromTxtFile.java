@@ -9,14 +9,14 @@ import tp.pr3.List;
 import tp.pr3.Place;
 import tp.pr3.Street;
 import tp.pr3.cityLoader.cityLoaderExceptions.WrongCityFormatException;
-import tp.pr3.items.Item;
+import tp.pr3.items.*;
 
-public class cityLoaderFromTxtFile {
+public class CityLoaderFromTxtFile {
 	Place _initialPlace;
 	
 	public Place getInitialPlace() {return _initialPlace;}
 	
-	public cityLoaderFromTxtFile(){}
+	public CityLoaderFromTxtFile(){}
 	
 	public City loadCity(InputStream file) throws WrongCityFormatException
 	{
@@ -25,16 +25,22 @@ public class cityLoaderFromTxtFile {
 		
 		Scanner reader = new Scanner(file);
 		
-		if(reader.next().equals("BeginCity"))
+		if(reader.next().equalsIgnoreCase("BeginCity"))
 		{
 			loadPlaces(places,reader);
 			loadStreets(streets,places,reader);
+			loadItems(places,reader);
+			
+			_initialPlace = places.get(0);
 		}
 		else
+		{
+			reader.close();
 			throw new WrongCityFormatException();
+		}
 		
-		
-		return null;
+		reader.close();
+		return new City(streets.toArray());
 	}
 	
 	public void loadPlaces(List<Place> places, Scanner reader) throws WrongCityFormatException
@@ -46,11 +52,11 @@ public class cityLoaderFromTxtFile {
 		boolean isSpaceship;
 		boolean end = false;
 		
-		if(reader.next().equals("BeginPlaces"))
+		if(reader.next().equalsIgnoreCase("BeginPlaces"))
 		{
 			while(!end && reader.hasNext())
 			{
-				end = reader.next().equals("EndPlaces"); //Place
+				end = reader.next().equalsIgnoreCase("EndPlaces"); //Place
 				
 				if(!end)
 				{
@@ -91,11 +97,11 @@ public class cityLoaderFromTxtFile {
 		int beginIndex=0,endIndex=1;
 		boolean end = false;
 		
-		if(reader.next().equals("BeginStreets"))
+		if(reader.next().equalsIgnoreCase("BeginStreets"))
 		{
 			while(!end && reader.hasNext())
 			{
-				end = reader.next().equals("EndStreets"); //Street
+				end = reader.next().equalsIgnoreCase("EndStreets"); //Street
 				
 				if(!end)
 				{
@@ -157,35 +163,63 @@ public class cityLoaderFromTxtFile {
 		String itemType;
 		String itemId;
 		String itemDescription;
-		int itemPower;
-		int itemTimes;
-		String cardCode;
+		int itemPower=0;
+		int itemTimes=0;
+		String cardCode="";
 		int placeIndex;
 		
 		boolean end = false;
 		
-		if(reader.next().equals("BeginItems"))
+		if(reader.next().equalsIgnoreCase("BeginItems"))
 		{
 			while(!end && reader.hasNext())
 			{
 				itemType = reader.next().toLowerCase();
-				newItemIndex = reader.nextInt();
+				end = itemType.equalsIgnoreCase("EndItems");
 				
-				if((itemIndex == 0 && newItemIndex == 0) || (itemIndex > 0 && newItemIndex == itemIndex + 1))
+				if(!end)
 				{
-					itemId = reader.next();
-					itemDescription = reader.next();
+					newItemIndex = reader.nextInt();
 					
-					switch(itemType)
+					if((itemIndex == 0 && newItemIndex == 0) || (itemIndex > 0 && newItemIndex == itemIndex + 1))
 					{
-					case "fuel"     : 
+						itemId = reader.next();
+						itemDescription = reader.next();
 						
-					case "garbage"  :
-					case "codecard" :
+						switch(itemType)
+						{
+						case "fuel": 
+							itemPower = reader.nextInt();
+							itemTimes = reader.nextInt();
+							break;
+						case "garbage":
+							itemPower = reader.nextInt();
+							break;
+						case "codecard":
+							cardCode = reader.next().replace("_", " ");
+							break;
+						default:
+							throw new WrongCityFormatException();
+						}
+						
+						reader.next();//Place
+						placeIndex = reader.nextInt();
+						
+						if(placeIndex < places.size())
+						{
+							switch(itemType)
+							{
+							case "fuel"     : places.get(placeIndex).addItem(new Fuel(itemId,itemDescription,itemPower,itemTimes)); break;
+							case "garbage"  : places.get(placeIndex).addItem(new Garbage(itemId,itemDescription,itemPower));        break;
+							case "codecard" : places.get(placeIndex).addItem(new CodeCard(itemId,itemDescription,cardCode));        break;
+							}
+						}
+						else
+							throw new WrongCityFormatException();
 					}
+					else
+						throw new WrongCityFormatException();
 				}
-				else
-					throw new WrongCityFormatException();
 			}
 			
 			if(!end) throw new WrongCityFormatException();
