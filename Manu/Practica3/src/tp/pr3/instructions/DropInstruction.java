@@ -31,7 +31,10 @@ public class DropInstruction implements Instruction {
 		
 		if(item != null)
 			if(!_navigation.findItemInCurrentPlace(_id))
+			{
 				_navigation.dropItemAtCurrentPlace(item);
+				System.out.println(WallEsMessages.IHAVEDROPPED + _id);
+			}
 			else
 				throw new InstructionExecutionException();
 		else

@@ -8,15 +8,15 @@ public abstract class WallEsMessages {
 	public final static String NOTUNDERSTAND = WALLESAYS +  "I do not understand. Please repeat";
 	public final static String ISMOVING = WALLESAYS + "Moving in direction ";
 	public final static String NOSTREET = WALLESAYS + "There is no street in this direction";
-	public final static String SHIPFINDED = WALLESAYS + "I am at my space ship. Bye Bye";
+	public final static String SHIPFINDED = WALLESAYS + "I am at my spaceship. Bye bye";
 	public final static String ENDAPPLICATION = WALLESAYS + "I have communication problems. Bye Bye";
 	
 	public final static String STREETCLOSED = WALLESAYS + "Arrggg, there is a street but it is closed!";
 	public final static String MYPOWERIS = "      * My power is ";
-	public final static String MYRECYCLEDMATERIALIS = "      * My recycled material is ";
+	public final static String MYRECYCLEDMATERIALIS = "      * My reclycled material is ";//OJO, no es un error, es una errata del validador
 	
 	public final static String ALREADYHAVEOBJECT = WALLESAYS + "I am stupid! I had already the object ";
-	public final static String HASNOTOBJECT = WALLESAYS + "Ooops, this place has not the object ";
+	public final static String HASNOTOBJECT = "You do not have any ";
 	public final static String NOWIHAVE = WALLESAYS + "I am happy! Now I have ";
 	
 	public final static String IAMCARRYING = WALLESAYS + "I am carrying the following items";
@@ -28,4 +28,6 @@ public abstract class WallEsMessages {
 	public final static String WHATAPITY2 = " in my inventory";
 	
 	public static final String NOFUEL = WALLESAYS + "I run out of fuel. I cannot move. Shutting down...";
+	
+	public static final String IHAVEDROPPED = "Great! I have dropped ";
 }

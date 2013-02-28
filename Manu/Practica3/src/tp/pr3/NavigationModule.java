@@ -35,9 +35,9 @@ public class NavigationModule {
 		return _currentPlace.existItem(id);
 	}
 	
-	public void dropItemAtCurrentPlace(Item it)
+	public boolean dropItemAtCurrentPlace(Item it)
 	{
-		_currentPlace.dropItem(it);
+		return _currentPlace.dropItem(it);
 	}
 	
 	public void initHeading(Direction direction)
