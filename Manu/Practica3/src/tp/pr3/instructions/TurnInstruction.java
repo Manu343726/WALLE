@@ -14,7 +14,7 @@ public class TurnInstruction implements Instruction {
 	Rotation _rotation;
 	
 	private static final String[] VALIDINSTRUCTIONS = {"TURN","GIRAR"};
-	public static final int EXECUTIONFUEL = -1;//No me gusta "hardcodear"
+	public static final int EXECUTIONFUEL = -5;//No me gusta "hardcodear"
 	
 	@Override
 	public void configureContext(RobotEngine engine,

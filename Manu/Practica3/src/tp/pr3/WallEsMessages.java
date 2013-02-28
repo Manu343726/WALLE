@@ -13,7 +13,7 @@ public abstract class WallEsMessages {
 	
 	public final static String STREETCLOSED = WALLESAYS + "Arrggg, there is a street but it is closed!";
 	public final static String MYPOWERIS = "      * My power is ";
-	public final static String MYRECYCLEDMATERIALIS = "      * My recycled material is: ";
+	public final static String MYRECYCLEDMATERIALIS = "      * My recycled material is ";
 	
 	public final static String ALREADYHAVEOBJECT = WALLESAYS + "I am stupid! I had already the object ";
 	public final static String HASNOTOBJECT = WALLESAYS + "Ooops, this place has not the object ";
