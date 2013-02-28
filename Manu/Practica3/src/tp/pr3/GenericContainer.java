@@ -137,6 +137,17 @@ public abstract class GenericContainer<T>
 			throw new ArrayIndexOutOfBoundsException("Parameter 'index' must be between 0 and " + (_count-1));
 	}
 	
+	@SuppressWarnings("unchecked")
+	protected T[] _toArray()
+	{
+		T[] returnArray = (T[])new Object[_count];
+		
+		for(int i = 0;i <_count; ++i)
+			returnArray[i] = _items[i];
+		
+		return returnArray;
+	}
+	
 	//esto no es un plagio de las STL...
 	public void reserve(int size)
 	{

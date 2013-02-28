@@ -1,5 +1,7 @@
 package tp.pr3;
 
+import java.util.ArrayList;
+
 public class List<T> extends GenericContainer<T> {
 
 	/**
@@ -72,7 +74,7 @@ public class List<T> extends GenericContainer<T> {
 	
 	public T[] toArray()
 	{
-		return _items.clone();
+		return _toArray();
 	}
 
 }

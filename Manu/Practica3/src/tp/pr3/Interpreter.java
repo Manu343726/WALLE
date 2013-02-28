@@ -94,7 +94,6 @@ public class Interpreter {
 										catch(WrongInstructionFormatException ex9)
 										{
 											instruction = null;
-											System.out.println(ex9.getMessage());
 										}
 									}
 								}

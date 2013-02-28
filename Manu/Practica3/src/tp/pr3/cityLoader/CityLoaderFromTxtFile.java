@@ -1,6 +1,7 @@
 package tp.pr3.cityLoader;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import tp.pr3.City;
@@ -20,8 +21,9 @@ public class CityLoaderFromTxtFile {
 	
 	public City loadCity(InputStream file) throws WrongCityFormatException
 	{
-		List<Street> streets = new List<Street>();
+		ArrayList<Street> streets = new ArrayList<Street>();
 		List<Place> places = new List<Place>();
+		Street[] map;
 		
 		Scanner reader = new Scanner(file);
 		
@@ -40,13 +42,16 @@ public class CityLoaderFromTxtFile {
 		}
 		
 		reader.close();
-		return new City(streets.toArray());
+		
+		map=new Street[streets.size()];
+		streets.toArray(map);
+		return new City(map);
 	}
 	
 	private void loadPlaces(List<Place> places, Scanner reader) throws WrongCityFormatException
 	{
 		int placeIndex = 0;
-		int newPlaceIndex;
+		int newPlaceIndex = 0;
 		String placeName;
 		String placeDescription;
 		boolean isSpaceship;
@@ -62,7 +67,7 @@ public class CityLoaderFromTxtFile {
 				{
 					newPlaceIndex = reader.nextInt();
 					
-					if((placeIndex==0 && newPlaceIndex==0) || (placeIndex>0 && newPlaceIndex == placeIndex + 1))
+					if((placeIndex==0 && newPlaceIndex==0) || newPlaceIndex == (placeIndex + 1))
 					{
 						placeName = reader.next();
 						placeDescription = reader.next().replace("_", " ");
@@ -79,6 +84,8 @@ public class CityLoaderFromTxtFile {
 				
 					places.add(new Place(placeName,isSpaceship,placeDescription));
 				}
+				
+				placeIndex = newPlaceIndex;
 			}
 			
 			if(!end) throw new WrongCityFormatException();
@@ -87,10 +94,10 @@ public class CityLoaderFromTxtFile {
 			throw new WrongCityFormatException();
 	}
 	
-	private void loadStreets(List<Street> streets,List<Place> places, Scanner reader)throws WrongCityFormatException
+	private void loadStreets(ArrayList<Street> streets,List<Place> places, Scanner reader)throws WrongCityFormatException
 	{
 		int streetIndex = 0;
-		int newStreetIndex;
+		int newStreetIndex = 0;
 		Direction streetDirection;
 		boolean streetOpen;
 		String streetCode;
@@ -107,7 +114,7 @@ public class CityLoaderFromTxtFile {
 				{
 					newStreetIndex = reader.nextInt();
 					
-					if((streetIndex == 0 && newStreetIndex == 0) || (streetIndex > 0 && newStreetIndex == (streetIndex + 1)))
+					if((streetIndex == 0 && newStreetIndex == 0) || newStreetIndex == (streetIndex + 1))
 					{
 						reader.next();//Place (Begin)
 						beginIndex = reader.nextInt();
@@ -150,6 +157,8 @@ public class CityLoaderFromTxtFile {
 					
 					streets.add(new Street(places.get(beginIndex),streetDirection,places.get(endIndex),streetOpen,streetCode));
 				}
+				
+				streetIndex = newStreetIndex;
 			}
 			
 			if(!end) throw new WrongCityFormatException();
@@ -159,7 +168,7 @@ public class CityLoaderFromTxtFile {
 	private void loadItems(List<Place> places,Scanner reader) throws WrongCityFormatException
 	{
 		int itemIndex = 0;
-		int newItemIndex;
+		int newItemIndex = 0;
 		String itemType;
 		String itemId;
 		String itemDescription;
@@ -181,7 +190,7 @@ public class CityLoaderFromTxtFile {
 				{
 					newItemIndex = reader.nextInt();
 					
-					if((itemIndex == 0 && newItemIndex == 0) || (itemIndex > 0 && newItemIndex == itemIndex + 1))
+					if((itemIndex == 0 && newItemIndex == 0) || newItemIndex == (itemIndex + 1))
 					{
 						itemId = reader.next();
 						itemDescription = reader.next();
@@ -220,6 +229,8 @@ public class CityLoaderFromTxtFile {
 					else
 						throw new WrongCityFormatException();
 				}
+				
+				itemIndex = newItemIndex;
 			}
 			
 			if(!end) throw new WrongCityFormatException();

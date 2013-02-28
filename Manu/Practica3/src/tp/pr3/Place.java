@@ -15,7 +15,7 @@ public class Place {
 	private String description;
 	private boolean isSpaceShip;
 	private ItemContainer itemContainer;
-	private final static String PLACECONTAINS = "The place contains these objects: ";//Joder, si no es por kdiff no lo veo XD
+	private final static String PLACECONTAINS = "The place contains these objects:";//Joder, si no es por kdiff no lo veo XD
 	private final static String PLACEEMPTY = "The place is empty. There are no objects to pick";//Lo mismo que la anterior!
 	
 	/* CONSTRUCTORS */

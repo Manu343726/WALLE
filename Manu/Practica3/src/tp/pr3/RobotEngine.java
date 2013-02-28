@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import tp.pr3.instructions.Instruction;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
+import tp.pr3.items.ItemContainer;
 
 /***
  * Represents the simulation engine. It process and execute user instructions.
@@ -13,6 +14,7 @@ public class RobotEngine {
 	private int recycledMaterial;
 	private int fuelAmount;
 	private NavigationModule _navigation;
+	private ItemContainer _items;
 	
 	private boolean _quit;
 	
@@ -50,6 +52,7 @@ public class RobotEngine {
 		this.fuelAmount = 100;
 		this.recycledMaterial = 0;
 		_quit = false;
+		_items = new ItemContainer();
 	}
 	
 	
@@ -61,6 +64,8 @@ public class RobotEngine {
 	
 	public void printRobotState(int params)
 	{//Y por que #!x¿?¿#¡ no hay casting de entero a bool? 
+		if((params & LSBMASK) == TRUE) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+		
 		if(((params >> 2) & LSBMASK) == TRUE)
 		{
 	        System.out.println(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
@@ -71,8 +76,6 @@ public class RobotEngine {
 		
 		System.out.println(WallEsMessages.MYPOWERIS + this.fuelAmount);
 		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + this.recycledMaterial);
-		
-		if((params & LSBMASK) == TRUE) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
 	}
 	
 	/**
@@ -137,6 +140,8 @@ public class RobotEngine {
 	{
 		if(instruction != null)
 		{
+			instruction.configureContext(this,_navigation,_items);
+			
 			try
 			{
 				instruction.execute();
