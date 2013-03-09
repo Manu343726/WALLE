@@ -41,7 +41,7 @@ public class PickInstruction implements Instruction {
 				throw new InstructionExecutionException(WallEsMessages.ALREADYHAVEOBJECT + item.getId());
 			}
 		else
-			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id + ".");//El punto final es para el validador
+			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id + ".........");//El punto final es para el validador
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class DropInstruction implements Instruction {
 			else
 				throw new InstructionExecutionException();
 		else
-			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id);
+			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id + ".");
 	}
 
 	@Override
