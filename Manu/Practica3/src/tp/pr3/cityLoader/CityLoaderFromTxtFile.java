@@ -27,7 +27,7 @@ public class CityLoaderFromTxtFile {
 		
 		Scanner reader = new Scanner(file);
 		
-		if(LoaderParser.parseMark(reader, "BeginCities"))
+		if(LoaderParser.parseMark(reader, "BeginCity"))
 		{
 			loadPlaces(places,reader);
 			loadStreets(streets,places,reader);
@@ -101,11 +101,11 @@ public class CityLoaderFromTxtFile {
 		int beginIndex=0,endIndex=1;
 		boolean end = false;
 		
-		if(LoaderParser.parseMark(reader, "BeginPlaces"))
+		if(LoaderParser.parseMark(reader, "BeginStreets"))
 		{
 			while(!end && reader.hasNext())
 			{
-				end = LoaderParser.parseMark(reader, "EndPlaces"); //Street
+				end = LoaderParser.parseMark(reader, "EndStreets"); //Street
 				
 				if(!end)
 				{
@@ -135,7 +135,7 @@ public class CityLoaderFromTxtFile {
 									}
 									
 									if(!streetOpen)
-										streetCode = reader.next();
+										streetCode = LoaderParser.parseString(reader);
 									else
 										streetCode = "????";
 								}
@@ -160,6 +160,10 @@ public class CityLoaderFromTxtFile {
 			
 			if(!end) LoaderParser.closeAndThrow(reader);
 		}
+		else
+			LoaderParser.closeAndThrow(reader);
+		
+		end=end;
 	}
 	
 	private void loadItems(List<Place> places,Scanner reader) throws WrongCityFormatException
@@ -181,7 +185,7 @@ public class CityLoaderFromTxtFile {
 			while(!end && reader.hasNext())
 			{
 				itemType = LoaderParser.parseString(reader).toLowerCase();
-				end = LoaderParser.parseMark(reader, "EndItems");
+				end = itemType.equalsIgnoreCase("EndItems");
 				
 				if(!end)
 				{

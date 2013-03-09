@@ -48,9 +48,9 @@ public class CityLoaderTest {
 		CityLoaderFromTxtFile_split ml = new CityLoaderFromTxtFile_split();  		 
 		/**/
 		if (loadString()){
-			//for (int i = 1; i<file.length(); i++) {
+			for (int i = 1; i<file.length(); i++) {
 				try {
-					InputStream is = new ByteArrayInputStream(file.getBytes());
+					InputStream is = new ByteArrayInputStream(file.substring(0, i).getBytes());
 					ml.loadCity(is);
 				}
 				catch (WrongCityFormatException e) {
@@ -59,7 +59,7 @@ public class CityLoaderTest {
 				catch (Exception e) {
 					fail("ERROR: loadCity throws an exception different from WrongCityFormatException: "+e);					
 				}
-			//}
+			}
 		}
 	}
 

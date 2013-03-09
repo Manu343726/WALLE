@@ -14,13 +14,18 @@ public abstract class LoaderParser {
 	
 	public static boolean parseMark(Scanner reader, String mark) throws WrongCityFormatException
 	{
+		String next;
+		
 		if(!reader.hasNext())
 		{
 			closeAndThrow(reader);
 			return false; //Inalcanzable, en fin...
 		}
 		else
-			return reader.next().equalsIgnoreCase(mark);
+		{
+			next = reader.next();
+			return next.equalsIgnoreCase(mark);
+		}
 	}
 	
 	public static int parseInt(Scanner reader) throws WrongCityFormatException
