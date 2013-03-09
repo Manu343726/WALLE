@@ -9,10 +9,10 @@ import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
 public class PickInstruction implements Instruction {
-	RobotEngine _engine;
+	RobotEngine      _engine;
 	NavigationModule _navigation;
-	ItemContainer _items;
-	String _id;
+	ItemContainer    _items;
+	String           _id;
 	
 	private static String[] VALIDINSTRUCTIONS = {"PICK","COGER"};
 	
@@ -41,7 +41,7 @@ public class PickInstruction implements Instruction {
 				throw new InstructionExecutionException(WallEsMessages.ALREADYHAVEOBJECT + item.getId());
 			}
 		else
-			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id + ".........");//El punto final es para el validador
+			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id + ".");//El punto final es para el validador
 	}
 
 	@Override

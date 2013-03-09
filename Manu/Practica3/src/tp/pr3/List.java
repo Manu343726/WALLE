@@ -1,7 +1,5 @@
 package tp.pr3;
 
-import java.util.ArrayList;
-
 public class List<T> extends GenericContainer<T> {
 
 	/**

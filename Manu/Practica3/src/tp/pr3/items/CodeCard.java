@@ -7,11 +7,11 @@ import tp.pr3.Street;
 
 public class CodeCard extends Item {
 	
-    private String code;
+    private String _code;
 	
 	public CodeCard(String id, String description, String code){
 		super(id, description);
-		this.code = code;
+		_code = code;
 	}
 	
 	public boolean canBeUsed(){
@@ -19,7 +19,7 @@ public class CodeCard extends Item {
 	}
 	
 	public String getCode(){
-		return this.code;
+		return _code;
 	}
 	
 	public boolean use(RobotEngine r, NavigationModule navigation){

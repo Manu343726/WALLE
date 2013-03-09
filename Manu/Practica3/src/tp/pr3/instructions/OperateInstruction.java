@@ -10,10 +10,10 @@ import tp.pr3.items.Item;
 import tp.pr3.items.ItemContainer;
 
 public class OperateInstruction implements Instruction {
-	RobotEngine _engine;
+	RobotEngine      _engine;
 	NavigationModule _navigation;
-	ItemContainer _items;
-	String _id;
+	ItemContainer    _items;
+	String           _id;
 	
 	private static final String[] VALIDINSTRUCTIONS = {"OPERATE","OPERAR"};
 	

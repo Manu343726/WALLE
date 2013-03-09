@@ -8,10 +8,10 @@ import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr3.items.ItemContainer;
 
 public class TurnInstruction implements Instruction {
-	RobotEngine _engine;
+	RobotEngine      _engine;
 	NavigationModule _navigation;
-	ItemContainer _items;
-	Rotation _rotation;
+	ItemContainer    _items;
+	Rotation         _rotation;
 	
 	private static final String[] VALIDINSTRUCTIONS = {"TURN","GIRAR"};
 	public static final int EXECUTIONFUEL = -5;//No me gusta "hardcodear"

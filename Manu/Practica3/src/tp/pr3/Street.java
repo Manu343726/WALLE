@@ -10,11 +10,11 @@ import tp.pr3.items.CodeCard;
  */
 public class Street {
 	
-	private Place source;
-	private Place target;
-	private Direction direction;
-	private boolean isOpen;
-	private String code;
+	private Place     _source;
+	private Place     _target;
+	private Direction _direction;
+	private boolean   _isOpen;
+	private String    _code;
 	
 	/* CONSTRUCTORS */
 	/**
@@ -29,18 +29,18 @@ public class Street {
 	 * @param target The final place (See class description)
 	 */	
 	public Street(Place source, Direction direction, Place target){
-		this.source = source;
-		this.target = target;
-		this.direction = direction;
-		this.isOpen = true;
+		_source = source;
+		_target = target;
+		_direction = direction;
+		_isOpen = true;
 	}
 	
 	public Street(Place source, Direction direction, Place target, boolean isOpen, String code){
-		this.source = source;
-		this.target = target;
-		this.direction = direction;
-		this.isOpen = isOpen;
-		this.code = code;
+		_source = source;
+		_target = target;
+		_direction = direction;
+		_isOpen = isOpen;
+		_code = code;
 	}
 	
 	/* PUBLIC METHODS */
@@ -51,7 +51,7 @@ public class Street {
 	 * @return True if the values match with this street. False in other case.
 	 */
 	public boolean comeOutFrom(Place place, Direction whichDirection){
-		return (place == this.source && whichDirection == this.direction) || (place == this.target && whichDirection == this.direction.opposite());
+		return (place == _source && whichDirection == _direction) || (place == _target && whichDirection == _direction.opposite());
 	}
 	
 	/**
@@ -60,22 +60,22 @@ public class Street {
 	 * @return the place on the other side of the street from the specified place
 	 */
 	public Place nextPlace(Place whereAmI){
-		if (whereAmI == this.source)
-			return this.target;
-		else if (whereAmI == this.target)
-			return this.source;
+		if (whereAmI == _source)
+			return _target;
+		else if (whereAmI == _target)
+			return _source;
 		else
 			return null;
 	}
 	
 	public boolean isOpen(){
-		return this.isOpen;
+		return _isOpen;
 	}
 	
 	public boolean open(CodeCard card){
-		if(isOpen || code.equalsIgnoreCase(card.getCode()))
+		if(_isOpen || _code.equalsIgnoreCase(card.getCode()))
 		{
-			isOpen = true;
+			_isOpen = true;
 			return true;
 		}
 		else
@@ -83,9 +83,9 @@ public class Street {
 	}
 	
 	public boolean close(CodeCard card){
-		if(!isOpen || code.equalsIgnoreCase(card.getCode()))
+		if(!_isOpen || _code.equalsIgnoreCase(card.getCode()))
 		{
-			this.isOpen = false;
+			_isOpen = false;
 			return true;
 		}
 		else

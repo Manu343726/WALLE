@@ -11,10 +11,10 @@ import tp.pr3.items.ItemContainer;
  */
 public class Place {
 	
-	private String name;
-	private String description;
-	private boolean isSpaceShip;
-	private ItemContainer itemContainer;
+	private String _name;
+	private String _description;
+	private boolean _isSpaceShip;
+	private ItemContainer _itemContainer;
 	private final static String PLACECONTAINS = "The place contains these objects:";//Joder, si no es por kdiff no lo veo XD
 	private final static String PLACEEMPTY = "The place is empty. There are no objects to pick";//Lo mismo que la anterior!
 	
@@ -31,10 +31,10 @@ public class Place {
 	 * @param description The place description
 	 */
 	public Place(String name, boolean isSpaceShip, String description){
-		this.name = name;
-		this.description = description;
-		this.isSpaceShip = isSpaceShip;
-		this.itemContainer = new ItemContainer();
+		_name = name;
+		_description = description;
+		_isSpaceShip = isSpaceShip;
+		_itemContainer = new ItemContainer();
 	}
 	
 	
@@ -44,35 +44,35 @@ public class Place {
 	 * @return True if the spaceship is at this place. False in other case.
 	 */
 	public boolean isSpaceship(){
-		return this.isSpaceShip;
+		return _isSpaceShip;
 	}
 
 	/**
 	 * Returns the place name and the place description
 	 */
 	public String toString(){
-		if(this.itemContainer.numberOfItems() == 0)
-			return (this.name + Interpreter.LINE_SEPARATOR +  this.description + Interpreter.LINE_SEPARATOR + PLACEEMPTY);
+		if(_itemContainer.numberOfItems() == 0)
+			return (_name + Interpreter.LINE_SEPARATOR +  _description + Interpreter.LINE_SEPARATOR + PLACEEMPTY);
 		else
-		    return (this.name + Interpreter.LINE_SEPARATOR +  this.description + Interpreter.LINE_SEPARATOR + PLACECONTAINS + Interpreter.LINE_SEPARATOR +  this.itemContainer.toString());
+		    return (_name + Interpreter.LINE_SEPARATOR +  _description + Interpreter.LINE_SEPARATOR + PLACECONTAINS + Interpreter.LINE_SEPARATOR +  _itemContainer.toString());
 	}
 	
 	public boolean addItem(Item it){
-		return this.itemContainer.addItem(it);
+		return _itemContainer.addItem(it);
 	}
 	
 	public Item pickItem(String id){
-		return this.itemContainer.pickItem(id);
+		return _itemContainer.pickItem(id);
 	}
 	
 	public boolean dropItem(Item it)
 	{
-		return this.itemContainer.addItem(it);
+		return _itemContainer.addItem(it);
 	}
 	
 	public boolean existItem(String id)
 	{
-		return itemContainer.getItem(id) != null;
+		return _itemContainer.getItem(id) != null;
 	}
 
 }

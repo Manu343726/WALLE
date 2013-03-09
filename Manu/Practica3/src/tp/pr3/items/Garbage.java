@@ -6,25 +6,26 @@ import tp.pr3.RobotEngine;
 
 public class Garbage extends Item{
 	
-	private int recycledMaterial;
+	private int _recycledMaterial;
 	
 	public Garbage(String id, String description, int recycledMaterial){
 		super(id, description);
-		this.recycledMaterial = recycledMaterial;
+		_recycledMaterial = recycledMaterial;
 	}
 	
 	public boolean canBeUsed(){
-		return (this.recycledMaterial > 0);
+		return (_recycledMaterial > 0);
 	}
 	
 	public String toString(){
-		return super.toString() + "// recycled material = " + this.recycledMaterial;
+		return super.toString() + "// recycled material = " + _recycledMaterial;
 	}
 	
 	public boolean use(RobotEngine r, NavigationModule navigation){
 		if(this.canBeUsed()){
-		    r.addRecycledMaterial(this.recycledMaterial);
-		    this.recycledMaterial = 0;
+		    r.addRecycledMaterial(_recycledMaterial);
+		    _recycledMaterial = 0;
+		    
 		    return true;
 		}
 		return false;

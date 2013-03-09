@@ -6,27 +6,28 @@ import tp.pr3.RobotEngine;
 
 public class Fuel extends Item{
 	
-	private int power;
-	private int times;
+	private int _power;
+	private int _times;
 	
 	public Fuel(String id, String description, int power, int times){
 		super(id, description);
-		this.power = power;
-		this.times = times;
+		_power = power;
+		_times = times;
 	}
 	
 	public boolean canBeUsed(){
-		return (this.times > 0);
+		return (_times > 0);
 	}
 	
 	public String toString(){
-		return super.toString() + "// power = " +  this.power + ", times = "+ this.times;
+		return super.toString() + "// power = " +  _power + ", times = "+ _times;
 	}
 	
 	public boolean use(RobotEngine r, NavigationModule navigation){
 		if(this.canBeUsed()){
-		    r.addFuel(this.power);
-		    this.times--;
+		    r.addFuel(_power);
+		    _times--;
+		    
 		    return true;
 		}
 		else

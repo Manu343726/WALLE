@@ -11,12 +11,19 @@ import tp.pr3.items.ItemContainer;
  * Represents the simulation engine. It process and execute user instructions.
  */
 public class RobotEngine {
-	private int recycledMaterial;
-	private int fuelAmount;
+	private int              _recycledMaterial;
+	private int              _fuelAmount;
 	private NavigationModule _navigation;
-	private ItemContainer _items;
+	private ItemContainer    _items;
 	
 	private boolean _quit;
+	
+	public int getFuel()             {return _fuelAmount;}
+	public int getRecycledMaterial() {return _recycledMaterial;}
+	public Street getHeadingStreet() {return _navigation.getHeadingStreet();}
+	
+	public static final int INITVALUES_FUELAMOUNT       = 100;
+	public static final int INITVALUES_RECICLEDMATERIAL = 0;
 	
 	/***************************************************************************************************\
 	 * PARAMETROS DE LA FUNCION "PRINTROBOTSTATE":  													*
@@ -49,8 +56,8 @@ public class RobotEngine {
 	public RobotEngine(City city, Place place, Direction direction){
 		_navigation = new NavigationModule(city,place);
 		_navigation.initHeading(direction);//Para que ponerlo en el constructor....pa que....
-		this.fuelAmount = 100;
-		this.recycledMaterial = 0;
+		_fuelAmount = INITVALUES_FUELAMOUNT;
+		_recycledMaterial = INITVALUES_RECICLEDMATERIAL;
 		_quit = false;
 		_items = new ItemContainer();
 	}
@@ -74,8 +81,8 @@ public class RobotEngine {
 		
 		if(((params >> 1) & LSBMASK) == TRUE) System.out.println();
 		
-		System.out.println(WallEsMessages.MYPOWERIS + this.fuelAmount);
-		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + this.recycledMaterial);
+		System.out.println(WallEsMessages.MYPOWERIS + _fuelAmount);
+		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + _recycledMaterial);
 	}
 	
 	/**
@@ -92,11 +99,11 @@ public class RobotEngine {
 			System.out.print(WallEsMessages.HEADER);
 			
 			comunicateRobot(Interpreter.generateInstruction(sc.nextLine()));
-		}while(!_quit && !_navigation.atSpaceship() && this.fuelAmount > 0);
+		}while(!_quit && !_navigation.atSpaceship() && _fuelAmount > 0);
 		
 		if(_quit)
 			System.out.print(WallEsMessages.ENDAPPLICATION);
-		else if(this.fuelAmount == 0)
+		else if(_fuelAmount == 0)
 			System.out.print(WallEsMessages.NOFUEL);
 		else
 			System.out.print(WallEsMessages.SHIPFINDED);
@@ -105,25 +112,14 @@ public class RobotEngine {
 	}
 	
 	public void addFuel(int fuel){
-		this.fuelAmount = this.fuelAmount + fuel;
-		if(this.fuelAmount < 0)
-		    this.fuelAmount = 0;
+		_fuelAmount += fuel;
+		
+		if(_fuelAmount < 0)
+		    _fuelAmount = 0;
 	}
 	
 	public void addRecycledMaterial(int weight){
-		this.recycledMaterial =this.recycledMaterial + weight;
-	}
-	
-	public int getFuel(){
-		return this.fuelAmount;
-	}
-	
-	public int getRecycledMaterial(){
-		return this.recycledMaterial;
-	}
-	
-	public Street getHeadingStreet(){
-		return _navigation.getHeadingStreet();
+		_recycledMaterial += weight;
 	}
 	
 	public void requestHelp()

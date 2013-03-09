@@ -7,24 +7,24 @@ import tp.pr3.NavigationModule;
 
 public abstract class Item {
 	
-	private String id;
-	private String description;
+	private String _id;
+	private String _description;
 	
 	public Item(String id, String description){
-		this.id  = id;
-		this.description = description;
+		_id  = id;
+		_description = description;
 	}
 	
 	public abstract boolean canBeUsed();
 	public abstract boolean use(RobotEngine r, NavigationModule navigation);
 	
 	public String getId(){
-		return this.id;
+		return _id;
 	}
 	
 	public String toString(){
-		return this.id + ": " + this.description;
+		return _id + ": " + _description;
 	}
 	
-	public boolean equals(Item i){return this.id.equals(i.getId());}
+	public boolean equals(Item i){return _id.equals(i.getId());}
 }

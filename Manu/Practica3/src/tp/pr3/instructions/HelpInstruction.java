@@ -7,9 +7,9 @@ import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr3.items.ItemContainer;
 
 public class HelpInstruction implements Instruction {
-	RobotEngine _engine;
+	RobotEngine      _engine;
 	NavigationModule _navigation;
-	ItemContainer _items;
+	ItemContainer    _items;
 	
 	private static  String[] VALIDINSTRUCTIONS = {"HELP","AYUDA"};
 	
