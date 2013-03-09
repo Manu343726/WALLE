@@ -27,12 +27,14 @@ public abstract class LoaderParser {
 	{
 		Pattern regex = Pattern.compile("-?[0-9]+");
 		String next;
+		Matcher matcher;
 		
 		if(reader.hasNext())
 		{
 			next = reader.next();
+			matcher = regex.matcher(next);
 			
-			if(regex.matcher(next).matches())
+			if(matcher.find() && !matcher.find())
 				return Integer.parseInt(next);
 			else
 				closeAndThrow(reader);

@@ -149,7 +149,7 @@ public class CityLoaderFromTxtFile {
 							LoaderParser.closeAndThrow(reader);
 					}
 					else
-						LoaderParser.closeAndThrow(reader);;//Street inicial no tiene indice cero o los indices no son consecutivos
+						LoaderParser.closeAndThrow(reader);//Street inicial no tiene indice cero o los indices no son consecutivos
 						
 					
 					streets.add(new Street(places.get(beginIndex),streetDirection,places.get(endIndex),streetOpen,streetCode));
@@ -176,40 +176,40 @@ public class CityLoaderFromTxtFile {
 		
 		boolean end = false;
 		
-		if(reader.next().equalsIgnoreCase("BeginItems"))
+		if(LoaderParser.parseMark(reader,"BeginItems"))
 		{
 			while(!end && reader.hasNext())
 			{
-				itemType = reader.next().toLowerCase();
-				end = itemType.equalsIgnoreCase("EndItems");
+				itemType = LoaderParser.parseString(reader).toLowerCase();
+				end = LoaderParser.parseMark(reader, "EndItems");
 				
 				if(!end)
 				{
-					newItemIndex = reader.nextInt();
+					newItemIndex = LoaderParser.parseInt(reader);
 					
 					if((itemIndex == 0 && newItemIndex == 0) || newItemIndex == (itemIndex + 1))
 					{
-						itemId = reader.next();
-						itemDescription = reader.next();
+						itemId = LoaderParser.parseString(reader);
+						itemDescription = LoaderParser.parseString(reader);
 						
 						switch(itemType)
 						{
 						case "fuel": 
-							itemPower = reader.nextInt();
-							itemTimes = reader.nextInt();
+							itemPower = LoaderParser.parseInt(reader);
+							itemTimes = LoaderParser.parseInt(reader);
 							break;
 						case "garbage":
-							itemPower = reader.nextInt();
+							itemPower = LoaderParser.parseInt(reader);
 							break;
 						case "codecard":
-							cardCode = reader.next().replace("_", " ");
+							cardCode = LoaderParser.parseString(reader).replace("_", " ");
 							break;
 						default:
-							throw new WrongCityFormatException();
+							LoaderParser.closeAndThrow(reader);
 						}
 						
-						reader.next();//Place
-						placeIndex = reader.nextInt();
+						LoaderParser.parseString(reader);//Place
+						placeIndex = LoaderParser.parseInt(reader);
 						
 						if(placeIndex < places.size())
 						{
@@ -221,18 +221,18 @@ public class CityLoaderFromTxtFile {
 							}
 						}
 						else
-							throw new WrongCityFormatException();
+							LoaderParser.closeAndThrow(reader);
 					}
 					else
-						throw new WrongCityFormatException();
+						LoaderParser.closeAndThrow(reader);
 				}
 				
 				itemIndex = newItemIndex;
 			}
 			
-			if(!end) throw new WrongCityFormatException();
+			if(!end) LoaderParser.closeAndThrow(reader);
 		}
 		else
-			throw new WrongCityFormatException();
+			LoaderParser.closeAndThrow(reader);
 	}
 }
