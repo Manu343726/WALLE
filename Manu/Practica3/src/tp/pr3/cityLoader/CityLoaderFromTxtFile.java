@@ -27,7 +27,7 @@ public class CityLoaderFromTxtFile {
 		
 		Scanner reader = new Scanner(file);
 		
-		if(reader.next().equalsIgnoreCase("BeginCity"))
+		if(LoaderParser.parseMark(reader, "BeginCities"))
 		{
 			loadPlaces(places,reader);
 			loadStreets(streets,places,reader);
@@ -36,10 +36,7 @@ public class CityLoaderFromTxtFile {
 			_initialPlace = places.get(0);
 		}
 		else
-		{
-			reader.close();
-			throw new WrongCityFormatException();
-		}
+			LoaderParser.closeAndThrow(reader);
 		
 		reader.close();
 		
@@ -52,35 +49,35 @@ public class CityLoaderFromTxtFile {
 	{
 		int placeIndex = 0;
 		int newPlaceIndex = 0;
-		String placeName;
-		String placeDescription;
-		boolean isSpaceship;
+		String placeName="";
+		String placeDescription="";
+		boolean isSpaceship=false;
 		boolean end = false;
 		
-		if(reader.next().equalsIgnoreCase("BeginPlaces"))
+		if(LoaderParser.parseMark(reader, "BeginPlaces"))
 		{
 			while(!end && reader.hasNext())
 			{
-				end = reader.next().equalsIgnoreCase("EndPlaces"); //Place
+				end = LoaderParser.parseMark(reader, "EndPlaces"); //Place
 				
 				if(!end)
 				{
-					newPlaceIndex = reader.nextInt();
+					newPlaceIndex = LoaderParser.parseInt(reader);
 					
 					if((placeIndex==0 && newPlaceIndex==0) || newPlaceIndex == (placeIndex + 1))
 					{
-						placeName = reader.next();
-						placeDescription = reader.next().replace("_", " ");
+						placeName = LoaderParser.parseString(reader);
+						placeDescription = LoaderParser.parseString(reader).replace("_", " ");
 						
-						switch(reader.next())
+						switch(LoaderParser.parseString(reader))
 						{
 						case "noSpaceShip" : isSpaceship = false; break;
 						case "spaceShip"   : isSpaceship = true;  break;
-						default            : throw new WrongCityFormatException(); 
+						default            : LoaderParser.closeAndThrow(reader);
 						}
 					}	
 					else
-						throw new WrongCityFormatException(); //Place inicial no tiene indice cero o los indices no son consecutivos
+						LoaderParser.closeAndThrow(reader); //Place inicial no tiene indice cero o los indices no son consecutivos
 				
 					places.add(new Place(placeName,isSpaceship,placeDescription));
 				}
@@ -88,10 +85,10 @@ public class CityLoaderFromTxtFile {
 				placeIndex = newPlaceIndex;
 			}
 			
-			if(!end) throw new WrongCityFormatException();
+			if(!end) LoaderParser.closeAndThrow(reader);
 		}
 		else
-			throw new WrongCityFormatException();
+			LoaderParser.closeAndThrow(reader);
 	}
 	
 	private void loadStreets(ArrayList<Street> streets,List<Place> places, Scanner reader)throws WrongCityFormatException
