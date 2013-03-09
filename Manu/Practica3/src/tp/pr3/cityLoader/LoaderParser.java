@@ -14,8 +14,6 @@ public abstract class LoaderParser {
 	
 	public static boolean parseMark(Scanner reader, String mark) throws WrongCityFormatException
 	{
-		String next;
-		
 		if(!reader.hasNext())
 		{
 			closeAndThrow(reader);
