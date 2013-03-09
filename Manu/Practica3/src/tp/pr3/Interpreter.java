@@ -2,6 +2,9 @@
 
 package tp.pr3;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
 import tp.pr3.instructions.*;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
@@ -21,6 +24,15 @@ public class Interpreter {
 	
 	public static final String  LINE_SEPARATOR = System.getProperty("line.separator");
 	
+	private static final Instruction[] _instructions = {new MoveInstruction(),
+														new TurnInstruction(),
+														new PickInstruction(),
+														new DropInstruction(),
+														new ScanInstruction(),
+														new RadarInstruction(),
+														new OperateInstruction(),
+														new HelpInstruction(),
+														new QuitInstruction()};
 	
 	/* PUBLIC METHODS */
 	/**
@@ -29,79 +41,18 @@ public class Interpreter {
 	 * @return a new instruction from the given line. If the line contains wrong syntax, returns a not valid instruction
 	 */
 	public static Instruction generateInstruction(String line){
-		Instruction instruction;
-		try
-		{
-			instruction = new DropInstruction();
-			instruction = instruction.parse(line);
-		}
-		catch(WrongInstructionFormatException ex1)
+		Instruction instruction = null;
+		Iterator<Instruction> it = Arrays.asList(_instructions).iterator(); 
+		boolean parsed = false;
+		
+		while(!parsed && it.hasNext())
 		{
 			try
 			{
-				instruction = new HelpInstruction();
-				instruction = instruction.parse(line);
+				instruction = it.next().parse(line);
+				parsed = true; //Creo que es una de las cosas más absurdas que he escrito en mi vida...
 			}
-			catch(WrongInstructionFormatException ex2)
-			{
-				try
-				{
-					instruction = new MoveInstruction();
-					instruction = instruction.parse(line);
-				}
-				catch(WrongInstructionFormatException ex3)
-				{
-					try
-					{
-						instruction = new OperateInstruction();
-						instruction = instruction.parse(line);
-					}
-					catch(WrongInstructionFormatException ex4)
-					{
-						try
-						{
-							instruction = new PickInstruction();
-							instruction = instruction.parse(line);
-						}
-						catch(WrongInstructionFormatException ex5)
-						{
-							try
-							{
-								instruction = new QuitInstruction();
-								instruction = instruction.parse(line);
-							}
-							catch(WrongInstructionFormatException ex6)
-							{
-								try
-								{
-									instruction = new RadarInstruction();
-									instruction = instruction.parse(line);
-								}
-								catch(WrongInstructionFormatException ex7)
-								{
-									try
-									{
-										instruction = new ScanInstruction();
-										instruction = instruction.parse(line);
-									}
-									catch(WrongInstructionFormatException ex8)
-									{
-										try
-										{
-											instruction = new TurnInstruction();
-											instruction = instruction.parse(line);
-										}
-										catch(WrongInstructionFormatException ex9)
-										{
-											instruction = null;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+			catch(WrongInstructionFormatException ex) {}
 		}
 		
 		return instruction;
@@ -111,16 +62,11 @@ public class Interpreter {
 	 * @return a string with that information
 	 */
 	public static String interpreterHelp(){
-		return ("The valid instructions for WALL-E are:" 
-	            + LINE_SEPARATOR + "     " + new MoveInstruction().getHelp()    //El colmo del absurdo
-				+ LINE_SEPARATOR + "     " + new TurnInstruction().getHelp()    //" " " " " " " " " " 
-				+ LINE_SEPARATOR + "     " + new PickInstruction().getHelp()    //" " " " " " " " " " 
-				+ LINE_SEPARATOR + "     " + new DropInstruction().getHelp()    //" " " " " " " " " " 
-				+ LINE_SEPARATOR + "     " + new ScanInstruction().getHelp()    //" " " " " " " " " " 
-				+ LINE_SEPARATOR + "     " + new RadarInstruction().getHelp()   //" " " " " " " " " " 
-				+ LINE_SEPARATOR + "     " + new OperateInstruction().getHelp() //" " " " " " " " " " 
-	            + LINE_SEPARATOR + "     " + new HelpInstruction().getHelp()    //" " " " " " " " " " 
-				+ LINE_SEPARATOR + "     " + new QuitInstruction().getHelp()    //" " " " " " " " " " 
-				+ LINE_SEPARATOR);
+		String message = "The valid instructions for WALL-E are:";
+		
+		for(Instruction instruction : _instructions)
+			message += LINE_SEPARATOR + "     " + instruction.getHelp();
+	       
+		return message;
 	}
 }

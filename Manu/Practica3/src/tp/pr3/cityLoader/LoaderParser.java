@@ -22,10 +22,7 @@ public abstract class LoaderParser {
 			return false; //Inalcanzable, en fin...
 		}
 		else
-		{
-			next = reader.next();
-			return next.equalsIgnoreCase(mark);
-		}
+			return reader.next().equalsIgnoreCase(mark);
 	}
 	
 	public static int parseInt(Scanner reader) throws WrongCityFormatException

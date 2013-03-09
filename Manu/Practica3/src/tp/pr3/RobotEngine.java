@@ -19,7 +19,7 @@ public class RobotEngine {
 	private boolean _quit;
 	
 	/***************************************************************************************************\
-	 * PARÁMETROS DE LA FUNCIÓN "PRINTROBOTSTATE":  													*
+	 * PARAMETROS DE LA FUNCION "PRINTROBOTSTATE":  													*
 	 * 																									*	
 	 * La función tiene tres parámetros:																*
 	 *  - PrintIsMoving: Indica si se muestra hacia donde se mueve WALL-E								*
