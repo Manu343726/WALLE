@@ -73,7 +73,7 @@ public class Street {
 	}
 	
 	public boolean open(CodeCard card){
-		if(isOpen || code.equalsIgnoreCase(card.getCode()))
+		if(code.equalsIgnoreCase(card.getCode()))
 		{
 			isOpen = true;
 			return true;
@@ -83,8 +83,7 @@ public class Street {
 	}
 	
 	public boolean close(CodeCard card){
-		if(!isOpen || code.equalsIgnoreCase(card.getCode()))
-		{
+		if(this.code.equalsIgnoreCase(card.getCode())){//Podría haber hecho isOpen && code == card.getCode() ...
 			this.isOpen = false;
 			return true;
 		}
