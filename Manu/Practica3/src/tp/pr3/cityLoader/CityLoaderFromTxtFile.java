@@ -95,43 +95,43 @@ public class CityLoaderFromTxtFile {
 	{
 		int streetIndex = 0;
 		int newStreetIndex = 0;
-		Direction streetDirection;
-		boolean streetOpen;
-		String streetCode;
+		Direction streetDirection=Direction.UNKNOWN;
+		boolean streetOpen=false;
+		String streetCode="";
 		int beginIndex=0,endIndex=1;
 		boolean end = false;
 		
-		if(reader.next().equalsIgnoreCase("BeginStreets"))
+		if(LoaderParser.parseMark(reader, "BeginPlaces"))
 		{
 			while(!end && reader.hasNext())
 			{
-				end = reader.next().equalsIgnoreCase("EndStreets"); //Street
+				end = LoaderParser.parseMark(reader, "EndPlaces"); //Street
 				
 				if(!end)
 				{
-					newStreetIndex = reader.nextInt();
+					newStreetIndex = LoaderParser.parseInt(reader);
 					
 					if((streetIndex == 0 && newStreetIndex == 0) || newStreetIndex == (streetIndex + 1))
 					{
-						reader.next();//Place (Begin)
-						beginIndex = reader.nextInt();
+						LoaderParser.parseString(reader);//Place (Begin)
+						beginIndex = LoaderParser.parseInt(reader);
 						
 						if(beginIndex < places.size())
 						{
-							streetDirection = Direction.parse(reader.next());
+							streetDirection = Direction.parse(LoaderParser.parseString(reader));
 							
 							if(streetDirection != Direction.UNKNOWN)
 							{
-								reader.next();//Place (end)
-								endIndex = reader.nextInt();
+								LoaderParser.parseString(reader);//Place (end)
+								endIndex = LoaderParser.parseInt(reader);
 								
 								if(endIndex < places.size())
 								{
-									switch(reader.next().toLowerCase())
+									switch(LoaderParser.parseString(reader).toLowerCase())
 									{
 									case "open"   : streetOpen = true;  break;
 									case "closed" : streetOpen = false; break;
-									default       : throw new WrongCityFormatException();
+									default       : LoaderParser.closeAndThrow(reader);
 									}
 									
 									if(!streetOpen)
@@ -140,16 +140,16 @@ public class CityLoaderFromTxtFile {
 										streetCode = "????";
 								}
 								else
-									throw new WrongCityFormatException();
+									LoaderParser.closeAndThrow(reader);
 							}
 							else
-								throw new WrongCityFormatException();
+								LoaderParser.closeAndThrow(reader);
 						}
 						else
-							throw new WrongCityFormatException();
+							LoaderParser.closeAndThrow(reader);
 					}
 					else
-						throw new WrongCityFormatException();//Street inicial no tiene indice cero o los indices no son consecutivos
+						LoaderParser.closeAndThrow(reader);;//Street inicial no tiene indice cero o los indices no son consecutivos
 						
 					
 					streets.add(new Street(places.get(beginIndex),streetDirection,places.get(endIndex),streetOpen,streetCode));
@@ -158,7 +158,7 @@ public class CityLoaderFromTxtFile {
 				streetIndex = newStreetIndex;
 			}
 			
-			if(!end) throw new WrongCityFormatException();
+			if(!end) LoaderParser.closeAndThrow(reader);
 		}
 	}
 	
