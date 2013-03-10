@@ -1,5 +1,9 @@
 package tp.pr3;
 
+/***CLASS WALLES MESSAGES***/
+/**
+ * This class represent the various messages that WALLE can say
+ */
 public abstract class WallEsMessages {
 	public final static String WALL_E = "WALL·E";
 	public final static String HEADER = WALL_E + "> ";

@@ -1,15 +1,19 @@
-//OK//
+
 
 package tp.pr3;
 
-
+/***ENUM DIRECTION***/
 /***
  * Represents the set of directions that the robot can follow
  */
 public enum Direction {
 	EAST, NORTH, SOUTH, UNKNOWN, WEST;
 	
+	
+	
+	
 	/* PUBLIC METHODS */
+	
 	/**
 	 * Returns the opposite direction from a given direction
 	 * @return the opposite direction
@@ -56,15 +60,20 @@ public enum Direction {
 		}
 	}
 	
-	public static Direction parse(String str)
-	{
-		switch(str.toUpperCase())
-		{
-		case "NORTH" : return Direction.NORTH;
-		case "SOUTH" : return Direction.SOUTH;
-		case "EAST"  : return Direction.EAST;
-		case "WEST"  : return Direction.WEST;
-		default      : return Direction.UNKNOWN;	
+	
+	/**
+	 * Checks a given line and transform it into a Direction
+	 * @param str Given line
+	 * @return A correct direction
+	 */
+	public static Direction parse(String str){
+		
+		switch(str.toUpperCase()){
+		    case "NORTH" : return Direction.NORTH;
+		    case "SOUTH" : return Direction.SOUTH;
+		    case "EAST"  : return Direction.EAST;
+		    case "WEST"  : return Direction.WEST;
+		    default      : return Direction.UNKNOWN;	
 		}
 	}
 }

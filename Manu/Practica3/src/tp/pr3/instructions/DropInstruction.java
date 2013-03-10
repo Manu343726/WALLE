@@ -17,8 +17,7 @@ public class DropInstruction implements Instruction {
 	private static  String[] VALIDINSTRUCTIONS = {"DROP","SOLTAR"};
 	
 	@Override
-	public void configureContext(RobotEngine engine,
-			NavigationModule navigation, ItemContainer robotContainer) {
+	public void configureContext(RobotEngine engine, NavigationModule navigation, ItemContainer robotContainer) {
 		
 		_engine = engine;
 		_navigation = navigation;

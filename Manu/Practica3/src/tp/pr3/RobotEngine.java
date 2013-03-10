@@ -7,6 +7,7 @@ import tp.pr3.instructions.Instruction;
 import tp.pr3.instructions.exceptions.InstructionExecutionException;
 import tp.pr3.items.ItemContainer;
 
+/***CLASS NAVIGATION MODULE***/
 /***
  * Represents the simulation engine. It process and execute user instructions.
  */
@@ -15,12 +16,7 @@ public class RobotEngine {
 	private int              _fuelAmount;
 	private NavigationModule _navigation;
 	private ItemContainer    _items;
-	
 	private boolean _quit;
-	
-	public int getFuel()             {return _fuelAmount;}
-	public int getRecycledMaterial() {return _recycledMaterial;}
-	public Street getHeadingStreet() {return _navigation.getHeadingStreet();}
 	
 	public static final int INITVALUES_FUELAMOUNT       = 100;
 	public static final int INITVALUES_RECICLEDMATERIAL = 0;
@@ -44,9 +40,12 @@ public class RobotEngine {
 	public static final int PRINT_LOOKINGAT            = 0x1; //001	
 	private static final int LSBMASK = 0x1;
 	private static final int TRUE  = 1;
-	private static final int FALSE = 0;
+	
+	
+	
 	
 	/* CONSTRUCTORS */
+	
 	/**
 	 * Parameterized constructor
 	 * @param place Initial place of the simulation
@@ -64,13 +63,32 @@ public class RobotEngine {
 	
 	
 	/* PUBLIC METHODS */
-	public void printRobotState()
-	{
+
+	public int getFuel(){
+		return _fuelAmount;
+	}
+	
+	public int getRecycledMaterial(){
+		return _recycledMaterial;
+	}
+	
+	public Street getHeadingStreet(){
+		return _navigation.getHeadingStreet();
+	}
+	
+	/**
+	 * Prints the state of the robot
+	 */
+	public void printRobotState(){
 		printRobotState(PRINT_LOOKINGAT);
 	}
 	
+	/**
+	 * Prints the state of the robot
+	 * @param params
+	 */
 	public void printRobotState(int params)
-	{//Y por que #!x¿?¿#¡ no hay casting de entero a bool? 
+	{ 
 		if((params & LSBMASK) == TRUE) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
 		
 		if(((params >> 2) & LSBMASK) == TRUE)
@@ -111,6 +129,10 @@ public class RobotEngine {
 		sc.close();
 	}
 	
+	/**
+	 * Adds an amount of fuel to the robot (it can be negative)
+	 * @param fuel Amount of fuel added to the robot
+	 */
 	public void addFuel(int fuel){
 		_fuelAmount += fuel;
 		
@@ -118,28 +140,40 @@ public class RobotEngine {
 		    _fuelAmount = 0;
 	}
 	
+	/**
+	 * Increases the amount of recycled material of the robot
+	 * @param weight Amount of recycled material
+	 */
 	public void addRecycledMaterial(int weight){
 		_recycledMaterial += weight;
 	}
 	
-	public void requestHelp()
-	{
+	/**
+	 * Prints the information about all possible instructions
+	 */
+	public void requestHelp(){
 		System.out.println(Interpreter.interpreterHelp());
 	}
-
-	public void requestQuit()
-	{
+	
+	/**
+	 * Requests the end of the simulation
+	 */
+	public void requestQuit(){
 		_quit=true;
 	}
 	
-	public void comunicateRobot(Instruction instruction)
-	{
-		if(instruction != null)
-		{
+	/**
+	 * It executes an instruction. 
+	 * The instruction must be configured with the context before executing it. 
+	 * It controls the end of the simulation. 
+	 * If the execution of the instruction throws an exception, then the corresponding message is printed
+	 * @param instruction The instruction to be executed
+	 */
+	public void comunicateRobot(Instruction instruction){
+		if(instruction != null){
 			instruction.configureContext(this,_navigation,_items);
 			
-			try
-			{
+			try{
 				instruction.execute();
 			}catch(InstructionExecutionException ex){
 				System.out.println(ex.getMessage());

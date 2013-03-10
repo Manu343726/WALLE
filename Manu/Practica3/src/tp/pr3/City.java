@@ -1,6 +1,10 @@
-//OK//
 
-//Error en el test !!?
+
+/***CLASS CITY***/
+/***
+ * This class represents the city where the robot is wandering. 
+ * It contains information about the streets and the places in the city
+ */
 
 package tp.pr3;
 
@@ -8,11 +12,19 @@ public class City {
 	
 	private Street[] _cityMap;
 	
-	public City(){}//Equivalente a cityMap = null 
+	
+	
+	
+	/* CONSTRUCTORS */
+	
+	public City(){}
 	
 	public City(Street[] cityMap){
 		_cityMap = cityMap;
 	}
+	
+	
+	/* PUBLIC METHODS */
 	
 	/**
 	 * Returns the street that comes out from a given place on a given direction
@@ -23,17 +35,18 @@ public class City {
 	public Street lookForStreet(Place currentPlace, Direction currentHeading){
 		Street s = null;
 		int i = 0;
-		boolean encontrada = false;//Ojo, habías puesto true
+		boolean encontrada = false;
 		
-		if(_cityMap != null)//Si no lo chequeas, puedes lanzar una NullPointerException (No sabes si el usuario de la clase ha utilizado el constructor predeterminado, y por tanto el mapa no ha sido creado)
-			while(i < _cityMap.length && !encontrada)
+		if(_cityMap != null){
+			while(i < _cityMap.length && !encontrada){
 				if(_cityMap[i].comeOutFrom(currentPlace, currentHeading)){
 					encontrada = true;
 					s = _cityMap[i];
 				}
 				else 
 					i++;
-		
+			}
+		}
 		return s;
 	}
 

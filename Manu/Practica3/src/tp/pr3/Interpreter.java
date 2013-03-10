@@ -1,4 +1,4 @@
-//OK//
+
 
 package tp.pr3;
 
@@ -8,6 +8,8 @@ import java.util.Iterator;
 import tp.pr3.instructions.*;
 import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
+
+/***CLASS INTERPRETER***/
 
 /**
  * Represents an interpreter which is responsible for translating user input into instructions for the simulation
@@ -34,7 +36,11 @@ public class Interpreter {
 														new HelpInstruction(),
 														new QuitInstruction()};
 	
+	
+	
+	
 	/* PUBLIC METHODS */
+	
 	/**
 	 * Generates a new instruction from a given line
 	 * @param line: the user input string 
@@ -45,18 +51,17 @@ public class Interpreter {
 		Iterator<Instruction> it = Arrays.asList(_instructions).iterator(); 
 		boolean parsed = false;
 		
-		while(!parsed && it.hasNext())
-		{
-			try
-			{
+		while(!parsed && it.hasNext()){
+			try{
 				instruction = it.next().parse(line);
-				parsed = true; //Creo que es una de las cosas más absurdas que he escrito en mi vida...
+				parsed = true; 
 			}
 			catch(WrongInstructionFormatException ex) {}
 		}
 		
 		return instruction;
 	}
+	
 	/**
 	 * Returns information of all valid instructions
 	 * @return a string with that information

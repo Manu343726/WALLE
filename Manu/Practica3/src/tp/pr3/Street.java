@@ -1,10 +1,9 @@
-//OK//
 
 package tp.pr3;
 
 import tp.pr3.items.CodeCard;
 
-
+/***CLASS STREET***/
 /***
  * Represents a street as its starting place, its final place, and its direction.
  */
@@ -17,6 +16,7 @@ public class Street {
 	private String    _code;
 	
 	/* CONSTRUCTORS */
+	
 	/**
 	 * Default constructor
 	 */
@@ -44,6 +44,7 @@ public class Street {
 	}
 	
 	/* PUBLIC METHODS */
+	
 	/**
 	 * Checks if this street matches to a certain place and direction
 	 * @param place: The starting or final place of the street
@@ -73,8 +74,7 @@ public class Street {
 	}
 	
 	public boolean open(CodeCard card){
-		if(_isOpen || _code.equalsIgnoreCase(card.getCode()))
-		{
+		if(_isOpen || _code.equalsIgnoreCase(card.getCode())){
 			_isOpen = true;
 			return true;
 		}
@@ -83,8 +83,7 @@ public class Street {
 	}
 	
 	public boolean close(CodeCard card){
-		if(!_isOpen || _code.equalsIgnoreCase(card.getCode()))
-		{
+		if(!_isOpen || _code.equalsIgnoreCase(card.getCode())){
 			_isOpen = false;
 			return true;
 		}
