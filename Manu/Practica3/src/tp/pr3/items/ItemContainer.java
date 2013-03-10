@@ -3,13 +3,26 @@ package tp.pr3.items;
 import tp.pr3.Interpreter;
 import tp.pr3.List;
 
+/**
+ * This class represents a WALLE's item container
+ * @author Manu343726
+ *
+ */
 public class ItemContainer {
 	private List<Item> _itemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
 	
+	/**
+	 * Initializes the container
+	 */
 	public ItemContainer(){
 		_itemCollection = new List<Item>();
 	}
 	
+	/**
+	 * Add an item to the container (The container is sorted by items id)
+	 * @param item Item to be added
+	 * @return Returns true if the insertion its correct. Returns false if the container already contains the item
+	 */
 	public boolean addItem(Item item){
 		
 		int pos = this.search(item.getId());
@@ -23,11 +36,21 @@ public class ItemContainer {
 		}
 	}
 	
+	/**
+	 * Checks if the container contains a specified item
+	 * @param id Id of the item
+	 * @return True if the container contains the item. False in other case.
+	 */
 	public boolean containsItem(String id)
 	{
 		return search(id) < 0;
 	}
 	
+	/**
+	 * Gets a item from the container
+	 * @param id Item id
+	 * @return True only if the container contains the ithem. False in other case.
+	 */
 	public Item getItem(String id){
 
         int pos = this.search(id);
@@ -39,10 +62,19 @@ public class ItemContainer {
 
 	}
 	
+	/**
+	 * Returns the container size
+	 * @return
+	 */
 	public int numberOfItems(){
 		return _itemCollection.size();
 	}
 	
+	/**
+	 * Gets an item and removes it from the container
+	 * @param id Item id
+	 * @return An Item instance. Retuns null if the container not contains any item with these id.
+	 */
 	public Item pickItem(String id){
 		
 		int pos = this.search(id);
@@ -53,6 +85,9 @@ public class ItemContainer {
 			return null;
 	}
 	
+	/**
+	 * Returns a string representation of the container
+	 */
 	public String toString(){
 		String words = "";
 		

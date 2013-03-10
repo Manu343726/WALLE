@@ -15,10 +15,23 @@ import tp.pr3.items.*;
 public class CityLoaderFromTxtFile {
 	Place _initialPlace;
 	
+	/**
+	 * Returns the loaded city initial place
+	 * @return
+	 */
 	public Place getInitialPlace() {return _initialPlace;}
 	
+	/**
+	 * Initializes the loader
+	 */
 	public CityLoaderFromTxtFile(){}
 	
+	/**
+	 * Loads a city from the specified input stream.
+	 * @param file
+	 * @return The loaded city
+	 * @throws WrongCityFormatException Only if the stream format is not correct.
+	 */
 	public City loadCity(InputStream file) throws WrongCityFormatException
 	{
 		ArrayList<Street> streets = new ArrayList<Street>();
