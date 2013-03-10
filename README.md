@@ -1,4 +1,4 @@
-﻿WALL-E  - Tecnología de la Programación, prácticas de la asignatura
+WALL-E  - Tecnología de la Programación, prácticas de la asignatura
 ===================================================================
 
 Autores:
