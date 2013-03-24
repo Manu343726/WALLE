@@ -1,7 +1,7 @@
 package tp.pr3.items;
 
 import tp.pr3.Interpreter;
-import tp.pr3.List;
+import java.util.*;
 
 /**
  * This class represents a WALLE's item container
@@ -9,13 +9,13 @@ import tp.pr3.List;
  *
  */
 public class ItemContainer {
-	private List<Item> _itemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
+	private Collection<Item> _itemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
 	
 	/**
 	 * Initializes the container
 	 */
 	public ItemContainer(){
-		_itemCollection = new List<Item>();
+		_itemCollection = new TreeSet<>();
 	}
 	
 	/**
@@ -24,16 +24,14 @@ public class ItemContainer {
 	 * @return Returns true if the insertion its correct. Returns false if the container already contains the item
 	 */
 	public boolean addItem(Item item){
-		
-		int pos = this.search(item.getId());
-			
-		if(pos < 0)//El elemento ya esta en la lista y no lo a�adimos//No estás usando unicode en el editor verdad? Esas eñes....
-			return false;
-		else{	
-			_itemCollection.add(pos, item);
-			
-			return true;
-		}
+            boolean result = true;
+            
+            if(_itemCollection.contains(item))
+                result = false;
+            else
+                _itemCollection.add(item);
+            
+            return result;
 	}
 	
 	/**
@@ -43,7 +41,7 @@ public class ItemContainer {
 	 */
 	public boolean containsItem(String id)
 	{
-		return search(id) < 0;
+		return _itemCollection.contains(Item.getInstance(id));
 	}
 	
 	/**
@@ -52,14 +50,7 @@ public class ItemContainer {
 	 * @return True only if the container contains the ithem. False in other case.
 	 */
 	public Item getItem(String id){
-
-        int pos = this.search(id);
-        	
-        if(pos < 0)//El elemento se ha encontrado
-        	return _itemCollection.get(-pos - 1);
-        else
-        	return null;
-
+            return Collections.
 	}
 	
 	/**
@@ -76,13 +67,7 @@ public class ItemContainer {
 	 * @return An Item instance. Retuns null if the container not contains any item with these id.
 	 */
 	public Item pickItem(String id){
-		
-		int pos = this.search(id);
-		
-		if(pos < 0)//El elemento esta en la lista
-			return _itemCollection.remove(-pos - 1);
-		else 
-			return null;
+            _itemCollection.
 	}
 	
 	/**
