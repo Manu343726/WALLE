@@ -21,6 +21,7 @@ public class PickInstruction implements Instruction {
 	
 	private static String[] VALIDINSTRUCTIONS = {"PICK","COGER"};
 	
+        @Override
 	/**
 	 * Configures the instruction for the execution
 	 * @param engine RobotEngine
@@ -35,6 +36,7 @@ public class PickInstruction implements Instruction {
 		_items = robotContainer;
 	}
 
+        @Override
 	/**
 	 * Executes the instruction
 	 * @throws InstructionExecutionException Throws an exception with any execution error. The exception contains the error description.
@@ -57,6 +59,7 @@ public class PickInstruction implements Instruction {
 			throw new InstructionExecutionException(WallEsMessages.HASNOTOBJECT + _id + ".");//El punto final es para el validador
 	}
 
+        @Override
 	/**
 	 * Returns a string containing the instruction help message
 	 * @return
@@ -70,6 +73,7 @@ public class PickInstruction implements Instruction {
 		return help.substring(0,help.length() - 8);//Si java no es eficiente, yo tampoco
 	}
 
+        @Override
 	/**
 	 * Tries to parse a string to a instruction
 	 * @param cad The parsing string
@@ -79,14 +83,13 @@ public class PickInstruction implements Instruction {
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 		String[] words = cad.split(" ");
 		
-		if(words.length == 2)
-			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
-				_id = words[1];
-			else
-				throw new WrongInstructionFormatException();
-		else
-			throw new WrongInstructionFormatException();
-		
-		return this;
+		if((words.length == 2) &&
+                   (words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1])))
+                {
+                    _id = words[1];
+                    return this;
+                }
+                else
+                    throw new WrongInstructionFormatException();
 	}
 }

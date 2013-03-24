@@ -18,6 +18,7 @@ public class HelpInstruction implements Instruction {
 	
 	private static  String[] VALIDINSTRUCTIONS = {"HELP","AYUDA"};
 	
+        @Override
 	/**
 	 * Configures the instruction for the execution
 	 * @param engine RobotEngine
@@ -32,6 +33,7 @@ public class HelpInstruction implements Instruction {
 		_items = robotContainer;
 	}
 
+        @Override
 	/**
 	 * Executes the instruction
 	 * @throws InstructionExecutionException Throws an exception with any execution error. The exception contains the error description.
@@ -40,6 +42,7 @@ public class HelpInstruction implements Instruction {
 		_engine.requestHelp();
 	}
 	
+        @Override
 	/**
 	 * Returns a string containing the instruction help message
 	 * @return
@@ -53,6 +56,7 @@ public class HelpInstruction implements Instruction {
 		return help.substring(0,help.length() - 3);//Si java no es eficiente, yo tampoco
 	}
 
+        @Override
 	/**
 	 * Tries to parse a string to a instruction
 	 * @param cad The parsing string

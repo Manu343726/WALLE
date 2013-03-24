@@ -14,11 +14,15 @@ public enum Rotation {
 	 * @return The correct Rotation
 	 */
 	public static Rotation parse(String str){
-		if(str.equalsIgnoreCase("LEFT"))
-			return Rotation.LEFT;
-		else if(str.equalsIgnoreCase("RIGHT"))
-			return Rotation.RIGHT;
-		else
-			return Rotation.UNKNOWN;
+            Rotation result;
+            
+            if(str.equalsIgnoreCase("LEFT"))
+                result = Rotation.LEFT;
+            else if(str.equalsIgnoreCase("RIGHT"))
+                result = Rotation.RIGHT;
+            else
+                result = Rotation.UNKNOWN;
+
+            return result;
 	}
 }

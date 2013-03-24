@@ -9,13 +9,13 @@ import java.util.*;
  *
  */
 public class ItemContainer {
-	private Collection<Item> _itemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
+	private TreeMap<String,Item> _itemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
 	
 	/**
 	 * Initializes the container
 	 */
 	public ItemContainer(){
-		_itemCollection = new TreeSet<>();
+		_itemCollection = new TreeMap<>();
 	}
 	
 	/**
@@ -26,10 +26,10 @@ public class ItemContainer {
 	public boolean addItem(Item item){
             boolean result = true;
             
-            if(_itemCollection.contains(item))
+            if(_itemCollection.containsKey(item.getId()))
                 result = false;
             else
-                _itemCollection.add(item);
+                _itemCollection.put(item.getId(),item);
             
             return result;
 	}
@@ -41,7 +41,7 @@ public class ItemContainer {
 	 */
 	public boolean containsItem(String id)
 	{
-		return _itemCollection.contains(Item.getInstance(id));
+		return _itemCollection.containsKey(id);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class ItemContainer {
 	 * @return True only if the container contains the ithem. False in other case.
 	 */
 	public Item getItem(String id){
-            return Collections.
+            return _itemCollection.get(id);
 	}
 	
 	/**
@@ -67,41 +67,20 @@ public class ItemContainer {
 	 * @return An Item instance. Retuns null if the container not contains any item with these id.
 	 */
 	public Item pickItem(String id){
-            _itemCollection.
+            return _itemCollection.remove(id);
 	}
 	
+        @Override
 	/**
 	 * Returns a string representation of the container
 	 */
 	public String toString(){
 		String words = "";
+                Collection<Item> items = _itemCollection.values();
 		
-		for(int i = 0; i < _itemCollection.size(); i++)//Lo he modificado para que encaje con el validador (Hay un salto de línea al final)
-			words = words + "   " +  _itemCollection.get(i).getId() + Interpreter.LINE_SEPARATOR;
+		for(Item item : items)
+			words = words + "   " +  item.getId() + Interpreter.LINE_SEPARATOR;
 		
 		return words;
-	}
-	
-	private int search(String id){
-		int pos = 0;
-		int comp;
-		boolean encontrado = false;
-		
-		while(pos < _itemCollection.size() && !encontrado){
-			comp = _itemCollection.get(pos).getId().compareToIgnoreCase(id);
-			//comp = 0 si son iguales
-			//comp < 0 si id es mayor
-			//comp > 0 si id es menor // Mira que te rayas eh?
-			
-			if(comp > 0)//id es menor 
-				encontrado = true;
-			else if(comp == 0){
-				encontrado = true;
-				pos = -pos - 1; //Hacemos estos para saber si el elemento ha sido encontado o no
-			}
-			else 
-				pos++;
-		}
-		return pos;
 	}
 }

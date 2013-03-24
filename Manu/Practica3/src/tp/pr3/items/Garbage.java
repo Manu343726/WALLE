@@ -1,7 +1,6 @@
 package tp.pr3.items;
 
 import tp.pr3.NavigationModule;
-import tp.pr3.Place;
 import tp.pr3.RobotEngine;
 
 public class Garbage extends Item{
@@ -19,6 +18,7 @@ public class Garbage extends Item{
 		_recycledMaterial = recycledMaterial;
 	}
 	
+        @Override
 	/**
 	 * Checks if the item can be used by WALLE
 	 * @return
@@ -27,13 +27,15 @@ public class Garbage extends Item{
 		return (_recycledMaterial > 0);
 	}
 	
+        @Override
 	/**
 	 * Returns a string representation of this item
 	 */
 	public String toString(){
-		return super.toString() + "// recycled material = " + _recycledMaterial;
+	return super.toString() + "// recycled material = " + _recycledMaterial;
 	}
 	
+        @Override
 	/**
 	 * By calling this function, WALLE uses this item
 	 * @param r WALLE's robot engine
@@ -41,13 +43,17 @@ public class Garbage extends Item{
 	 * @return Returns true only if the use is correct. Returns false otherwise.
 	 */
 	public boolean use(RobotEngine r, NavigationModule navigation){
-		if(this.canBeUsed()){
-		    r.addRecycledMaterial(_recycledMaterial);
-		    _recycledMaterial = 0;
-		    
-		    return true;
-		}
-		return false;
-		
+            boolean result;
+            
+            if(this.canBeUsed()){
+                r.addRecycledMaterial(_recycledMaterial);
+                _recycledMaterial = 0;
+
+                result = true;
+            }
+            else
+                result = false;
+
+            return result;
 	}
 }

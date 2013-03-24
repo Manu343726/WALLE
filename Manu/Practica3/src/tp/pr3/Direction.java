@@ -19,13 +19,17 @@ public enum Direction {
 	 * @return the opposite direction
 	 */
 	public Direction opposite(){
-		switch(this){
-		case EAST: return Direction.WEST;
-		case NORTH: return Direction.SOUTH;
-		case SOUTH: return Direction.NORTH;
-		case WEST: return Direction.EAST;
-		default: return Direction.UNKNOWN;
-		}
+            Direction result;
+            
+            switch(this){
+            case EAST: result = Direction.WEST;break;
+            case NORTH: result = Direction.SOUTH;break;
+            case SOUTH: result = Direction.NORTH;break;
+            case WEST: result = Direction.EAST;break;
+            default: result = Direction.UNKNOWN;break;
+            }
+                
+            return result;
 	}
 	
 	/**
@@ -34,30 +38,42 @@ public enum Direction {
 	 * @return the new direction
 	 */
 	public Direction rotate(Rotation rotation){
-		switch(this){
-		case NORTH: 
-			if(rotation == Rotation.RIGHT)
-				return Direction.EAST;
-			else
-				return Direction.WEST; 
-		case SOUTH:
-			if(rotation == Rotation.RIGHT)
-				return Direction.WEST;
-			else
-				return Direction.EAST;
-		case EAST:
-			if(rotation == Rotation.RIGHT)
-				return Direction.SOUTH;
-			else
-				return Direction.NORTH;
-		case WEST:
-			if(rotation == Rotation.RIGHT)
-				return Direction.NORTH;
-			else
-				return Direction.SOUTH;
-		default:
-			return Direction.UNKNOWN;
-		}
+            Direction result;
+            
+            switch(this){
+            case NORTH: 
+                    if(rotation == Rotation.RIGHT)
+                            result = Direction.EAST;
+                    else
+                            result = Direction.WEST; 
+                
+                break;
+            case SOUTH:
+                    if(rotation == Rotation.RIGHT)
+                            result = Direction.WEST;
+                    else
+                            result = Direction.EAST;
+                
+                break;
+            case EAST:
+                    if(rotation == Rotation.RIGHT)
+                            result = Direction.SOUTH;
+                    else
+                            result = Direction.NORTH;
+                
+                break;
+            case WEST:
+                    if(rotation == Rotation.RIGHT)
+                            result = Direction.NORTH;
+                    else
+                            result = Direction.SOUTH;
+                
+                break;
+            default:
+                    result = Direction.UNKNOWN;
+            }
+            
+            return result;
 	}
 	
 	
@@ -67,13 +83,16 @@ public enum Direction {
 	 * @return A correct direction
 	 */
 	public static Direction parse(String str){
-		
+		Direction result;
+                
 		switch(str.toUpperCase()){
-		    case "NORTH" : return Direction.NORTH;
-		    case "SOUTH" : return Direction.SOUTH;
-		    case "EAST"  : return Direction.EAST;
-		    case "WEST"  : return Direction.WEST;
-		    default      : return Direction.UNKNOWN;	
+		    case "NORTH" : result = Direction.NORTH;break;
+		    case "SOUTH" : result = Direction.SOUTH;break;
+		    case "EAST"  : result = Direction.EAST;break;
+		    case "WEST"  : result = Direction.WEST;break;
+		    default      : result = Direction.UNKNOWN;break;
 		}
+                
+                return result;
 	}
 }

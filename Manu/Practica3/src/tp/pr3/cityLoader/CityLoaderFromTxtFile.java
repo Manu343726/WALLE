@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import tp.pr3.City;
 import tp.pr3.Direction;
-import tp.pr3.List;
 import tp.pr3.Place;
 import tp.pr3.Street;
 import tp.pr3.cityLoader.cityLoaderExceptions.WrongCityFormatException;
@@ -34,8 +33,8 @@ public class CityLoaderFromTxtFile {
 	 */
 	public City loadCity(InputStream file) throws WrongCityFormatException
 	{
-		ArrayList<Street> streets = new ArrayList<Street>();
-		List<Place> places = new List<Place>();
+		ArrayList<Street> streets = new ArrayList<>();
+		ArrayList<Place> places = new ArrayList<>();
 		Street[] map;
 		
 		Scanner reader = new Scanner(file);
@@ -58,7 +57,7 @@ public class CityLoaderFromTxtFile {
 		return new City(map);
 	}
 	
-	private void loadPlaces(List<Place> places, Scanner reader) throws WrongCityFormatException
+	private void loadPlaces(ArrayList<Place> places, Scanner reader) throws WrongCityFormatException
 	{
 		int placeIndex = 0;
 		int newPlaceIndex = 0;
@@ -104,7 +103,7 @@ public class CityLoaderFromTxtFile {
 			LoaderParser.closeAndThrow(reader);
 	}
 	
-	private void loadStreets(ArrayList<Street> streets,List<Place> places, Scanner reader)throws WrongCityFormatException
+	private void loadStreets(ArrayList<Street> streets,ArrayList<Place> places, Scanner reader)throws WrongCityFormatException
 	{
 		int streetIndex = 0;
 		int newStreetIndex = 0;
@@ -179,7 +178,7 @@ public class CityLoaderFromTxtFile {
 		end=end;
 	}
 	
-	private void loadItems(List<Place> places,Scanner reader) throws WrongCityFormatException
+	private void loadItems(ArrayList<Place> places,Scanner reader) throws WrongCityFormatException
 	{
 		int itemIndex = 0;
 		int newItemIndex = 0;

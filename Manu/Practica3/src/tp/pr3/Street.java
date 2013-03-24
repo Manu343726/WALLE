@@ -61,12 +61,16 @@ public class Street {
 	 * @return the place on the other side of the street from the specified place
 	 */
 	public Place nextPlace(Place whereAmI){
-		if (whereAmI == _source)
-			return _target;
-		else if (whereAmI == _target)
-			return _source;
-		else
-			return null;
+            Place result;
+            
+            if (whereAmI == _source)
+                    result = _target;
+            else if (whereAmI == _target)
+                    result = _source;
+            else
+                    result = null;
+            
+            return result;
 	}
 	
 	public boolean isOpen(){
@@ -74,20 +78,40 @@ public class Street {
 	}
 	
 	public boolean open(CodeCard card){
-		if(_isOpen || _code.equalsIgnoreCase(card.getCode())){
-			_isOpen = true;
-			return true;
-		}
-		else
-			return false;
+            /***************************************
+             * boolean open() table:               *
+             * ----------------------------------- *
+             * isOpen | GoodCode # isOpen | return *
+             * -------|----------#--------|------- *
+             *  false |   false  #  false | false  *
+             *  false |   true   #  true  | true   *
+             *   true |   false  #  true  | false  *
+             *   true |   true   #  true  | true   *
+             **************************************/
+            
+            boolean goodCode = _code.equalsIgnoreCase(card.getCode());
+            
+            _isOpen = _isOpen || goodCode;
+            
+            return goodCode;
 	}
 	
 	public boolean close(CodeCard card){
-		if(!_isOpen || _code.equalsIgnoreCase(card.getCode())){
-			_isOpen = false;
-			return true;
-		}
-		else
-			return false;
+             /**************************************
+             * boolean close() table:              *
+             * ----------------------------------- *
+             * isOpen | GoodCode # isOpen | return *
+             * -------|----------#--------|------- *
+             *  false |   false  #  false | false  *
+             *  false |   true   #  false | true   *
+             *   true |   false  #  true  | false  *
+             *   true |   true   #  false | true   *
+             **************************************/
+            
+            boolean goodCode = _code.equalsIgnoreCase(card.getCode());
+            
+            _isOpen = _isOpen && !goodCode;
+            
+            return goodCode;
 	}
 }

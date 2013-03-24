@@ -21,44 +21,51 @@ public class CodeCard extends Item {
     * @param description Code card description
     * @param code Secret code stored in the code card
     */
-	public CodeCard(String id, String description, String code){
-		super(id, description);
-		_code = code;
-	}
-	
-	/**
-	 * A code card always can be used. Since the robot has the code card it never loses it
-	 */
-	public boolean canBeUsed(){
-		return true; 
-	}
-	
-	/**
-	 * Gets the code stored in the code card
-	 * @return A String that represents the code
-	 */
-	public String getCode(){
-		return _code;
-	}
-	
-	
-	/**
-	 * The method to use a code card. If the robot is in a place which contains a street in the direction he is
-	 * looking at, then the street is opened or closed if the street code and the card code match.
-	 */
-	public boolean use(RobotEngine r, NavigationModule navigation){
-		if(this.canBeUsed()){
-		    Street street = navigation.getHeadingStreet();
-		    if(street == null)
-			    return false;
-		    else{
-		        if(street.isOpen())
-			        return street.close(this); 
-		        else
-			        return street.open(this); 
-		    }
-		}
-		else
-			return false;
-	}
+    public CodeCard(String id, String description, String code){
+            super(id, description);
+            _code = code;
+    }
+
+    @Override
+    /**
+     * A code card always can be used. Since the robot has the code card it never loses it
+     */
+    public boolean canBeUsed(){
+            return true; 
+    }
+
+    /**
+     * Gets the code stored in the code card
+     * @return A String that represents the code
+     */
+    public String getCode(){
+            return _code;
+    }
+
+    @Override
+    /**
+     * The method to use a code card. If the robot is in a place which contains a street in the direction he is
+     * looking at, then the street is opened or closed if the street code and the card code match.
+     */
+    public boolean use(RobotEngine r, NavigationModule navigation){
+        boolean result;
+        Street street = navigation.getHeadingStreet();
+
+        if(this.canBeUsed()){
+            street = navigation.getHeadingStreet();
+            
+            if(street == null)
+                    result = false;
+            else{
+                if(street.isOpen())
+                        result = street.close(this); 
+                else
+                        result = street.open(this); 
+            }
+        }
+        else
+                result = false;
+        
+        return result;
+    }
 }

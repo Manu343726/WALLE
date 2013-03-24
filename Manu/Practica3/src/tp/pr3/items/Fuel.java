@@ -22,6 +22,7 @@ public class Fuel extends Item{
 		_times = times;
 	}
 	
+        @Override
 	/**
 	 * Checks if the item can be used by WALLE
 	 * @return
@@ -30,6 +31,7 @@ public class Fuel extends Item{
 		return (_times > 0);
 	}
 	
+        @Override
 	/**
 	 * Returns a string representation of this item
 	 */
@@ -37,6 +39,7 @@ public class Fuel extends Item{
 		return super.toString() + "// power = " +  _power + ", times = "+ _times;
 	}
 	
+        @Override
 	/**
 	 * By calling this function, WALLE uses this item
 	 * @param r WALLE's robot engine
@@ -44,14 +47,18 @@ public class Fuel extends Item{
 	 * @return Returns true only if the use is correct. Returns false otherwise.
 	 */
 	public boolean use(RobotEngine r, NavigationModule navigation){
-		if(this.canBeUsed()){
-		    r.addFuel(_power);
-		    _times--;
-		    
-		    return true;
-		}
-		else
-			return false;
+            boolean result;
+            
+            if(this.canBeUsed()){
+                r.addFuel(_power);
+                _times--;
+
+                result = true;
+            }
+            else
+                result = false;
+            
+            return result;
 	}
 
 }

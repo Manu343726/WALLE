@@ -21,6 +21,7 @@ public class TurnInstruction implements Instruction {
 	private static final String[] VALIDINSTRUCTIONS = {"TURN","GIRAR"};
 	public static final int EXECUTIONFUEL = -5;//No me gusta "hardcodear"
 	
+        @Override
 	/**
 	 * Configures the instruction for the execution
 	 * @param engine RobotEngine
@@ -35,6 +36,7 @@ public class TurnInstruction implements Instruction {
 		_items = robotContainer;
 	}
 
+        @Override
 	/**
 	 * Executes the instruction
 	 * @throws InstructionExecutionException Throws an exception with any execution error. The exception contains the error description.
@@ -45,6 +47,7 @@ public class TurnInstruction implements Instruction {
 		_engine.printRobotState();
 	}
 
+        @Override
 	/**
 	 * Returns a string containing the instruction help message
 	 * @return
@@ -58,6 +61,7 @@ public class TurnInstruction implements Instruction {
 		return help.substring(0,help.length() - 8);//Si java no es eficiente, yo tampoco
 	}
 
+        @Override
 	/**
 	 * Tries to parse a string to a instruction
 	 * @param cad The parsing string
@@ -67,19 +71,11 @@ public class TurnInstruction implements Instruction {
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 		String[] words = cad.split(" ");
 		
-		if(words.length == 2)
-			if(words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1]))
-			{
-				_rotation = Rotation.parse(words[1]);
-				
-				if(_rotation == Rotation.UNKNOWN)
-					throw new WrongInstructionFormatException();
-			}
-			else
-				throw new WrongInstructionFormatException();
-		else
-			throw new WrongInstructionFormatException();
-		
-		return this;
+		if((words.length == 2) && 
+                   (words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[0]) || words[0].equalsIgnoreCase(VALIDINSTRUCTIONS[1])) && 
+                   (_rotation = Rotation.parse(words[1])) != Rotation.UNKNOWN)
+                    return this;
+                else
+                    throw new WrongInstructionFormatException();
 	}
 }

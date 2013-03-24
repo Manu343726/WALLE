@@ -13,29 +13,21 @@ import tp.pr3.instructions.exceptions.WrongInstructionFormatException;
 
 /**
  * Represents an interpreter which is responsible for translating user input into instructions for the simulation
- * The valid instructions are:
- *   -MOVE
- *   -TURN <LEFT|RIGHT>
- *   -PICK <id>
- *   -SCAN <id>
- *   -OPERATE <id>
- *   -HELP
- *   -QUIT
  */
 public class Interpreter {
 	
 	public static final String  LINE_SEPARATOR = System.getProperty("line.separator");
 	
 	private static final Instruction[] _instructions = {new MoveInstruction(),
-														new TurnInstruction(),
-														new PickInstruction(),
-														new DropInstruction(),
-														new ScanInstruction(),
-														new RadarInstruction(),
-														new OperateInstruction(),
-														new HelpInstruction(),
-														new QuitInstruction()};
-	
+                                                            new TurnInstruction(),
+                                                            new PickInstruction(),
+                                                            new DropInstruction(),
+                                                            new ScanInstruction(),
+                                                            new RadarInstruction(),
+                                                            new OperateInstruction(),
+                                                            new HelpInstruction(),
+                                                            new QuitInstruction()};
+
 	
 	
 	

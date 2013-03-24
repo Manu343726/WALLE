@@ -21,6 +21,7 @@ public class ScanInstruction implements Instruction {
 	
 	private static String[] VALIDINSTRUCTIONS = {"SCAN","ESCANEAR"};
 	
+        @Override
 	/**
 	 * Configures the instruction for the execution
 	 * @param engine RobotEngine
@@ -35,6 +36,7 @@ public class ScanInstruction implements Instruction {
 		_items = robotContainer;
 	}
 
+        @Override
 	/**
 	 * Executes the instruction
 	 * @throws InstructionExecutionException Throws an exception with any execution error. The exception contains the error description.
@@ -42,7 +44,7 @@ public class ScanInstruction implements Instruction {
 	public void execute() throws InstructionExecutionException {
 		Item item = null;
 		
-		if(_id == "")
+		if(_id.equals(""))
 		{
 			if(_items.numberOfItems() > 0)
 			{
@@ -63,6 +65,7 @@ public class ScanInstruction implements Instruction {
 		}
 	}
 
+        @Override
 	/**
 	 * Returns a string containing the instruction help message
 	 * @return
@@ -76,6 +79,7 @@ public class ScanInstruction implements Instruction {
 		return help.substring(0,help.length() - 12);//Si java no es eficiente, yo tampoco
 	}
 
+        @Override
 	/**
 	 * Tries to parse a string to a instruction
 	 * @param cad The parsing string

@@ -18,6 +18,7 @@ public class QuitInstruction implements Instruction {
 	
 	private static String[] VALIDINSTRUCTIONS = {"QUIT","SALIR"};
 	
+        @Override
 	/**
 	 * Configures the instruction for the execution
 	 * @param engine RobotEngine
@@ -32,6 +33,7 @@ public class QuitInstruction implements Instruction {
 		_items = robotContainer;
 	}
 
+        @Override
 	/**
 	 * Executes the instruction
 	 * @throws InstructionExecutionException Throws an exception with any execution error. The exception contains the error description.
@@ -40,6 +42,7 @@ public class QuitInstruction implements Instruction {
 		_engine.requestQuit();
 	}
 
+        @Override
 	/**
 	 * Returns a string containing the instruction help message
 	 * @return
@@ -53,6 +56,7 @@ public class QuitInstruction implements Instruction {
 		return help.substring(0,help.length() - 3);//Si java no es eficiente, yo tampoco
 	}
 
+        @Override
 	/**
 	 * Tries to parse a string to a instruction
 	 * @param cad The parsing string
@@ -62,7 +66,7 @@ public class QuitInstruction implements Instruction {
 	public Instruction parse(String cad) throws WrongInstructionFormatException {
 		for(String instruction : VALIDINSTRUCTIONS)
 			if(cad.equalsIgnoreCase(instruction))
-				return this; //Ésto le va a encantar a Alberto...
+				return this;
 		
 		throw new WrongInstructionFormatException();
 	}
