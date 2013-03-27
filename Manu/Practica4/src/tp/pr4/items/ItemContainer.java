@@ -9,13 +9,13 @@ import java.util.*;
  *
  */
 public class ItemContainer {
-	private TreeMap<String,Item> _itemCollection;//Usamos nuestra implementación de ArrayList (PARTE OPCIONAL)
+	private TreeMap<String,Item> _itemCollection;
 	
 	/**
 	 * Initializes the container
 	 */
 	public ItemContainer(){
-		_itemCollection = new TreeMap<>();
+		_itemCollection = new TreeMap<>();  
 	}
 	
 	/**

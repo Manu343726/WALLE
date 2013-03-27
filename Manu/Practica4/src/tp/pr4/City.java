@@ -8,19 +8,20 @@
 
 package tp.pr4;
 
+import java.util.*;
+import tp.pr4.utils.*;
+
 public class City {
 	
-	private Street[] _cityMap;
-	
-	
-	
+	private Collection<Street> _cityMap;
 	
 	/* CONSTRUCTORS */
 	
 	public City(){}
 	
 	public City(Street[] cityMap){
-		_cityMap = cityMap;
+            _cityMap = new ArrayList<>();
+            Collections.addAll(_cityMap, cityMap);
 	}
 	
 	
@@ -32,21 +33,29 @@ public class City {
 	 * @param direction: direction which you want to move
 	 * @return if there is a street from the given place on that direction. If there no street returns null
 	 */
-	public Street lookForStreet(Place currentPlace, Direction currentHeading){
+	public Street lookForStreet(final Place currentPlace,final Direction currentHeading){
 		Street s = null;
 		int i = 0;
 		boolean encontrada = false;
+                Filter<Street> filter = null;
 		
-		if(_cityMap != null){
-			while(i < _cityMap.length && !encontrada){
-				if(_cityMap[i].comeOutFrom(currentPlace, currentHeading)){
-					encontrada = true;
-					s = _cityMap[i];
-				}
-				else 
-					i++;
-			}
+		if(_cityMap != null && _cityMap.size() > 0){//Como echo de menos las lamdas...
+                    filter = new Filter(_cityMap.iterator(),new Predicate<Street>()
+                    {
+                        @Override
+                        public boolean apply(Street street) 
+                        {
+                            return street.comeOutFrom(currentPlace, currentHeading);
+                        }
+                    });
+                    
+                    while(filter.hasNext() && !encontrada)
+                    {
+                        encontrada = true;
+                        s = filter.next();
+                    }
 		}
+                
 		return s;
 	}
 

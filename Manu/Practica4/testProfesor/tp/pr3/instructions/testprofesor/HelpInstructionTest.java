@@ -6,8 +6,8 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr3.instructions.HelpInstruction;
-import tp.pr3.instructions.Instruction;
+import tp.pr4.instructions.HelpInstruction;
+import tp.pr4.instructions.Instruction;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr3.testprofesor.MockRobotEngine;

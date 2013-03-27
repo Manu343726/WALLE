@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
-import tp.pr3.instructions.Instruction;
-import tp.pr3.instructions.ScanInstruction;
+import tp.pr4.instructions.Instruction;
+import tp.pr4.instructions.ScanInstruction;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.ItemContainer;
