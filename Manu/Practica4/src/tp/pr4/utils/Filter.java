@@ -41,6 +41,10 @@ public class Filter<T> implements Iterator<T> {
             throw new NoSuchElementException();
     }
     
+    /**
+     * Checks if there are more values that passes the filter in the iteration
+     * @return
+     */
     @Override
     public boolean hasNext()
     {

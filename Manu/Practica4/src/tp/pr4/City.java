@@ -35,11 +35,10 @@ public class City {
 	 */
 	public Street lookForStreet(final Place currentPlace,final Direction currentHeading){
 		Street street = null;
-		int i = 0;
-		boolean encontrada = false;
                 Filter<Street> filter = null;
 		
-		if(_cityMap != null && _cityMap.size() > 0){//Como echo de menos las lamdas...
+		if(_cityMap != null && _cityMap.size() > 0){
+                    //Como echo de menos las lamdas...(Java 8 por fin incluye lambdas, basadas en C#, como todas las actualizaciones que llevan haciendo los últimos cinco años...)
                     filter = new Filter(_cityMap.iterator(),new Predicate<Street>()
                     {
                         @Override
