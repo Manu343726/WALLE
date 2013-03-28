@@ -34,7 +34,7 @@ public class City {
 	 * @return if there is a street from the given place on that direction. If there no street returns null
 	 */
 	public Street lookForStreet(final Place currentPlace,final Direction currentHeading){
-		Street s = null;
+		Street street = null;
 		int i = 0;
 		boolean encontrada = false;
                 Filter<Street> filter = null;
@@ -49,14 +49,13 @@ public class City {
                         }
                     });
                     
-                    while(filter.hasNext() && !encontrada)
-                    {
-                        encontrada = true;
-                        s = filter.next();
-                    }
+                    if(filter.hasNext())
+                        street = filter.next();
+                    else
+                        street = null;
 		}
                 
-		return s;
+		return street;
 	}
 
 }

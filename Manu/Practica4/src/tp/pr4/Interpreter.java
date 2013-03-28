@@ -2,12 +2,11 @@
 
 package tp.pr4;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.*;
 
 import tp.pr4.instructions.*;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
-
+import tp.pr4.utils.*;
 
 /***CLASS INTERPRETER***/
 
@@ -18,18 +17,15 @@ public class Interpreter {
 	
 	public static final String  LINE_SEPARATOR = System.getProperty("line.separator");
 	
-	private static final Instruction[] _instructions = {new MoveInstruction(),
-                                                            new TurnInstruction(),
-                                                            new PickInstruction(),
-                                                            new DropInstruction(),
-                                                            new ScanInstruction(),
-                                                            new RadarInstruction(),
-                                                            new OperateInstruction(),
-                                                            new HelpInstruction(),
-                                                            new QuitInstruction()};
-
-	
-	
+	private static final Collection<Instruction> _instructions = Arrays.asList(new MoveInstruction(),
+                                                                                   new TurnInstruction(),
+                                                                                   new PickInstruction(),
+                                                                                   new DropInstruction(),
+                                                                                   new ScanInstruction(),
+                                                                                   new RadarInstruction(),
+                                                                                   new OperateInstruction(),
+                                                                                   new HelpInstruction(),
+                                                                                   new QuitInstruction());
 	
 	/* PUBLIC METHODS */
 	
@@ -38,18 +34,29 @@ public class Interpreter {
 	 * @param line: the user input string 
 	 * @return a new instruction from the given line. If the line contains wrong syntax, returns a not valid instruction
 	 */
-	public static Instruction generateInstruction(String line){
+	public static Instruction generateInstruction(final String line){
 		Instruction instruction = null;
-		Iterator<Instruction> it = Arrays.asList(_instructions).iterator(); 
-		boolean parsed = false;
-		
-		while(!parsed && it.hasNext()){
-			try{
-				instruction = it.next().parse(line);
-				parsed = true; 
-			}
-			catch(WrongInstructionFormatException ex) {}
-		}
+		Filter<Instruction> filter = new Filter<>(_instructions.iterator(), new Predicate<Instruction>()
+                {
+                    @Override
+                    public boolean apply(Instruction instruction)
+                    {
+                        try
+                        {
+                            instruction.parse(line);
+                            return true;
+                        }
+                        catch(WrongInstructionFormatException ex)
+                        {
+                            return false;
+                        }
+                    }
+                });
+                
+                if(filter.hasNext())
+                    instruction = filter.next();
+                else
+                    instruction = null;
 		
 		return instruction;
 	}
