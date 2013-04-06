@@ -78,4 +78,33 @@ public class Filter<T> implements Iterator<T> {
     {
         throw new UnsupportedOperationException();
     }
+    
+    /**
+     * Return collection of all values that passes this filter. After the call, this Filter iterator is not valid.
+     * @return 
+     */
+    public Collection<T> filtered()
+    {
+        Collection<T> ret = new ArrayList<>();
+        
+        while(this.hasNext())
+            ret.add(this.next());
+        
+        return ret;
+    }
+    
+    /**
+     * Returns a new filter that performs the opposite filtering (Filtered items by this will be not filtered and vice versa)
+     * @return 
+     */
+    public Filter<T> opposite()
+    {
+        return new Filter<>(_underlyingIterator,new NotPredicate(_predicate));
+    }
+    
+    /**
+     * Returns the predicate that preforms the filtering
+     * @return 
+     */
+    public Predicate<T> getPredicate() {return _predicate;}
 }
