@@ -35,8 +35,13 @@ public class Filter<T> implements Iterator<T> {
     @Override
     public T next() throws NoSuchElementException
     {
+        T value = _cachedValue;
+        
         if(hasNext())
-            return _cachedValue;
+        {
+            _cachedValue = null;
+            return value;
+        }
         else
             throw new NoSuchElementException();
     }
