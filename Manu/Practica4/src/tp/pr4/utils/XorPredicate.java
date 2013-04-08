@@ -5,20 +5,20 @@
 package tp.pr4.utils;
 
 /**
- * A Predicate class that represents the OR operation of two predicates
+ * A Predicate class that represents the XOR operation of two predicates
  * @author
  * Manu343726
  */
-public class OrPredicate<T> extends Predicate<T> {
+public class XorPredicate<T> extends Predicate<T> {
         private Predicate<T> _firstOperand;
     private Predicate<T> _secondOperand;
     
     /**
-     * Creates a logical OR predicate from two predicates
+     * Creates a logical XOR predicate from two predicates
      * @param firstOperand First operand of the logical and
      * @param secondOperand Second operand of the logical and
      */
-    public OrPredicate(Predicate<T> firstOperand , Predicate<T> secondOperand)
+    public XorPredicate(Predicate<T> firstOperand , Predicate<T> secondOperand)
     {
         _firstOperand = firstOperand;
         _secondOperand = secondOperand;
@@ -32,6 +32,6 @@ public class OrPredicate<T> extends Predicate<T> {
     @Override
     public boolean apply(T data)
     {
-        return _firstOperand.apply(data) || _secondOperand.apply(data);
+        return _firstOperand.apply(data) ^ _secondOperand.apply(data);
     }
 }

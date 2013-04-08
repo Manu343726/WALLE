@@ -36,6 +36,8 @@ public class City {
 	public Street lookForStreet(final Place currentPlace,final Direction currentHeading){
 		Street street = null;
                 Filter<Street> filter = null;
+                
+                Predicate<Street> predicate;
 		
 		if(_cityMap != null && _cityMap.size() > 0){
                     
