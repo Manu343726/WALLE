@@ -1,10 +1,13 @@
 package tp.pr4.gui;
 
 import java.util.EnumMap;
+import javax.swing.ImageIcon;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import tp.pr4.Direction;
 
 
 /**
@@ -17,18 +20,16 @@ import javax.swing.JTextArea;
  * This panel will update the visited places when the robot moves from one place to another. 
  * Additionally it will show the place description on a text area if the user clicks on a visited place.
  * @author Laura
- * @param <V>
- * @param <K>
  *
  */
 public class NavigationPanel extends JPanel{
 
 	private int row; //Current row
 	private int col; //Current column
-	private PlaceCell[][] cells; //Grid with the MapCells
-	private JTextArea info; //Text area where the room description is shown
+	private PlaceCell[][] cells;   //Grid with the MapCells
+	private JTextArea info;        //Text area where the room description is shown
 	private JLabel lbRobotHeading; //Label where the WALLE image appears showing the robot heading
-	private EnumMap<K extends Enum<K>, V> headingIcons; //A map with the icons for each heading direction
+	private EnumMap<Direction , ImageIcon> headingIcons; //A map with the icons for each heading direction
 	
 	public NavigationPanel(){}
 	
