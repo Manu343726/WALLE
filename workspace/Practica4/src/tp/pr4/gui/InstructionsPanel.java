@@ -1,10 +1,13 @@
 package tp.pr4.gui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.EventListener;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+@SuppressWarnings("serial")
 public class InstructionsPanel extends JPanel{
 
 	private JButton jButtonMove;
@@ -19,6 +22,11 @@ public class InstructionsPanel extends JPanel{
 	
 	public InstructionsPanel(){
 		initInstructionsPanel();
+	}
+	
+	public InstructionsPanel(EventListener driver){
+		initInstructionsPanel();
+		setDriver(driver);
 	}
 	
 	private void initInstructionsPanel(){
@@ -52,6 +60,7 @@ public class InstructionsPanel extends JPanel{
 		this.jComboRotation.setName("jComboRotation");
 		this.jComboRotation.addItem("LEFT");
 		this.jComboRotation.addItem("RIGHT");
+		this.jComboRotation.setEditable(false);
 		
 		this.setLayout(new GridLayout(4,2));
 		
@@ -65,5 +74,17 @@ public class InstructionsPanel extends JPanel{
 		this.add(this.jButtonOperate);
 	}
 	
+	//No hace falta funcion de update en este panel
 	
+	public void setDriver(EventListener driver){
+	//Para los botones el cuadro de texto y el combo box se usa el ActionListener
+		jButtonMove.addActionListener((ActionListener) driver);
+		jButtonTurn.addActionListener((ActionListener) driver);
+		jButtonPick.addActionListener((ActionListener) driver);
+		jButtonDrop.addActionListener((ActionListener) driver);
+		jButtonQuit.addActionListener((ActionListener) driver);
+		jButtonOperate.addActionListener((ActionListener) driver);
+		jTextItem.addActionListener((ActionListener) driver);
+		jComboRotation.addActionListener((ActionListener) driver);
+	}
 }

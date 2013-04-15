@@ -1,6 +1,8 @@
 package tp.pr4.gui;
 
 import java.util.EnumMap;
+import java.util.EventListener;
+
 import javax.swing.ImageIcon;
 
 import javax.swing.JLabel;
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import tp.pr4.Direction;
+import tp.pr4.Place;
 
 
 /**
@@ -22,16 +25,37 @@ import tp.pr4.Direction;
  * @author Laura
  *
  */
+@SuppressWarnings("serial")
 public class NavigationPanel extends JPanel{
 
 	private int row; //Current row
 	private int col; //Current column
 	private PlaceCell[][] cells;   //Grid with the MapCells
 	private JTextArea info;        //Text area where the room description is shown
-	private JLabel lbRobotHeading; //Label where the WALLE image appears showing the robot heading
+	private JLabel labelRobotHeading; //Label where the WALLE image appears showing the robot heading
 	private EnumMap<Direction , ImageIcon> headingIcons; //A map with the icons for each heading direction
 	
-	public NavigationPanel(){}
+	public NavigationPanel(){
+		initNavigationPanel();
+	}
 	
+	public NavigationPanel(EventListener driver){
+		initNavigationPanel();
+		setDriver(driver);
+	}
 	
+	public void initNavigationPanel(){
+		
+	}
+	
+	public void setDriver(EventListener driver){
+		
+	}
+	
+	public void update(){
+		
+	}
+
+
+
 }

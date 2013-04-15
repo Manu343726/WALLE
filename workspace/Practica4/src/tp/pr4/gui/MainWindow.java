@@ -1,5 +1,10 @@
 package tp.pr4.gui;
 
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.util.EventListener;
+
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
@@ -25,16 +30,59 @@ import tp.pr4.RobotEngine;
  *
  */
 
-public class MainWindow {
+@SuppressWarnings("serial")
+public class MainWindow extends JFrame{
 
 	private RobotEngine robot;
+	private Container mainPanel;
 	private JMenu jMenu;
-	private JPanel jPanelInstructions;
+	private InstructionsPanel instructionsPanel;
 	private RobotPanel robotPanel;
 	private NavigationPanel navPanel;
 	
-	public MainWindow(RobotEngine robot){
+	public MainWindow(){
+		super("WALL-E The garbage collector");
+		initMainWindow();
+	}
+	
+	public MainWindow(RobotDriver driver){
+		super("WALL-E The garbage collector");
+		initMainWindow();
+		setDriver(driver);
+	}
+	
+	public void initMainWindow(){
+		this.setSize(3*320, 340); //No se realmente que tamaño ponerle
+		this.mainPanel = this.getContentPane();
+		
+		this.jMenu = new JMenu();
+		this.instructionsPanel = new InstructionsPanel();
+		this.robotPanel = new RobotPanel(robot);
+		this.navPanel = new NavigationPanel();
 		
 	}
 	
+	public void setDriver(EventListener driver){
+		this.instructionsPanel.setDriver(driver);
+		this.robotPanel.setDriver(driver);
+		this.navPanel.setDriver(driver);
+	}
+	
+	public void update(){
+		
+	}
+	
+	//Para pruebas
+	public void arranca(){
+		EventQueue.invokeLater(new Runnable(){
+		public void run(){
+			setVisible(true);
+		}
+		});
+	}
+	
+	public static void main(String[] args){
+		final MainWindow m = new MainWindow();
+		m.arranca();
+	}
 }

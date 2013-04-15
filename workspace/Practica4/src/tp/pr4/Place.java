@@ -14,8 +14,8 @@ public class Place {
 	private String        _description;
 	private boolean       _isSpaceShip;
 	private ItemContainer _itemContainer;
-	private final static String PLACECONTAINS = "The place contains these objects:";//Joder, si no es por kdiff no lo veo XD
-	private final static String PLACEEMPTY = "The place is empty. There are no objects to pick";//Lo mismo que la anterior!
+	private final static String PLACECONTAINS = "The place contains these objects:";
+	private final static String PLACEEMPTY = "The place is empty. There are no objects to pick";
 	
 	
 	
@@ -99,6 +99,10 @@ public class Place {
 	public boolean existItem(String id)
 	{
 		return _itemContainer.getItem(id) != null;
+	}
+	
+	public String getName(){
+		return this._name;
 	}
 
 }
