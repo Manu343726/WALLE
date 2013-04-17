@@ -34,4 +34,16 @@ public abstract class WallEsMessages {
 	public static final String NOFUEL = WALLESAYS + "I run out of fuel. I cannot move. Shutting down...";
 	
 	public static final String IHAVEDROPPED = "Great! I have dropped ";
-}
+
+        
+        private static final String MSGBOX_TITLE_ERROR = "WALLE - Error"
+        
+        private static void _writeMessagByConsole(String message)
+        {
+            System.out.println(message);
+        }
+        
+        private static void _writeMessageByMsgBox(String message)
+        {
+            
+        }

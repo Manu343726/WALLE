@@ -2,8 +2,7 @@ package tp.pr4.cityLoader;
 
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
-import java.util.Scanner;
-import java.util.regex.*;
+import java.util.*;
 
 /**
  * This class provides methods to safe-parsing input streams.
@@ -48,19 +47,20 @@ public abstract class LoaderParser {
 	 */
 	public static int parseInt(Scanner reader) throws WrongCityFormatException
 	{
-		Pattern regex = Pattern.compile("-?[0-9]+");
 		String next;
-		Matcher matcher;
+                boolean isNumber = true;
 		
 		if(reader.hasNext())
 		{
-			next = reader.next();
-			matcher = regex.matcher(next);
-			
-			if(matcher.find() && !matcher.find())
-				return Integer.parseInt(next);
-			else
-				closeAndThrow(reader);
+                    next = reader.next();
+                    
+                    for(int i = 0 ; i < next.length() && isNumber ; ++i)
+                        isNumber = Character.isDigit( next.charAt(i) );
+                    
+                    if(isNumber)
+                        return Integer.parseInt(next);
+                    else
+                        closeAndThrow(reader);
 		}
 		else
 			closeAndThrow(reader);

@@ -1,5 +1,8 @@
 package tp.pr4;
 
+import java.util.Observable;
+
+
 import tp.pr4.gui.NavigationPanel;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.items.Item;
@@ -12,12 +15,13 @@ import tp.pr4.items.Item;
  *  and to pick and drop items at the current place.
  */
 
-public class NavigationModule {
+public class NavigationModule extends Observable{
 	
 	private City      _city;
 	private Place     _currentPlace;
 	private Direction _currentDirection;
-	private NavigationPanel navPanel;
+	
+	private NavigationPanel _navPanel;
 	
 	/* CONSTRUCTORS */
 	
@@ -59,6 +63,7 @@ public class NavigationModule {
 	 */
 	public void rotate(Rotation rotation){
 		_currentDirection = _currentDirection.rotate(rotation);
+		reportObservers(false);
 	}
 	
 	/**
@@ -106,6 +111,12 @@ public class NavigationModule {
 		return _city.lookForStreet(_currentPlace, _currentDirection);
 	}
 	
+	public void reportObservers(boolean move)
+	{
+		setChanged();
+		notifyObservers(move);
+	}
+	
 	/**
 	 * The method tries to move the robot following the current direction. 
 	 * If the movement is not possible because there is no street, or there is a street which is closed, then it throws an exception.
@@ -116,8 +127,10 @@ public class NavigationModule {
 		Street currentStreet = getHeadingStreet();
 		
 		if(currentStreet != null){
-			if(currentStreet.isOpen())
+			if(currentStreet.isOpen()){
 				_currentPlace = currentStreet.nextPlace(_currentPlace);
+				reportObservers(true);
+			}
 			else
 				throw new InstructionExecutionException(WallEsMessages.STREETCLOSED);
 		}
@@ -133,7 +146,4 @@ public class NavigationModule {
 	}
 	
 	
-	public void setNavigationPanel(NavigationPanel navPanel){
-		this.navPanel = navPanel;
-	}
 }

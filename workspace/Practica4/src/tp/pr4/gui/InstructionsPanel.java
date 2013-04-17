@@ -17,8 +17,13 @@ public class InstructionsPanel extends JPanel{
 	private JButton jButtonQuit;
 	private JButton jButtonOperate;
 	private JTextField jTextItem;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jComboRotation;
 
+	
+	public String getSelectedDirection(){
+		return (String)jComboRotation.getSelectedItem();
+	}
 	
 	public InstructionsPanel(){
 		initInstructionsPanel();
@@ -29,6 +34,8 @@ public class InstructionsPanel extends JPanel{
 		setDriver(driver);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+
 	private void initInstructionsPanel(){
 		this.jButtonMove = new JButton();
 		this.jButtonTurn = new JButton();

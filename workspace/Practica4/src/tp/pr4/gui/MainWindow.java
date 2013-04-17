@@ -1,14 +1,26 @@
 package tp.pr4.gui;
 
 import java.awt.Container;
-import java.awt.EventQueue;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+
+
 import java.util.EventListener;
+import java.util.Observable;
+
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+
 
 import tp.pr4.RobotEngine;
+
 
 /**
  * This clase represents the main window. The MainWindow contains:
@@ -31,58 +43,79 @@ import tp.pr4.RobotEngine;
  */
 
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame{
-
+public class MainWindow extends JFrame implements InterfaceWindow{
+	
 	private RobotEngine robot;
+	
 	private Container mainPanel;
-	private JMenu jMenu;
+	
 	private InstructionsPanel instructionsPanel;
 	private RobotPanel robotPanel;
 	private NavigationPanel navPanel;
+
+	private JMenu jMenu;
+	private JMenuBar jMenuBar;
+	private JMenuItem jMenuItem;
 	
-	public MainWindow(){
+	public MainWindow(RobotEngine robotEngine, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
 		super("WALL-E The garbage collector");
-		initMainWindow();
+		initMainWindow(robot, robotPanel, navigationPanel, instPanel);
 	}
 	
-	public MainWindow(RobotDriver driver){
+	public MainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, RobotDriver driver){
 		super("WALL-E The garbage collector");
-		initMainWindow();
+		initMainWindow(robot, robotPanel, navigationPanel, instPanel);
 		setDriver(driver);
 	}
 	
-	public void initMainWindow(){
-		this.setSize(3*320, 340); //No se realmente que tamaño ponerle
+	public void initMainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
+		this.robot = robot;
+		
+		this.setSize(800, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE | JFrame.DISPOSE_ON_CLOSE);
 		this.mainPanel = this.getContentPane();
+
+		this.instructionsPanel = instPanel;
+		this.robotPanel = robotPanel;
+		this.navPanel = navigationPanel;
 		
-		this.jMenu = new JMenu();
-		this.instructionsPanel = new InstructionsPanel();
-		this.robotPanel = new RobotPanel(robot);
-		this.navPanel = new NavigationPanel();
+		jMenuBar = new JMenuBar();
+		setJMenuBar(jMenuBar);
+		jMenu = new JMenu("File");
+		jMenuBar.add(jMenu);
+		jMenuItem = new JMenuItem("Quit");
+		jMenu.add(jMenuItem);
+		jMenuItem.setName("jMenuQuit");
 		
+		JSplitPane panelAux = new JSplitPane(SwingConstants.VERTICAL, instructionsPanel, robotPanel);
+		
+		this.mainPanel = new JPanel(new BorderLayout());
+		mainPanel.add(panelAux, "North");
+		mainPanel.add(navPanel, "Center");
+
+		
+		this.setContentPane(mainPanel);
+		setVisible(true);
 	}
+	
 	
 	public void setDriver(EventListener driver){
 		this.instructionsPanel.setDriver(driver);
 		this.robotPanel.setDriver(driver);
 		this.navPanel.setDriver(driver);
+		this.jMenuItem.addActionListener((ActionListener) driver);
 	}
 	
-	public void update(){
-		
-	}
-	
-	//Para pruebas
-	public void arranca(){
-		EventQueue.invokeLater(new Runnable(){
-		public void run(){
-			setVisible(true);
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		if(robot.quit()){
+			System.exit(0);
 		}
-		});
+		navPanel.update(o, arg);
+		robotPanel.update(o, arg);
 	}
 	
-	public static void main(String[] args){
-		final MainWindow m = new MainWindow();
-		m.arranca();
-	}
+
 }

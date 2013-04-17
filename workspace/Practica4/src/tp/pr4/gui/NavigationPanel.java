@@ -1,16 +1,27 @@
 package tp.pr4.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Point;
+
+
+import java.awt.GridLayout;
 import java.util.EnumMap;
 import java.util.EventListener;
+
+import java.util.Observable;
+
 
 import javax.swing.ImageIcon;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 import tp.pr4.Direction;
-import tp.pr4.Place;
+
+import tp.pr4.NavigationModule;
 
 
 /**
@@ -26,36 +37,108 @@ import tp.pr4.Place;
  *
  */
 @SuppressWarnings("serial")
-public class NavigationPanel extends JPanel{
+public class NavigationPanel extends JPanel implements InterfaceWindow{
 
+
+	private NavigationModule navModule;
+	
+	@SuppressWarnings("unused")
 	private int row; //Current row
+	@SuppressWarnings("unused")
 	private int col; //Current column
+	
 	private PlaceCell[][] cells;   //Grid with the MapCells
 	private JTextArea info;        //Text area where the room description is shown
 	private JLabel labelRobotHeading; //Label where the WALLE image appears showing the robot heading
 	private EnumMap<Direction , ImageIcon> headingIcons; //A map with the icons for each heading direction
 	
-	public NavigationPanel(){
-		initNavigationPanel();
+
+	public NavigationPanel(NavigationModule navModule){
+		initNavigationPanel(navModule);
 	}
 	
-	public NavigationPanel(EventListener driver){
-		initNavigationPanel();
-		setDriver(driver);
-	}
 	
-	public void initNavigationPanel(){
+	public void initNavigationPanel(NavigationModule navModule){
+		this.navModule = navModule;
+		row = 4;
+		col = 5;
+		cells = new PlaceCell[11][11];
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < 11; j++){
+				cells[i][j] = new PlaceCell();
+			}
+		}
+		info = new JTextArea();
+		labelRobotHeading = new JLabel();
+		headingIcons = new EnumMap<Direction, ImageIcon>(Direction.class);
 		
+		info.setEditable(false);
+		
+		headingIcons.put(Direction.NORTH, new ImageIcon("src/tp/pr4/gui/images/walleNorth.png"));
+		headingIcons.put(Direction.EAST, new ImageIcon("src/tp/pr4/gui/images/walleEast.png"));
+		headingIcons.put(Direction.SOUTH, new ImageIcon("src/tp/pr4/gui/images/walleSouth.png"));
+		headingIcons.put(Direction.WEST, new ImageIcon("src/tp/pr4/gui/images/walleWest.png"));
+		
+		labelRobotHeading.setIcon(headingIcons.get(Direction.NORTH));
+		
+		this.setLayout(new GridLayout(2, 1));
+		
+		JPanel panelGrid = new JPanel(new GridLayout(11, 11));
+		panelGrid.setBorder(new TitledBorder("Navigation Panel"));
+		for(int i = 0; i < 11; i++)
+			for(int j = 0; j < 11; j++)
+				panelGrid.add(cells[i][j]);
+		
+		JPanel panelAux = new JPanel(new BorderLayout());
+		panelAux.add(labelRobotHeading, "West");
+		panelAux.add(panelGrid, "Center");
+		
+		JScrollPane panelAuxText = new JScrollPane(info, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		panelAuxText.setBorder(new TitledBorder("Log"));
+		
+		this.add(panelAux);
+		this.add(panelAuxText);
 	}
 	
 	public void setDriver(EventListener driver){
-		
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < 11; j++){
+				cells[i][j].setDriver(driver);
+			}
+		}
 	}
 	
-	public void update(){
-		
+	private void calculateCoords(Direction dir){
+		switch(dir){
+		case NORTH: row--; break;
+		case SOUTH: row++; break;
+		case EAST:  col++; break;
+		case WEST: col--; break;
+		}
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		if(arg != null){
+			if(!(boolean) arg)
+				labelRobotHeading.setIcon(headingIcons.get(navModule.getCurrentHeading()));
+			else{
+			    calculateCoords(((NavigationModule) o).getCurrentHeading());
+			    cells[row][col].setCurrentPlace(((NavigationModule) o).getCurrentPlace());
+			    for(int i = 0; i < 11; i++){
+				    for(int j = 0; j < 11; j++){
+					    cells[i][j].update(o, arg);
+				    }
+			    }
+			}
+		}
 	}
 
+	public void setDescriptionText(String description){
+		this.info.setText(description);
+	}
+	
 
 
 }

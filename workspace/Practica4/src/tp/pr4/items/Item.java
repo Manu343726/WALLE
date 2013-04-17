@@ -15,6 +15,8 @@ public abstract class Item implements Comparable<Item> {
 	private String _id;
 	private String _description;
 	
+	
+
 	/**
 	 * Initializes the item 
 	 * @param id Item id
@@ -47,6 +49,13 @@ public abstract class Item implements Comparable<Item> {
 		return _id;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getDescription(){
+		return _description;
+	}
         @Override
 	/**
 	 * Returns a string representation of this item

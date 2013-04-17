@@ -8,7 +8,7 @@ import java.util.*;
  * @author Manu343726
  *
  */
-public class ItemContainer {
+public class ItemContainer extends Observable{
 	private TreeMap<String,Item> _itemCollection;
 	
 	/**

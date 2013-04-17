@@ -2,58 +2,20 @@
 package tp.pr4;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import java.util.*;
 
 import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
-import tp.pr4.utils.*;
-
-
 public class Main {
-    private static boolean HACIENDO_EL_FRIKI = true;
-    
-    private static void testPredicates()
-    {
-        Collection<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
-        
-        Predicate<Integer> primo = new Predicate<Integer>()
-        {
-            @Override
-            public boolean apply(Integer data)
-            {
-                for(int i = 2 ; i < data ; ++i)
-                    if(data % i == 0)
-                        return false;
-
-                return true;
-            }
-        };
-            
-        Predicate<Integer> impar = new Predicate<Integer>()
-        {
-            @Override
-            public boolean apply(Integer data)
-            {
-                return data % 2 != 0;
-            }
-        };
-            
-        Filter<Integer> filter = new Filter<>(numbers.iterator() , primo.or(impar));
-        
-        while(filter.hasNext())
-            System.out.println(filter.next());
-    }
-    
+   
     /**
      * Creates the city, the engine and finally
      * starts the simulation
      * @param args
      */
     public static void main(String[] args) {
-        if(!HACIENDO_EL_FRIKI)
-        {
             CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
             City city = null;
 
@@ -78,9 +40,9 @@ public class Main {
                             System.exit(2);
                     }
 
-                    // create the engine of the game
-                    RobotEngine engine = new RobotEngine(city, loader.getInitialPlace(),Direction.NORTH);
-                    // plays
+                    // create the engine of the game, the model
+                    RobotEngine engine = new RobotEngine(city, loader.getInitialPlace(),Direction.SOUTH);
+                    //plays
                     engine.startEngine();
             }
             else{
@@ -94,8 +56,5 @@ public class Main {
 
                     System.exit(1);
             }
-        }
-        else
-            testPredicates();
     }
 }

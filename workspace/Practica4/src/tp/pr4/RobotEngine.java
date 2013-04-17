@@ -1,10 +1,13 @@
 package tp.pr4;
 
 
-import java.util.Scanner;
+import java.util.Observable;
 
+
+
+import tp.pr4.gui.*;
 import tp.pr4.gui.MainWindow;
-import tp.pr4.gui.NavigationPanel;
+import tp.pr4.gui.RobotDriver;
 import tp.pr4.gui.RobotPanel;
 import tp.pr4.instructions.Instruction;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
@@ -14,15 +17,17 @@ import tp.pr4.items.ItemContainer;
 /***
  * Represents the simulation engine. It process and execute user instructions.
  */
-public class RobotEngine {
+public class RobotEngine extends Observable{
 	private int              _recycledMaterial;
 	private int              _fuelAmount;
 	private NavigationModule _navigation;
 	private ItemContainer    _items;
 	private boolean _quit;
 	
-	private RobotPanel robotPanel;
-	private MainWindow mainWindow;
+	private MainWindow _mainWindow;
+	private RobotPanel _robotPanel;
+	private NavigationPanel _navigationPanel;
+	private InstructionsPanel _instPanel;
 	
 	public static final int INITVALUES_FUELAMOUNT       = 100;
 	public static final int INITVALUES_RECICLEDMATERIAL = 0;
@@ -67,7 +72,6 @@ public class RobotEngine {
 		_items = new ItemContainer();
 	}
 	
-	
 	/* PUBLIC METHODS */
 
 	public int getFuel(){
@@ -80,6 +84,10 @@ public class RobotEngine {
 	
 	public Street getHeadingStreet(){
 		return _navigation.getHeadingStreet();
+	}
+	
+	public boolean quit(){
+		return _quit;
 	}
 	
 	/**
@@ -113,7 +121,20 @@ public class RobotEngine {
 	 * Starts the robot engine. Gets user instructions, processes the instructions and makes the necessary changes
 	 */
 	public void startEngine(){
-		Scanner sc = new Scanner(System.in);
+		_instPanel = new InstructionsPanel();
+		_robotPanel = new RobotPanel(_items);
+		_navigationPanel = new NavigationPanel(_navigation);
+		RobotDriver driver = new RobotDriver(this, _navigation, _navigationPanel, _instPanel);
+		
+		
+		_mainWindow = new MainWindow(this, _robotPanel, _navigationPanel, _instPanel,  driver);
+		this.addObserver(_mainWindow);
+		this._items.addObserver(_robotPanel);
+		this._navigation.addObserver(_navigationPanel);
+		
+		_navigationPanel.update(_navigation, true);
+		_mainWindow.setVisible(true);
+		/*Scanner sc = new Scanner(System.in);
 		
 		System.out.println(_navigation.getCurrentPlace().toString());
 		
@@ -132,7 +153,7 @@ public class RobotEngine {
 		else
 			System.out.print(WallEsMessages.SHIPFINDED);
 		
-		sc.close();
+		sc.close();*/
 	}
 	
 	/**
@@ -144,6 +165,8 @@ public class RobotEngine {
 		
 		if(_fuelAmount < 0)
 		    _fuelAmount = 0;
+		
+		reportObservers();
 	}
 	
 	/**
@@ -152,6 +175,7 @@ public class RobotEngine {
 	 */
 	public void addRecycledMaterial(int weight){
 		_recycledMaterial += weight;
+		reportObservers();
 	}
 	
 	/**
@@ -165,7 +189,13 @@ public class RobotEngine {
 	 * Requests the end of the simulation
 	 */
 	public void requestQuit(){
-		_quit=true;
+		_quit = true;
+		reportObservers();
+	}
+	
+	private void reportObservers(){
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
@@ -191,14 +221,15 @@ public class RobotEngine {
 	
 	
 	public void setGUIWindow(MainWindow mainWindow){
-		this.mainWindow = mainWindow;
-	}
-	
-	public void setNavigationPanel(NavigationPanel navPanel){
-		this._navigation.setNavigationPanel(navPanel);
+		_mainWindow = mainWindow;
 	}
 	
 	public void setRobotPanel(RobotPanel robotPanel){
-		this.robotPanel = robotPanel;
+		_robotPanel = robotPanel;
 	}
+	
+	public void NavigationPanel(NavigationPanel navigationPanel){
+		_navigationPanel = navigationPanel;
+	}
+	
 }

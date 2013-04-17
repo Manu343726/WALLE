@@ -17,7 +17,7 @@ public class MoveInstruction implements Instruction {
 	ItemContainer    _items;
 	
 	private static final String[] VALIDINSTRUCTIONS = {"MOVE","MOVER"};
-	public static final int EXECUTIONFUEL = -5;//Igual que en TurnInstruction, ¡nunca hard-coding!
+	public static final int EXECUTIONFUEL = -5;
 	
         @Override
 	/**

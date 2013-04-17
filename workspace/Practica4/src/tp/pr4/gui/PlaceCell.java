@@ -1,9 +1,15 @@
 package tp.pr4.gui;
 
 import java.awt.Color;
+
+import tp.pr4.Direction;
+import tp.pr4.NavigationModule;
+
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.EventListener;
+import java.util.Observable;
+
+
 
 import javax.swing.JButton;
 
@@ -23,40 +29,49 @@ import tp.pr4.Place;
  *
  */
 @SuppressWarnings("serial")
-public class PlaceCell extends JButton{
+public class PlaceCell extends JButton implements InterfaceWindow{
 
-	private NavigationPanel navPanel;
 	private boolean active;
 	private Place place;
+
 	
-	public PlaceCell(NavigationPanel navPanel, Place place){
-		initPlaceCell(navPanel, place);
+	
+	public PlaceCell() {
+		// TODO Auto-generated constructor stub
+		this.setName("placeCell");
+		active = false;
+		place = new Place();
 	}
-	
-	public PlaceCell(NavigationPanel navPanel, Place place, EventListener driver){
-		initPlaceCell(navPanel, place);
-		setDriver(driver);
-	}
-	
-	public void initPlaceCell(NavigationPanel navPanel, Place place){
-		this.navPanel = navPanel;
-		this.place = place;
-		this.active = true;
-		this.setName(place.getName());//He hecho un get para el nombre del lugar, creo que es lo mas comodo
-		
-	}
-	
+
 	public void setDriver(EventListener driver){
 		this.addActionListener((ActionListener) driver);
 	}
 	
-	public void update(){
-		//if(/*lugar donde estoy*/ == place){
-		    this.setBackground(Color.GREEN);
-		    this.setText(place.getName());
-		//}
-		//else if(active)
-			this.setBackground(Color.GRAY);
-			
+	
+	public boolean isActive(){
+		return this.active;
 	}
+
+	public Place getPlace(){
+		return place;
+	}
+	
+	public void setCurrentPlace(Place place){
+		this.place = place;
+		this.active = true;
+		this.setText(place.getName());
+		this.setOpaque(true);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(((NavigationModule) arg0).getCurrentPlace() == place){
+			this.setBackground(Color.GREEN);
+		}
+		else if(active)
+			this.setBackground(Color.GRAY);
+	}
+			
+	
 }
+	

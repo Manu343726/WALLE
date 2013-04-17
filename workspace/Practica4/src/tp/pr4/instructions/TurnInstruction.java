@@ -19,7 +19,7 @@ public class TurnInstruction implements Instruction {
 	Rotation         _rotation;
 	
 	private static final String[] VALIDINSTRUCTIONS = {"TURN","GIRAR"};
-	public static final int EXECUTIONFUEL = -5;//No me gusta "hardcodear"
+	public static final int EXECUTIONFUEL = -5;
 	
         @Override
 	/**
@@ -58,7 +58,7 @@ public class TurnInstruction implements Instruction {
 		for(String instruction : VALIDINSTRUCTIONS)
 			help += instruction + " <id> | ";
 		
-		return help.substring(0,help.length() - 8);//Si java no es eficiente, yo tampoco
+		return help.substring(0,help.length() - 8);
 	}
 
         @Override
