@@ -48,7 +48,7 @@ public class PickInstruction implements Instruction {
 			if(_items.getItem(_id) == null)
 			{
 				_items.addItem(item);
-				System.out.println(WallEsMessages.NOWIHAVE + item.getId());
+				WallEsMessages.messageProvider().WriteInfo(WallEsMessages.NOWIHAVE + item.getId());
 			}
 			else
 			{

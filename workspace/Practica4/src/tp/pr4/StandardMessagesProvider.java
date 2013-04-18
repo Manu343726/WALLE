@@ -11,13 +11,13 @@ import java.io.PrintStream;
  * @author
  * Manu343726
  */
-public class StandardMessageProvider implements MessageProvider {
+public class StandardMessagesProvider implements MessagesProvider {
     private PrintStream _outputStream;
     
     /*
      * Creates a message provider that uses the specified output stream.
      */
-    public StandardMessageProvider(PrintStream outputStream)
+    public StandardMessagesProvider(PrintStream outputStream)
     {
         _outputStream = outputStream;
     }
@@ -25,7 +25,7 @@ public class StandardMessageProvider implements MessageProvider {
     /*
      * Creates a message provider that uses the standard output stream.
      */
-    public StandardMessageProvider()
+    public StandardMessagesProvider()
     {
         _outputStream = System.out;
     }

@@ -48,8 +48,8 @@ public class ScanInstruction implements Instruction {
 		{
 			if(_items.numberOfItems() > 0)
 			{
-				System.out.println(WallEsMessages.IAMCARRYING);
-				System.out.println(_items.toString());
+				WallEsMessages.messageProvider().WriteInfo(WallEsMessages.IAMCARRYING);
+				WallEsMessages.messageProvider().WriteInfo(_items.toString());
 			}
 			else
 				throw new InstructionExecutionException(WallEsMessages.INVENTORYEMPTY);
@@ -59,7 +59,7 @@ public class ScanInstruction implements Instruction {
 			item = _items.getItem(_id);
 			
 			if(item != null)
-				System.out.println(WallEsMessages.WALLESAYS + item.toString());
+				WallEsMessages.messageProvider().WriteInfo(WallEsMessages.WALLESAYS + item.toString());
 			else
 				throw new InstructionExecutionException(WallEsMessages.IHAVENOT);
 		}

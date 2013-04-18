@@ -9,7 +9,7 @@ package tp.pr4;
  * @author
  * Manu
  */
-public interface MessageProvider {
+public interface MessagesProvider {
     /*
      * Outputs an error message
      * @param message A string containing the message

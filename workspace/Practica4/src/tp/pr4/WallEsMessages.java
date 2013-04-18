@@ -40,26 +40,29 @@ public abstract class WallEsMessages {
     
     
     /* Esto no me convence, igual debería haber hecho un singleton en una clase aparte */ 
-    private static ApplicationMode _appMode;
-    private static MessageProvider _messageProvider; 
+    private static ApplicationMode  _appMode;
+    private static MessagesProvider _messagesProvider; 
     
     /*
      * Returns the application forntend mode
      */
     public static ApplicationMode getAppMode() {return _appMode;}
     
+    /*
+     * Sets the applicacion frontend mode.
+     */
     public static void setAppMode(ApplicationMode appMode)
     {
         _appMode = appMode;
         
         if(_appMode == ApplicationMode.CONSOLE)
-            _messageProvider = new StandardMessageProvider();
+            _messagesProvider = new StandardMessagesProvider();
         else
-            _messageProvider = new GUIMessageProvider();
+            _messagesProvider = new GUIMessagesProvider(false);
     }
     
     /*
      * Returns the application message provider.
      */
-    public static MessageProvider messageProvider() { return _messageProvider; }
+    public static MessagesProvider messageProvider() { return _messagesProvider; }
 }

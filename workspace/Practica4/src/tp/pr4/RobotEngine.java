@@ -103,18 +103,18 @@ public class RobotEngine extends Observable{
 	 */
 	public void printRobotState(int params)
 	{ 
-		if((params & LSBMASK) == TRUE) System.out.println(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+		if((params & LSBMASK) == TRUE) WallEsMessages.messageProvider().WriteInfo(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
 		
 		if(((params >> 2) & LSBMASK) == TRUE)
 		{
-	        System.out.println(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
-		    System.out.println(_navigation.getCurrentPlace().toString());
+	        WallEsMessages.messageProvider().WriteInfo(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
+		    WallEsMessages.messageProvider().WriteInfo(_navigation.getCurrentPlace().toString());
 		}
 		
 		if(((params >> 1) & LSBMASK) == TRUE) System.out.println();
 		
-		System.out.println(WallEsMessages.MYPOWERIS + _fuelAmount);
-		System.out.println(WallEsMessages.MYRECYCLEDMATERIALIS + _recycledMaterial);
+		WallEsMessages.messageProvider().WriteInfo(WallEsMessages.MYPOWERIS + _fuelAmount);
+		WallEsMessages.messageProvider().WriteInfo(WallEsMessages.MYRECYCLEDMATERIALIS + _recycledMaterial);
 	}
 	
 	/**
@@ -207,16 +207,16 @@ public class RobotEngine extends Observable{
 	 */
 	public void comunicateRobot(Instruction instruction){
 		if(instruction != null){
-			instruction.configureContext(this,_navigation,_items);
-			
-			try{
-				instruction.execute();
-			}catch(InstructionExecutionException ex){
-				System.out.println(ex.getMessage());
-			}
+                    instruction.configureContext(this,_navigation,_items);
+
+                    try{
+                            instruction.execute();
+                    }catch(InstructionExecutionException ex){
+                            WallEsMessages.messageProvider().WriteError(ex.getMessage());
+                    }
 		}
 		else
-			System.out.println(WallEsMessages.NOTUNDERSTAND);
+                    WallEsMessages.messageProvider().WriteError(WallEsMessages.NOTUNDERSTAND);
 	}
 	
 	

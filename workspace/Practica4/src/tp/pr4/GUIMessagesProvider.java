@@ -11,9 +11,16 @@ import javax.swing.JOptionPane;
  * @author
  * Manu
  */
-public class GUIMessageProvider implements MessageProvider {
+public class GUIMessagesProvider implements MessagesProvider {
     public final String MESSAGEBOXTITLE_INFO  = "WALLE - Information";
     public final String MESSAGEBOXTITLE_ERROR = "WALLE - Error";
+    
+    private final boolean SHOWINFOMESSAGES;
+    
+    public GUIMessagesProvider(boolean showInfoMessages)
+    {
+        SHOWINFOMESSAGES = showInfoMessages;
+    }
     
     @Override
     public void WriteError(String message)
@@ -24,6 +31,6 @@ public class GUIMessageProvider implements MessageProvider {
     @Override
     public void WriteInfo(String message)
     {
-        JOptionPane.showMessageDialog(null, message , MESSAGEBOXTITLE_INFO , JOptionPane.INFORMATION_MESSAGE);
+        if(SHOWINFOMESSAGES) JOptionPane.showMessageDialog(null, message , MESSAGEBOXTITLE_INFO , JOptionPane.INFORMATION_MESSAGE);
     }
 }
