@@ -47,7 +47,7 @@ public class DropInstruction implements Instruction {
 			if(!_navigation.findItemInCurrentPlace(_id))
 			{
 				_navigation.dropItemAtCurrentPlace(item);
-				WallEsMessages.messageProvider().WriteInfo(WallEsMessages.IHAVEDROPPED + _id);
+				WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.IHAVEDROPPED + _id);
 			}
 			else
 				throw new InstructionExecutionException();

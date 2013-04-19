@@ -44,12 +44,12 @@ public abstract class WallEsMessages {
     private static MessagesProvider _messagesProvider; 
     
     /*
-     * Returns the application forntend mode
+     * Returns the application front-end mode
      */
     public static ApplicationMode getAppMode() {return _appMode;}
     
     /*
-     * Sets the applicacion frontend mode.
+     * Sets the applicacion front-end mode.
      */
     public static void setAppMode(ApplicationMode appMode)
     {
@@ -64,9 +64,9 @@ public abstract class WallEsMessages {
     /**
      * Returns the application messages provider.
      * @return A pointer to the application messages provider. 
-     * @throws NoApplicationModeException If application mode is not configured (No application messages provided created).
+     * @throws NoApplicationModeException If application mode is not configured (No application messages provider created).
      */
-    public static MessagesProvider messageProvider() throws NoApplicationModeException
+    public static MessagesProvider messagesProvider() throws NoApplicationModeException
     {
         if( _messagesProvider != null)
             return _messagesProvider;

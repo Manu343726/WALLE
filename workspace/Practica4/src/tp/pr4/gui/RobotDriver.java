@@ -15,9 +15,16 @@ import tp.pr4.Interpreter;
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
 
-public class RobotDriver implements ActionListener, MouseListener{//para los JButton
+/**
+ * 
+ * @author Laura & Manuel
+ *
+ */
+public class RobotDriver implements ActionListener, //para los JButton
+									MouseListener{
 
 	private RobotEngine _engine;
+	@SuppressWarnings("unused")
 	private NavigationModule _nav;
 	private NavigationPanel _navPanel;
 	private InstructionsPanel _instPanel;
@@ -45,11 +52,10 @@ public class RobotDriver implements ActionListener, MouseListener{//para los JBu
 			_engine.requestQuit();
 		}
 		else if(c.getName().equalsIgnoreCase("jButtonTurn")){
-			
 			_engine.comunicateRobot(Interpreter.generateInstruction("turn " + _instPanel.getSelectedDirection()));
 		}
 		else if(c.getName().equals("jButtonPick")){
-			
+			_engine.comunicateRobot(Interpreter.generateInstruction("pick " + _instPanel.getIdWritten()));
 		}
 		else if(c.getName().equals("jButtonDrop")){
 			

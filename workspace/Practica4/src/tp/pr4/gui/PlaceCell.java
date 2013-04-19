@@ -1,18 +1,11 @@
 package tp.pr4.gui;
 
 import java.awt.Color;
-
-import tp.pr4.Direction;
 import tp.pr4.NavigationModule;
-
 import java.awt.event.ActionListener;
 import java.util.EventListener;
 import java.util.Observable;
-
-
-
 import javax.swing.JButton;
-
 import tp.pr4.Place;
 
 /**
@@ -25,22 +18,22 @@ import tp.pr4.Place;
  * 
  * When the user clicks on a PlaceCell the CityPanel will show 
  * the place description if the Place was also peviously visited
- * @author Laura
+ * @author Laura & Manuel
  *
  */
 @SuppressWarnings("serial")
 public class PlaceCell extends JButton implements InterfaceWindow{
 
-	private boolean active;
-	private Place place;
+	private boolean _active;
+	private Place _place;
 
 	
 	
 	public PlaceCell() {
 		// TODO Auto-generated constructor stub
 		this.setName("placeCell");
-		active = false;
-		place = new Place();
+		_active = false;
+		_place = new Place();
 	}
 
 	public void setDriver(EventListener driver){
@@ -49,26 +42,26 @@ public class PlaceCell extends JButton implements InterfaceWindow{
 	
 	
 	public boolean isActive(){
-		return this.active;
+		return _active;
 	}
 
 	public Place getPlace(){
-		return place;
+		return _place;
 	}
 	
 	public void setCurrentPlace(Place place){
-		this.place = place;
-		this.active = true;
+		_place = place;
+		_active = true;
 		this.setText(place.getName());
 		this.setOpaque(true);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(((NavigationModule) arg0).getCurrentPlace() == place){
+		if(((NavigationModule) arg0).getCurrentPlace() == _place){
 			this.setBackground(Color.GREEN);
 		}
-		else if(active)
+		else if(_active)
 			this.setBackground(Color.GRAY);
 	}
 			

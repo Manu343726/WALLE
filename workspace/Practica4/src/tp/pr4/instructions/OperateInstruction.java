@@ -53,7 +53,7 @@ public class OperateInstruction implements Instruction {
 			
 				if(!item.canBeUsed())
 				{
-					WallEsMessages.messageProvider().WriteInfo(WallEsMessages.WHATAPITY1 + item.getId() + WallEsMessages.WHATAPITY2);
+					WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.WHATAPITY1 + item.getId() + WallEsMessages.WHATAPITY2);
 					_items.pickItem(_id);
 				}
 			}

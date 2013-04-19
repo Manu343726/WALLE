@@ -7,22 +7,31 @@ import java.util.EventListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+/**
+ * 
+ * @author Laura & Manuel
+ *
+ */
 @SuppressWarnings("serial")
 public class InstructionsPanel extends JPanel{
 
-	private JButton jButtonMove;
-	private JButton jButtonTurn;
-	private JButton jButtonPick;
-	private JButton jButtonDrop;
-	private JButton jButtonQuit;
-	private JButton jButtonOperate;
-	private JTextField jTextItem;
+	private JButton _jButtonMove;
+	private JButton _jButtonTurn;
+	private JButton _jButtonPick;
+	private JButton _jButtonDrop;
+	private JButton _jButtonQuit;
+	private JButton _jButtonOperate;
+	private JTextField _jTextItem;
 	@SuppressWarnings("rawtypes")
-	private JComboBox jComboRotation;
+	private JComboBox _jComboRotation;
 
 	
 	public String getSelectedDirection(){
-		return (String)jComboRotation.getSelectedItem();
+		return (String)_jComboRotation.getSelectedItem();
+	}
+	
+	public String getIdWritten(){
+		return _jTextItem.getText();
 	}
 	
 	public InstructionsPanel(){
@@ -37,61 +46,61 @@ public class InstructionsPanel extends JPanel{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 
 	private void initInstructionsPanel(){
-		this.jButtonMove = new JButton();
-		this.jButtonTurn = new JButton();
-		this.jButtonPick = new JButton();
-		this.jButtonDrop = new JButton();
-		this.jButtonQuit = new JButton();
-		this.jButtonOperate = new JButton();
-		this.jTextItem = new JTextField();
-		this.jComboRotation = new JComboBox();
+		_jButtonMove = new JButton();
+		_jButtonTurn = new JButton();
+		_jButtonPick = new JButton();
+		_jButtonDrop = new JButton();
+		_jButtonQuit = new JButton();
+		_jButtonOperate = new JButton();
+		_jTextItem = new JTextField();
+		_jComboRotation = new JComboBox();
 		
 		this.setBorder(new TitledBorder("Instructions"));
 		
-		this.jButtonMove.setText("MOVE");
-		this.jButtonMove.setName("jButtonMove");
-		this.jButtonTurn.setText("TURN");
-		this.jButtonTurn.setName("jButtonTurn");
-		this.jButtonPick.setText("PICK");
-		this.jButtonPick.setName("jButtonPick");
-		this.jButtonDrop.setText("DROP");
-		this.jButtonDrop.setName("jButtonDrop");
-		this.jButtonQuit.setText("QUIT");
-		this.jButtonQuit.setName("jButtonQuit");
-		this.jButtonOperate.setText("OPERATE");
-		this.jButtonOperate.setName("jButtonOperate");
+		_jButtonMove.setText("MOVE");
+		_jButtonMove.setName("jButtonMove");
+		_jButtonTurn.setText("TURN");
+		_jButtonTurn.setName("jButtonTurn");
+		_jButtonPick.setText("PICK");
+		_jButtonPick.setName("jButtonPick");
+		_jButtonDrop.setText("DROP");
+		_jButtonDrop.setName("jButtonDrop");
+		_jButtonQuit.setText("QUIT");
+		_jButtonQuit.setName("jButtonQuit");
+		_jButtonOperate.setText("OPERATE");
+		_jButtonOperate.setName("jButtonOperate");
 		
-		this.jTextItem.setHorizontalAlignment(JTextField.LEFT);
-		this.jTextItem.setName("jTextItem");
+		_jTextItem.setHorizontalAlignment(JTextField.LEFT);
+		_jTextItem.setName("jTextItem");
 		
-		this.jComboRotation.setName("jComboRotation");
-		this.jComboRotation.addItem("LEFT");
-		this.jComboRotation.addItem("RIGHT");
-		this.jComboRotation.setEditable(false);
+		_jComboRotation.setName("jComboRotation");
+		_jComboRotation.addItem("LEFT");
+		_jComboRotation.addItem("RIGHT");
+		_jComboRotation.setEditable(false);
 		
 		this.setLayout(new GridLayout(4,2));
 		
-		this.add(this.jButtonMove);
-		this.add(this.jButtonQuit);
-		this.add(this.jButtonTurn);
-		this.add(this.jComboRotation);
-		this.add(this.jButtonPick);
-		this.add(this.jTextItem);
-		this.add(this.jButtonDrop);
-		this.add(this.jButtonOperate);
+		this.add(_jButtonMove);
+		this.add(_jButtonQuit);
+		this.add(_jButtonTurn);
+		this.add(_jComboRotation);
+		this.add(_jButtonPick);
+		this.add(_jTextItem);
+		this.add(_jButtonDrop);
+		this.add(_jButtonOperate);
 	}
 	
 	//No hace falta funcion de update en este panel
 	
 	public void setDriver(EventListener driver){
 	//Para los botones el cuadro de texto y el combo box se usa el ActionListener
-		jButtonMove.addActionListener((ActionListener) driver);
-		jButtonTurn.addActionListener((ActionListener) driver);
-		jButtonPick.addActionListener((ActionListener) driver);
-		jButtonDrop.addActionListener((ActionListener) driver);
-		jButtonQuit.addActionListener((ActionListener) driver);
-		jButtonOperate.addActionListener((ActionListener) driver);
-		jTextItem.addActionListener((ActionListener) driver);
-		jComboRotation.addActionListener((ActionListener) driver);
+		_jButtonMove.addActionListener((ActionListener) driver);
+		_jButtonTurn.addActionListener((ActionListener) driver);
+		_jButtonPick.addActionListener((ActionListener) driver);
+		_jButtonDrop.addActionListener((ActionListener) driver);
+		_jButtonQuit.addActionListener((ActionListener) driver);
+		_jButtonOperate.addActionListener((ActionListener) driver);
+		_jTextItem.addActionListener((ActionListener) driver);
+		_jComboRotation.addActionListener((ActionListener) driver);
 	}
 }

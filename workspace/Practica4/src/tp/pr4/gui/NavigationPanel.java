@@ -1,26 +1,17 @@
 package tp.pr4.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Point;
-
-
 import java.awt.GridLayout;
 import java.util.EnumMap;
 import java.util.EventListener;
-
 import java.util.Observable;
-
-
 import javax.swing.ImageIcon;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
-
 import tp.pr4.Direction;
-
 import tp.pr4.NavigationModule;
 
 
@@ -33,7 +24,7 @@ import tp.pr4.NavigationModule;
  * The 11x11 grid contains PlaceCell objects and the first place starts at (5,5). 
  * This panel will update the visited places when the robot moves from one place to another. 
  * Additionally it will show the place description on a text area if the user clicks on a visited place.
- * @author Laura
+ * @author Laura & Manuel
  *
  */
 @SuppressWarnings("serial")
@@ -42,9 +33,7 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
 
 	private NavigationModule navModule;
 	
-	@SuppressWarnings("unused")
 	private int row; //Current row
-	@SuppressWarnings("unused")
 	private int col; //Current column
 	
 	private PlaceCell[][] cells;   //Grid with the MapCells
@@ -117,13 +106,15 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
 		}
 	}
 	
+	
+	//Al navPanel le llegan las instrucciones de mov y turn
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(arg != null){
-			if(!(boolean) arg)
+		if(arg != null){//Creo que esto ya no hace falta, pero no sabre hasta que pruebe 
+			if(!(boolean) arg) //Has happened a turn instruction
 				labelRobotHeading.setIcon(headingIcons.get(navModule.getCurrentHeading()));
-			else{
+			else{//Has happened a move instruction
 			    calculateCoords(((NavigationModule) o).getCurrentHeading());
 			    cells[row][col].setCurrentPlace(((NavigationModule) o).getCurrentPlace());
 			    for(int i = 0; i < 11; i++){

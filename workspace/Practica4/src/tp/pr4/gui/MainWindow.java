@@ -25,41 +25,41 @@ import tp.pr4.RobotEngine;
 /**
  * This clase represents the main window. The MainWindow contains:
  *   => A menu whit the QUIT action
- *   => An Action panel with several button to perform MOVE, TURN,
+ *   => An InstructionsPanel with several button to perform MOVE, TURN,
  *      OPERATE, PICK and DROP actions. Additionally it has a combo box
  *      of turn rotations and a text field to write the name od the item
  *      that the robot wants to pick from the current place
  *   => A RobotPanel that displays the robot information(fuel and recycled material)
  *      and the robot inventory. The user can select the items contained in 
  *      the inventory in order to DROP or OPERATE an item
- *   => A CityPanel that represents the city.It shows the places that
+ *   => A NavigationPanel that represents the city.It shows the places that
  *      the robot has visited and an icon that represents the robot heading.
  *      The robot heading is updated when the user performs TURN action.
  *      The visible places are upsdated when the robot performs a MOVE action.
  *      Once a place is visited, the user can click on in in order to display the 
  *      place description(similar to RADAR command)
- * @author Laura
+ * @author Laura & Manuel
  *
  */
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements InterfaceWindow{
 	
-	private RobotEngine robot;
+	private RobotEngine _robot;
 	
-	private Container mainPanel;
+	private Container _mainPanel;
 	
-	private InstructionsPanel instructionsPanel;
-	private RobotPanel robotPanel;
-	private NavigationPanel navPanel;
+	private InstructionsPanel _instructionsPanel;
+	private RobotPanel _robotPanel;
+	private NavigationPanel _navPanel;
 
-	private JMenu jMenu;
-	private JMenuBar jMenuBar;
-	private JMenuItem jMenuItem;
+	private JMenu _jMenu;
+	private JMenuBar _jMenuBar;
+	private JMenuItem _jMenuItem;
 	
 	public MainWindow(RobotEngine robotEngine, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
 		super("WALL-E The garbage collector");
-		initMainWindow(robot, robotPanel, navigationPanel, instPanel);
+		initMainWindow(robotEngine, robotPanel, navigationPanel, instPanel);
 	}
 	
 	public MainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, RobotDriver driver){
@@ -69,52 +69,57 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	}
 	
 	public void initMainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
-		this.robot = robot;
+		_robot = robot;
 		
 		this.setSize(800, 600);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.mainPanel = this.getContentPane();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE | JFrame.DISPOSE_ON_CLOSE);
+		_mainPanel = this.getContentPane();
 
-		this.instructionsPanel = instPanel;
-		this.robotPanel = robotPanel;
-		this.navPanel = navigationPanel;
+		_instructionsPanel = instPanel;
+		_robotPanel = robotPanel;
+		_navPanel = navigationPanel;
 		
-		jMenuBar = new JMenuBar();
-		setJMenuBar(jMenuBar);
-		jMenu = new JMenu("File");
-		jMenuBar.add(jMenu);
-		jMenuItem = new JMenuItem("Quit");
-		jMenu.add(jMenuItem);
-		jMenuItem.setName("jMenuQuit");
+		_jMenuBar = new JMenuBar();
+		setJMenuBar(_jMenuBar);
+		_jMenu = new JMenu("File");
+		_jMenuBar.add(_jMenu);
+		_jMenuItem = new JMenuItem("Quit");
+		_jMenu.add(_jMenuItem);
+		_jMenuItem.setName("jMenuQuit");
 		
-		JSplitPane panelAux = new JSplitPane(SwingConstants.VERTICAL, instructionsPanel, robotPanel);
+		JSplitPane panelAux = new JSplitPane(SwingConstants.VERTICAL, _instructionsPanel, _robotPanel);
 		
-		this.mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(panelAux, "North");
-		mainPanel.add(navPanel, "Center");
+		_mainPanel = new JPanel(new BorderLayout());
+		_mainPanel.add(panelAux, "North");
+		_mainPanel.add(_navPanel, "Center");
 
 		
-		this.setContentPane(mainPanel);
+		this.setContentPane(_mainPanel);
 		setVisible(true);
 	}
 	
 	
 	public void setDriver(EventListener driver){
-		this.instructionsPanel.setDriver(driver);
-		this.robotPanel.setDriver(driver);
-		this.navPanel.setDriver(driver);
-		this.jMenuItem.addActionListener((ActionListener) driver);
+		_instructionsPanel.setDriver(driver);
+		_robotPanel.setDriver(driver);
+		_navPanel.setDriver(driver);
+		_jMenuItem.addActionListener((ActionListener) driver);
 	}
 	
 
+	//La ventana principal es la observadora del RobotEngine
+	//Por tanto solo trata la instruccion QUIT
+	//Por otro lado llama a robotPanel para que actualize fuel y material reciclado
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(robot.quit()){
+		if(_robot.quit()){
 			System.exit(0);
 		}
-		navPanel.update(o, arg);
-		robotPanel.update(o, arg);
+		else{
+			//_navPanel.update(o, arg);
+			_robotPanel.update(o, arg);
+		}
 	}
 	
 

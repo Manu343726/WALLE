@@ -142,7 +142,7 @@ public class NavigationModule extends Observable{
 	 * Prints the information (description + inventory) of the current place
 	 */
 	public void scanCurrentPlace(){
-		WallEsMessages.messageProvider().WriteInfo(_currentPlace.toString());
+		WallEsMessages.messagesProvider().WriteInfo(_currentPlace.toString());
 	}
 	
 	

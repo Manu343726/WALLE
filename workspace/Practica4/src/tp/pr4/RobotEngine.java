@@ -104,18 +104,18 @@ public class RobotEngine extends Observable{
      */
     public void printRobotState(int params)
     { 
-            if((params & LSBMASK) == TRUE) WallEsMessages.messageProvider().WriteInfo(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+            if((params & LSBMASK) == TRUE) WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
 
             if(((params >> 2) & LSBMASK) == TRUE)
             {
-            WallEsMessages.messageProvider().WriteInfo(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
-                WallEsMessages.messageProvider().WriteInfo(_navigation.getCurrentPlace().toString());
+            WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
+                WallEsMessages.messagesProvider().WriteInfo(_navigation.getCurrentPlace().toString());
             }
 
             if(((params >> 1) & LSBMASK) == TRUE) System.out.println();
 
-            WallEsMessages.messageProvider().WriteInfo(WallEsMessages.MYPOWERIS + _fuelAmount);
-            WallEsMessages.messageProvider().WriteInfo(WallEsMessages.MYRECYCLEDMATERIALIS + _recycledMaterial);
+            WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.MYPOWERIS + _fuelAmount);
+            WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.MYRECYCLEDMATERIALIS + _recycledMaterial);
     }
 
     /**
@@ -218,11 +218,11 @@ public class RobotEngine extends Observable{
             try{
                     instruction.execute();
             }catch(InstructionExecutionException ex){
-                    WallEsMessages.messageProvider().WriteError(ex.getMessage());
+                    WallEsMessages.messagesProvider().WriteError(ex.getMessage());
             }
         }
         else
-            WallEsMessages.messageProvider().WriteError(WallEsMessages.NOTUNDERSTAND);
+            WallEsMessages.messagesProvider().WriteError(WallEsMessages.NOTUNDERSTAND);
     }
 
 
