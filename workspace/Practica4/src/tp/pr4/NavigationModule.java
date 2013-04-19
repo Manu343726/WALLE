@@ -111,6 +111,10 @@ public class NavigationModule extends Observable{
 		return _city.lookForStreet(_currentPlace, _currentDirection);
 	}
 	
+        /**
+         * Raises the Observable.update() event
+         * @param move The event arg that specifies if the change of the model is a move instruction ( See NavigationPanle::update() )
+         */
 	public void reportObservers(boolean move)
 	{
 		setChanged();

@@ -47,14 +47,14 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	
 	private RobotEngine _robot;
 	
-	private Container _mainPanel;
+	private Container   _mainPanel;
 	
 	private InstructionsPanel _instructionsPanel;
-	private RobotPanel _robotPanel;
-	private NavigationPanel _navPanel;
+	private RobotPanel        _robotPanel;
+	private NavigationPanel   _navPanel;
 
-	private JMenu _jMenu;
-	private JMenuBar _jMenuBar;
+	private JMenu     _jMenu;
+	private JMenuBar  _jMenuBar;
 	private JMenuItem _jMenuItem;
 	
 	public MainWindow(RobotEngine robotEngine, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
@@ -72,7 +72,7 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 		_robot = robot;
 		
 		this.setSize(800, 600);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE | JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_mainPanel = this.getContentPane();
 
 		_instructionsPanel = instPanel;
@@ -98,7 +98,7 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 		setVisible(true);
 	}
 	
-	
+	@Override
 	public void setDriver(EventListener driver){
 		_instructionsPanel.setDriver(driver);
 		_robotPanel.setDriver(driver);
@@ -112,12 +112,10 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	//Por otro lado llama a robotPanel para que actualize fuel y material reciclado
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		if(_robot.quit()){
-			System.exit(0);
+			System.exit(0); //Esto de cargarnos la aplicación a lo bestia desde aquí no me acaba de convencer...
 		}
 		else{
-			//_navPanel.update(o, arg);
 			_robotPanel.update(o, arg);
 		}
 	}

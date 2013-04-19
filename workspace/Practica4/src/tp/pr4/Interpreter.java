@@ -35,7 +35,7 @@ public class Interpreter {
 	 * @return a new instruction from the given line. If the line contains wrong syntax, returns a not valid instruction
 	 */
 	public static Instruction generateInstruction(final String line){
-		Instruction instruction = null;
+		Instruction instruction;
 		Filter<Instruction> filter = new Filter<>(_instructions.iterator(), new Predicate<Instruction>()
                 {
                     @Override

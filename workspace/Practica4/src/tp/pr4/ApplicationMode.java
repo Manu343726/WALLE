@@ -5,7 +5,7 @@
 package tp.pr4;
 
 /**
- * Represents the application frontend mode
+ * Represents the application front-end mode
  * @author
  * Manu343726
  */

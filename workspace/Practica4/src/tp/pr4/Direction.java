@@ -9,9 +9,6 @@ package tp.pr4;
 public enum Direction {
 	EAST, NORTH, SOUTH, UNKNOWN, WEST;
 	
-	
-	
-	
 	/* PUBLIC METHODS */
 	
 	/**
@@ -22,11 +19,11 @@ public enum Direction {
             Direction result;
             
             switch(this){
-            case EAST: result = Direction.WEST;break;
+            case EAST:  result = Direction.WEST;break;
             case NORTH: result = Direction.SOUTH;break;
             case SOUTH: result = Direction.NORTH;break;
-            case WEST: result = Direction.EAST;break;
-            default: result = Direction.UNKNOWN;break;
+            case WEST:  result = Direction.EAST;break;
+            default:    result = Direction.UNKNOWN;break;
             }
                 
             return result;

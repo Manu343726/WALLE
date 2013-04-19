@@ -33,10 +33,14 @@ public class Main {
     private static final String COMMANDLINE_ARGS_ARGNAME_VIEWMODE = COMMANDLINE_ARGS_VIEWMODE;
     private static final String COMMANDLINE_ARGS_ARGNAME_HELP     = COMMANDLINE_ARGS_HELP;
     
-    private static Options _options; //Command-line options set.
-    
-    public static void setupInputOptions()
+    /**
+     * Sets up the input options set.
+     * @return An instance of the Options class containing the configured command-line options. 
+     */
+    public static Options setupInputOptions()
     {
+        Options options = new Options();
+        
         Option mapArg = new Option(COMMANDLINE_ARGS_MAPFILE , COMMANDLINE_ARGS_LONG_MAPFILE , true , COMMANDLINE_ARGS_DESCRIPTION_MAPFILE);
         mapArg.setArgName( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
         
@@ -46,11 +50,11 @@ public class Main {
         Option helpArg = new Option(COMMANDLINE_ARGS_HELP , COMMANDLINE_ARGS_LONG_HELP , false , COMMANDLINE_ARGS_DESCRIPTION_HELP);
         helpArg.setArgName( COMMANDLINE_ARGS_ARGNAME_HELP );
         
-        _options = new Options();
+        options.addOption(mapArg);
+        options.addOption(viewModeArg);
+        options.addOption(helpArg);
         
-        _options.addOption(mapArg);
-        _options.addOption(viewModeArg);
-        _options.addOption(helpArg);
+        return options;
     } 
     
     /**
@@ -77,12 +81,10 @@ public class Main {
                     engine.startEngine();
                 }
                 catch(FileNotFoundException ex1){
-
                         System.err.println("Error reading the map file: " + mapfile + " (No existe el fichero o el directorio)");
                         exitCode = 2;
                 }
                 catch(WrongCityFormatException ex2){
-
                         System.err.println("Error reading the map file: " + mapfile + "(Formato incorrecto)");
                         exitCode = 2;
                 }
@@ -111,9 +113,8 @@ public class Main {
     public static void main(String[] args) {
         int exitCode = 0;
         CommandLineParser parser = new BasicParser();
-        setupInputOptions();
         
-        try{ exitCode = initializeApplication( new BasicParser().parse(_options , args) ); }
+        try{ exitCode = initializeApplication( new BasicParser().parse( setupInputOptions() , args) ); }
         catch(ParseException ex)
         {
             System.err.println("Bad params");

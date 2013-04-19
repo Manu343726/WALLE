@@ -33,16 +33,11 @@ public class City {
 	 * @param direction: direction which you want to move
 	 * @return if there is a street from the given place on that direction. If there no street returns null
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Street lookForStreet(final Place currentPlace,final Direction currentHeading){
 		Street street = null;
-                Filter<Street> filter = null;
-                
-                @SuppressWarnings("unused")
-				Predicate<Street> predicate;
+                Filter<Street> filter;
 		
 		if(_cityMap != null && _cityMap.size() > 0){
-                    
                     filter = new Filter(_cityMap.iterator(),new Predicate<Street>()
                     {
                         @Override

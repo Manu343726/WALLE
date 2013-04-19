@@ -110,8 +110,7 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
 	//Al navPanel le llegan las instrucciones de mov y turn
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		if(arg != null){//Creo que esto ya no hace falta, pero no sabre hasta que pruebe 
+		if(arg != null){//Creo que esto ya no hace falta, pero no sabre hasta que pruebe . OK
 			if(!(boolean) arg) //Has happened a turn instruction
 				labelRobotHeading.setIcon(headingIcons.get(navModule.getCurrentHeading()));
 			else{//Has happened a move instruction

@@ -36,6 +36,7 @@ public class PlaceCell extends JButton implements InterfaceWindow{
 		_place = new Place();
 	}
 
+        @Override
 	public void setDriver(EventListener driver){
 		this.addActionListener((ActionListener) driver);
 	}
