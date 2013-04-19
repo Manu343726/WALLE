@@ -61,8 +61,16 @@ public abstract class WallEsMessages {
             _messagesProvider = new GUIMessagesProvider(false);
     }
     
-    /*
-     * Returns the application message provider.
+    /**
+     * Returns the application messages provider.
+     * @return A pointer to the application messages provider. 
+     * @throws NoApplicationModeException If application mode is not configured (No application messages provided created).
      */
-    public static MessagesProvider messageProvider() { return _messagesProvider; }
+    public static MessagesProvider messageProvider() throws NoApplicationModeException
+    {
+        if( _messagesProvider != null)
+            return _messagesProvider;
+        else
+            throw new NoApplicationModeException();
+    }
 }

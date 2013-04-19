@@ -72,7 +72,7 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 		this.robot = robot;
 		
 		this.setSize(800, 600);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE | JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.mainPanel = this.getContentPane();
 
 		this.instructionsPanel = instPanel;

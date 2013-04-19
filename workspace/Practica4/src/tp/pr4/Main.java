@@ -8,53 +8,123 @@ import java.io.FileNotFoundException;
 import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
+import org.apache.commons.cli.*;
+
 public class Main {
-   
+    /* Command-line args config: */
+    
+    //Args (Short version):
+    private static final String COMMANDLINE_ARGS_MAPFILE  = "m";
+    private static final String COMMANDLINE_ARGS_VIEWMODE = "i";
+    private static final String COMMANDLINE_ARGS_HELP     = "h";
+    
+    //Args (Long version):
+    private static final String COMMANDLINE_ARGS_LONG_MAPFILE     = "mapfile";
+    private static final String COMMANDLINE_ARGS_LONG_VIEWMODE    = "interface";
+    private static final String COMMANDLINE_ARGS_LONG_HELP        = "help";
+    
+    //Args description:
+    private static final String COMMANDLINE_ARGS_DESCRIPTION_MAPFILE  = "File with the description of the city";
+    private static final String COMMANDLINE_ARGS_DESCRIPTION_VIEWMODE = "The type of the interface: console or swing";
+    private static final String COMMANDLINE_ARGS_DESCRIPTION_HELP     = "Shows this help message";
+    
+    //Options names:
+    private static final String COMMANDLINE_ARGS_ARGNAME_MAPFILE  = COMMANDLINE_ARGS_MAPFILE;
+    private static final String COMMANDLINE_ARGS_ARGNAME_VIEWMODE = COMMANDLINE_ARGS_VIEWMODE;
+    private static final String COMMANDLINE_ARGS_ARGNAME_HELP     = COMMANDLINE_ARGS_HELP;
+    
+    private static Options _options; //Command-line options set.
+    
+    public static void setupInputOptions()
+    {
+        Option mapArg = new Option(COMMANDLINE_ARGS_MAPFILE , COMMANDLINE_ARGS_LONG_MAPFILE , true , COMMANDLINE_ARGS_DESCRIPTION_MAPFILE);
+        mapArg.setArgName( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
+        
+        Option viewModeArg = new Option(COMMANDLINE_ARGS_VIEWMODE , COMMANDLINE_ARGS_LONG_VIEWMODE , true , COMMANDLINE_ARGS_DESCRIPTION_VIEWMODE);
+        viewModeArg.setArgName( COMMANDLINE_ARGS_ARGNAME_VIEWMODE );
+        
+        Option helpArg = new Option(COMMANDLINE_ARGS_HELP , COMMANDLINE_ARGS_LONG_HELP , false , COMMANDLINE_ARGS_DESCRIPTION_HELP);
+        helpArg.setArgName( COMMANDLINE_ARGS_ARGNAME_HELP );
+        
+        _options = new Options();
+        
+        _options.addOption(mapArg);
+        _options.addOption(viewModeArg);
+        _options.addOption(helpArg);
+    } 
+    
+    /**
+     * Sets up the application
+     * @param cmd Command line input. 
+     */
+    public static int initializeApplication(CommandLine cmd)
+    {
+        int exitCode = 0;
+        City city;
+        CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
+        RobotEngine engine;
+        
+        String mapfile = cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
+        ApplicationMode appMode = ApplicationMode.parse( cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_VIEWMODE ) );
+
+        if( appMode != ApplicationMode.UNKNOWN )
+            if( mapfile != null )
+                try{ 
+                    city = loader.loadCity(new FileInputStream( mapfile )); 
+                    WallEsMessages.setAppMode(appMode);//Sets the application messages output mode.
+                    
+                    engine = new RobotEngine(city , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION); //Sets up the engine
+                    engine.startEngine();
+                }
+                catch(FileNotFoundException ex1){
+
+                        System.err.println("Error reading the map file: " + mapfile + " (No existe el fichero o el directorio)");
+                        exitCode = 2;
+                }
+                catch(WrongCityFormatException ex2){
+
+                        System.err.println("Error reading the map file: " + mapfile + "(Formato incorrecto)");
+                        exitCode = 2;
+                }
+            else
+            {
+                /* TODO */
+            }
+        else
+        {
+            System.err.println("Bad params.");
+            System.err.println("Usage: java tp.pr3.Main <mapfile>");
+            System.err.println();
+            System.err.println("<mapfile> : file with the description of the city.");
+
+            exitCode = 1;
+        }
+        
+        return exitCode;
+    }
+    
     /**
      * Creates the city, the engine and finally
      * starts the simulation
      * @param args
      */
     public static void main(String[] args) {
-            CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
-            City city = null;
-
-            if(args.length > 0 && args[0].length() > 0){
-                    try{ 
-                            city = loader.loadCity(new FileInputStream(args[0])); 
-                    }
-                    catch(FileNotFoundException ex1){
-
-                            System.err.println("Error reading the map file: " + args[0] + " (No existe el fichero o el directorio)");
-
-                            //System.out.println("ERROR TYPE 2: NO FILE");
-
-                            System.exit(2);
-                    }
-                    catch(WrongCityFormatException ex2){
-
-                            System.err.println("Error reading the map file: " + args[0] + "(Formato incorrecto)");
-
-                            //System.out.println("ERROR TYPE 2: BAD FORMAT");
-
-                            System.exit(2);
-                    }
-
-                    // create the engine of the game, the model
-                    RobotEngine engine = new RobotEngine(city, loader.getInitialPlace(),Direction.SOUTH);
-                    //plays
-                    engine.startEngine();
-            }
-            else{
-
-                    System.err.println("Bad params.");
-                    System.err.println("Usage: java tp.pr3.Main <mapfile>");
-                    System.err.println();
-                    System.err.println("<mapfile> : file with the description of the city.");
-
-                    //System.out.println("ERROR TYPE 1: NO PARAMS");
-
-                    System.exit(1);
-            }
+        int exitCode = 0;
+        CommandLineParser parser = new BasicParser();
+        setupInputOptions();
+        
+        try{ exitCode = initializeApplication( new BasicParser().parse(_options , args) ); }
+        catch(ParseException ex)
+        {
+            System.err.println("Bad params");
+            System.err.println("Usage: java tp.pr3.Main <mapfile>");
+            System.err.println();
+            System.err.println("<mapfile> : file with the description of the city.");
+            
+            exitCode = 1;
+        }
+        
+        if(exitCode != 0)
+            System.exit( exitCode );
     }
 }

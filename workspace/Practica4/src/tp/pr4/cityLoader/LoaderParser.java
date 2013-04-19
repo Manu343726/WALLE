@@ -55,7 +55,7 @@ public abstract class LoaderParser {
                     next = reader.next();
                     
                     for(int i = 0 ; i < next.length() && isNumber ; ++i)
-                        isNumber = Character.isDigit( next.charAt(i) );
+                        isNumber = Character.isDigit( next.charAt(i) ) || ( i == 0 && next.charAt(i) == '-');
                     
                     if(isNumber)
                         return Integer.parseInt(next);

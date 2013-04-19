@@ -8,7 +8,7 @@ EndPlaces
 BeginStreets
 street 0 place 0 south place 1 open
 street 1 place 1 east place 2 open
-street 2 place 2 north place 3 closed onetwothreefourfive
+street 2 place 2 north place 3 open
 EndStreets
 BeginItems
 fuel 0 Petrol from_olds_heatings 10 3 place 0
