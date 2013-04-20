@@ -31,6 +31,9 @@ public class ItemContainer extends Observable{
             else
                 _itemCollection.put(item.getId(),item);
             
+            if(result)
+                raiseUpdateEvent( new ItemContainerChangeEventArgs(ItemContainerChangeType.ITEM_ADDED, item ) );
+            
             return result;
 	}
 	
@@ -41,7 +44,10 @@ public class ItemContainer extends Observable{
 	 */
 	public boolean containsItem(String id)
 	{
+            if( id != null )
 		return _itemCollection.containsKey(id);
+            else
+                return false;
 	}
 	
 	/**
@@ -67,7 +73,12 @@ public class ItemContainer extends Observable{
 	 * @return An Item instance. Retuns null if the container not contains any item with these id.
 	 */
 	public Item pickItem(String id){
-            return _itemCollection.remove(id);
+            Item result = _itemCollection.remove(id);
+            
+            if(result != null)
+                raiseUpdateEvent( new ItemContainerChangeEventArgs(ItemContainerChangeType.ITEM_DELETED, result ) );
+            
+            return result;
 	}
 	
         @Override
@@ -83,4 +94,14 @@ public class ItemContainer extends Observable{
 		
 		return words;
 	}
+        
+        /**
+         * Notifies a container change
+         * @param args Event argumments
+         */
+        private void raiseUpdateEvent(ItemContainerChangeEventArgs args)
+        {
+            setChanged();
+            notifyObservers(args);
+        }
 }

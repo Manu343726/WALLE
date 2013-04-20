@@ -101,7 +101,7 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	@Override
 	public void setDriver(EventListener driver){
 		_instructionsPanel.setDriver(driver);
-		_robotPanel.setDriver(driver);
+		//_robotPanel.setDriver(driver); no lo vas a usar
 		_navPanel.setDriver(driver);
 		_jMenuItem.addActionListener((ActionListener) driver);
 	}

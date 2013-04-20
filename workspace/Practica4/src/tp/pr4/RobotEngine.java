@@ -125,13 +125,13 @@ public class RobotEngine extends Observable{
         if(WallEsMessages.getAppMode() == ApplicationMode.GUI)
         {
             _instPanel = new InstructionsPanel();
-            _robotPanel = new RobotPanel(_items);
+            _robotPanel = new RobotPanel();//Si lo has puesto como observador de los items (Más abajo), no entiendo para que le metes una instancia 
             _navigationPanel = new NavigationPanel(_navigation);
             RobotDriver driver = new RobotDriver(this, _navigation, _navigationPanel, _instPanel);
 
             _mainWindow = new MainWindow(this, _robotPanel, _navigationPanel, _instPanel,  driver);
             this.addObserver(_mainWindow);
-            this._items.addObserver(_robotPanel);
+            this._items.addObserver(_robotPanel);//Perfecto, totalmente de acuerdo
             this._navigation.addObserver(_navigationPanel);
 
             _navigationPanel.update(_navigation, true);
