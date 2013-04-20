@@ -50,12 +50,32 @@ public class PlaceCell extends JButton implements InterfaceWindow{
         {
             return _place.toString();
         }
+        
+        /***
+         * Checks if the speficied place is the place of this PlaceCell.
+         * @param place The specified place.
+         * @return 
+         */
+        public boolean isMyPlace(Place place)
+        {
+            return _place == place; //Si no se ha hecho nada raro, todo el programa debería hacer referencia a las instancias contenidas por el citymap, de manera que ésto vale.
+        }
+        
+        /**
+         * Prints this PlaceCell as walked
+         */
+        public void setWalked()
+        {
+            if(_active)
+                this.setBackground(Color.GRAY);
+        }
 	
 	public void setCurrentPlace(Place place){
 		_place = place;
 		_active = true;
 		this.setText(place.getName());
 		this.setOpaque(true);
+                this.setBackground(Color.GREEN);
 	}
 
 	@Override

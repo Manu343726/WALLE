@@ -11,7 +11,7 @@ import java.io.PrintStream;
  * @author
  * Manu343726
  */
-public class StandardMessagesProvider implements MessagesProvider {
+public class StandardMessagesProvider extends MessagesProvider {
     private PrintStream _outputStream;
     
     /*
@@ -31,14 +31,20 @@ public class StandardMessagesProvider implements MessagesProvider {
     }
     
     @Override
-    public void WriteError(String message)
+    public void WriteError(String message , boolean exit)
     {
         _outputStream.println(message);
+              
+        if( exit )
+            System.exit( 0 );
     }
     
     @Override
-    public void WriteInfo(String message)
+    public void WriteInfo(String message , boolean exit)
     {
         _outputStream.println(message);
+                
+        if( exit )
+            System.exit( 0 );
     }
 }

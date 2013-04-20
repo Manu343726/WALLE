@@ -103,7 +103,7 @@ public class RobotEngine extends Observable{
         {
             _instPanel = new InstructionsPanel();
             _robotPanel = new RobotPanel();//Si lo has puesto como observador de los items (Más abajo), no entiendo para que le metes una instancia 
-            _navigationPanel = new NavigationPanel(_navigation);
+            _navigationPanel = new NavigationPanel();
             RobotDriver driver = new RobotDriver(this, _navigation, _navigationPanel, _instPanel, _robotPanel);
 
             _mainWindow = new MainWindow(this, _robotPanel, _navigationPanel, _instPanel,  driver);
@@ -111,7 +111,7 @@ public class RobotEngine extends Observable{
             this._items.addObserver(_robotPanel);//Perfecto, totalmente de acuerdo
             this._navigation.addObserver(_navigationPanel);
 
-            _navigationPanel.update(_navigation, true);
+            _navigationPanel.update(_navigation, new NavigationModuleChangedEventArgs(_navigation.getCurrentPlace(), _navigation.getCurrentPlace() , INITIAL_DIRECTION));
             _mainWindow.setVisible(true);
             
             reportObservers();//Forzamos un refresco inicial de la vista
