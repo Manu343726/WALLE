@@ -19,6 +19,7 @@ import tp.pr4.items.*;
 
 import java.util.*;
 import javax.swing.JScrollPane;
+import tp.pr4.WallEsMessages;
 
 
 /**
@@ -175,7 +176,7 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
     }
 
     //Update captura dos eventos: robotEngine::changed() (Para actualizar los labels de fuel y material) e ItemContainer::changed() (Para actualizar la lista de items). 
-    //Los diferencia mirando si puedo hacer el casting del argumento del evento a ItemContainerChangedEventArgs
+    //Los diferencio mirando si puedo hacer el casting del argumento del evento a ItemContainerChangedEventArgs
     @Override
     public void update(Observable o, Object arg) {
         if( arg instanceof ItemContainerChangeEventArgs)
@@ -193,8 +194,13 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
         }
         else
         {//Es un evento de actualización del engine (Cualquier otra cosa: Actualizamos los labels).
-            _fuelLevelLabel.setText("Fuel: " + ((RobotEngine) o).getFuel());
-            _recycledMaterialLabel.setText("Recycled: " + ((RobotEngine) o).getRecycledMaterial());
-        }  
+            if(!(boolean)arg)
+            {
+                _fuelLevelLabel.setText("Fuel: " + ((RobotEngine) o).getFuel());
+                _recycledMaterialLabel.setText("Recycled: " + ((RobotEngine) o).getRecycledMaterial());
+            }
+            else
+                WallEsMessages.messagesProvider().WriteError( WallEsMessages.NOFUEL , true);
+        }
     }
 }

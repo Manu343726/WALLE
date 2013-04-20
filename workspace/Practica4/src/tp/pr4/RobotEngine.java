@@ -151,7 +151,7 @@ public class RobotEngine extends Observable{
         if(_fuelAmount < 0)
             _fuelAmount = 0;
 
-        reportObservers();
+        reportObservers( _fuelAmount == 0);
     }
 
     /**
@@ -178,9 +178,14 @@ public class RobotEngine extends Observable{
         reportObservers();
     }
 
-    private void reportObservers(){
+    private void reportObservers(boolean outOfFuel){
         setChanged();
-        notifyObservers();
+        notifyObservers(outOfFuel);
+    }
+    
+    private void reportObservers()
+    {
+        reportObservers(false);
     }
 
     /**

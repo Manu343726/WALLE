@@ -80,11 +80,13 @@ public class PlaceCell extends JButton implements InterfaceWindow{
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+            /* Ya no hace falta, pero si quito update() creo que refunfuña
 		if(((NavigationModule) arg0).getCurrentPlace() == _place){
 			this.setBackground(Color.GREEN);
 		}
 		else if(_active)
 			this.setBackground(Color.GRAY);
+            */
 	}
 			
 	

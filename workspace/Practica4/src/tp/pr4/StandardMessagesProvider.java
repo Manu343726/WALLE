@@ -33,10 +33,7 @@ public class StandardMessagesProvider extends MessagesProvider {
     @Override
     public void WriteError(String message , boolean exit)
     {
-        _outputStream.println(message);
-              
-        if( exit )
-            System.exit( 0 );
+        WriteInfo( message , exit ); //...
     }
     
     @Override
