@@ -5,10 +5,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-import tp.pr4.gui.*;
-import tp.pr4.gui.MainWindow;
-import tp.pr4.gui.RobotDriver;
-import tp.pr4.gui.RobotPanel;
 import tp.pr4.instructions.Instruction;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.items.ItemContainer;
@@ -215,18 +211,5 @@ public class RobotEngine extends Observable{
         }
         else
             WallEsMessages.messagesProvider().WriteError(WallEsMessages.NOTUNDERSTAND);
-    }
-
-
-    public void setGUIWindow(MainWindow mainWindow){
-        _mainWindow = mainWindow;
-    }
-
-    public void setRobotPanel(RobotPanel robotPanel){
-        _robotPanel = robotPanel;
-    }
-
-    public void NavigationPanel(NavigationPanel navigationPanel){
-        _navigationPanel = navigationPanel;
     }
 }
