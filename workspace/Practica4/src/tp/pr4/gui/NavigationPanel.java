@@ -31,7 +31,7 @@ import tp.pr4.utils.*;
  * The 11x11 grid contains PlaceCell objects and the first place starts at (5,5). 
  * This panel will update the visited places when the robot moves from one place to another. 
  * Additionally it will show the place description on a text area if the user clicks on a visited place.
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 @SuppressWarnings("serial")

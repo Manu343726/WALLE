@@ -7,7 +7,7 @@ package tp.pr4.utils;
 /**
  * Base class for boolean predicates.
  * @author
- * Manu
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public abstract class Predicate<T> {
     /**

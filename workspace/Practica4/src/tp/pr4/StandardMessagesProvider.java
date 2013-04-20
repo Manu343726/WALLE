@@ -9,7 +9,7 @@ import java.io.PrintStream;
 /**
  * Represents a message provider that uses the standard output stream
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class StandardMessagesProvider extends MessagesProvider {
     private PrintStream _outputStream;

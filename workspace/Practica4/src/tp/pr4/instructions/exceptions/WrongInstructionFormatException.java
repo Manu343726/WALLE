@@ -5,7 +5,7 @@ import tp.pr4.WallEsMessages;
 @SuppressWarnings("serial")
 /**
  * This class represents an instruction parsing error
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public class WrongInstructionFormatException extends Exception

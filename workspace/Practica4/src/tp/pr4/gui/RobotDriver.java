@@ -18,7 +18,7 @@ import tp.pr4.WallEsMessages;
 
 /**
  * 
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public class RobotDriver implements ActionListener, //para los JButton

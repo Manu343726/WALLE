@@ -7,7 +7,7 @@ package tp.pr4.items;
 /**
  * Represents the set of changes that can occurs in a item container
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public enum ItemContainerChangeType {
     ITEM_ADDED,

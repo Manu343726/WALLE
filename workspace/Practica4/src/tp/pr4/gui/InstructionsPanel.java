@@ -9,7 +9,7 @@ import javax.swing.border.TitledBorder;
 
 /**
  * 
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 @SuppressWarnings("serial")

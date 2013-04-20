@@ -24,7 +24,7 @@ import tp.pr4.items.ItemContainer;
 
 /**
  * This interface represents the set of methods that any WALLE's instruction must contains.
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public interface Instruction {

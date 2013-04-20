@@ -3,7 +3,7 @@ package tp.pr4.cityLoader.cityLoaderExceptions;
 @SuppressWarnings("serial")
 /**
  * This class represents a citymap file parsing error
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public class WrongCityFormatException extends Exception {

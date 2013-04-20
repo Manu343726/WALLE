@@ -7,7 +7,7 @@ package tp.pr4.items;
 /**
  * Contains data of a item container change event
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class ItemContainerChangeEventArgs {
     private ItemContainerChangeType _type;

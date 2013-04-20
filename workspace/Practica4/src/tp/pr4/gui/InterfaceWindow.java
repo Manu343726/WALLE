@@ -5,7 +5,7 @@ import java.util.Observer;
 
 /**
  * 
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public interface InterfaceWindow extends Observer{

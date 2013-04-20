@@ -7,7 +7,7 @@ package tp.pr4.utils;
 /**
  * A logical NOT predicate that represents the opposite of another Predicate
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class NotPredicate<T> extends Predicate<T> {
     private Predicate<T> _original;

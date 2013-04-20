@@ -11,7 +11,7 @@ import tp.pr4.items.ItemContainer;
 
 /**
  * This class represents an operate instruction
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public class OperateInstruction implements Instruction {

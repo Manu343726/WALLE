@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 /**
  * Represents a message provider that uses a message dialog.
  * @author
- * Manu
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class GUIMessagesProvider extends MessagesProvider {
     public final String MESSAGEBOXTITLE_INFO  = "WALLE - Information";

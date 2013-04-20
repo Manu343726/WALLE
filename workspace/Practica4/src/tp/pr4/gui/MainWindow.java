@@ -38,7 +38,7 @@ import tp.pr4.RobotEngine;
  *      The visible places are upsdated when the robot performs a MOVE action.
  *      Once a place is visited, the user can click on in in order to display the 
  *      place description(similar to RADAR command)
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 

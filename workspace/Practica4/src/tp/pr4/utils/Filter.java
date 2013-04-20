@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * This class represents a collection filter based on a specified Predicate
  * @author
- * Manu
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class Filter<T> implements Iterator<T> {
     private Predicate<T> _predicate;

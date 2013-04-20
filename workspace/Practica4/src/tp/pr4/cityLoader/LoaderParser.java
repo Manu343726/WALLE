@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * This class provides methods to safe-parsing input streams.
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public abstract class LoaderParser {

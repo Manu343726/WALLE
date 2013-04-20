@@ -7,7 +7,7 @@ package tp.pr4.utils;
 /**
  * A Predicate class that represents the AND operation of two predicates
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class AndPredicate<T> extends Predicate<T> {
     private Predicate<T> _firstOperand;

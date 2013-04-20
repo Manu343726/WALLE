@@ -3,7 +3,7 @@ package tp.pr4.instructions.exceptions;
 @SuppressWarnings("serial")//No usamos serialización, no?
 /**
  * This class represents an instruction execution error 
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public class InstructionExecutionException extends Exception {

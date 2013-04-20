@@ -7,7 +7,7 @@ package tp.pr4;
 /**
  * Event argumments for NavigationModule change event.
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class NavigationModuleChangedEventArgs {
     NavigationModuleChangeType _type;

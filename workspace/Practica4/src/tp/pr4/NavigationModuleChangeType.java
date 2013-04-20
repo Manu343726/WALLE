@@ -7,7 +7,7 @@ package tp.pr4;
 /**
  * The set of changes that could be performed at the navigation module
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public enum NavigationModuleChangeType {
     CHANGE_CURRENTPLACE,     ///< Current place changed (Move instruction).

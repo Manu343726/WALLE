@@ -7,7 +7,7 @@ import tp.pr4.NavigationModule;
 
 /**
  * This class is the base type for any WALLE's items 
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public abstract class Item implements Comparable<Item> {

@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * This class represents a WALLE's item container
- * @author Manu343726
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 public class ItemContainer extends Observable{

@@ -7,7 +7,7 @@ package tp.pr4;
 /**
  * Represents the application front-end mode
  * @author
- * Manu343726
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public enum ApplicationMode {
     CONSOLE, ///< App uses standard output to output messages.

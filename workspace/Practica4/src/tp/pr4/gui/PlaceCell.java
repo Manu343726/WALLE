@@ -18,7 +18,7 @@ import tp.pr4.Place;
  * 
  * When the user clicks on a PlaceCell the CityPanel will show 
  * the place description if the Place was also peviously visited
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 @SuppressWarnings("serial")

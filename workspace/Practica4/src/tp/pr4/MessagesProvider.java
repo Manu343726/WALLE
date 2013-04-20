@@ -7,7 +7,7 @@ package tp.pr4;
 /**
  * An interface for application messages providers
  * @author
- * Manu
+ * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public abstract class MessagesProvider {
     /*

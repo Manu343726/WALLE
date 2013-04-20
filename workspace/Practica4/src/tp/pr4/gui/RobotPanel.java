@@ -27,7 +27,7 @@ import tp.pr4.WallEsMessages;
  * it contains labels to show the robot fuel and the weight of recycled material and a 
  * table that represents the robot inventory. Each row displays information about an
  *  item contained in the inventory.
- * @author Laura & Manuel
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
 @SuppressWarnings("serial")
