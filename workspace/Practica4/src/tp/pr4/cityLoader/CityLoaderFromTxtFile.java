@@ -208,7 +208,7 @@ public class CityLoaderFromTxtFile {
 					if((itemIndex == 0 && newItemIndex == 0) || newItemIndex == (itemIndex + 1))
 					{
 						itemId = LoaderParser.parseString(reader);
-						itemDescription = LoaderParser.parseString(reader);
+						itemDescription = LoaderParser.parseString(reader).replace('_', ' ');//Pues resulta que no lo había hecho...
 						
 						switch(itemType)
 						{

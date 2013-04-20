@@ -106,8 +106,29 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
     }
 
     private MyTableModel  _tableModel;
+    private JTable _table;
     private JLabel _fuelLevelLabel;
     private JLabel _recycledMaterialLabel;
+    
+    /***
+     * Checks if a Item is selected
+     * @return True if a item is selected. False if not.
+     */
+    public boolean isItemSelected() {return _table.getSelectedRow() >= 0; }
+    
+    /***
+     * Gets the id of the selected item
+     * @return A string containing the item id.
+     */
+    public String getSelectedItemId() throws NoSuchElementException
+    {
+        int index = _table.getSelectedRow();
+        
+        if(index >= 0)
+            return (String)_tableModel.getValueAt(index, 0);
+        else
+            throw new NoSuchElementException("No item selected");
+    }
 
     public RobotPanel(){
             initRobotPanel();
@@ -125,9 +146,9 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
         _fuelLevelLabel = new JLabel();
         _recycledMaterialLabel = new JLabel();
 
-        JTable table = new JTable ( _tableModel ); 
-        JScrollPane scrollPane = new JScrollPane( table );
-        table.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        _table = new JTable ( _tableModel ); 
+        JScrollPane scrollPane = new JScrollPane( _table );
+        _table.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
         scrollPane.setPreferredSize( new Dimension( 200 , 80)); //Las dimensiones las he puesto a ojo, si no te gusta como queda cambialo
 
         _fuelLevelLabel.setText("Fuel: ");
@@ -171,7 +192,7 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
             }
         }
         else
-        {//Es un evento de actualización del engine (Cualquier otra cosa: Actualizamos los labels.
+        {//Es un evento de actualización del engine (Cualquier otra cosa: Actualizamos los labels).
             _fuelLevelLabel.setText("Fuel: " + ((RobotEngine) o).getFuel());
             _recycledMaterialLabel.setText("Recycled: " + ((RobotEngine) o).getRecycledMaterial());
         }  

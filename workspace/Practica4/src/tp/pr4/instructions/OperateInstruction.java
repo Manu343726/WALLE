@@ -49,7 +49,7 @@ public class OperateInstruction implements Instruction {
 			if(item.use(_engine,_navigation))
 			{
 				if(item.getClass() != CodeCard.class)//Otra guarrada derivada del maravilloso diseño de la práctica...
-					_engine.printRobotState(RobotEngine.PRINT_ONLYPOWERANDMATERIAL);
+					_engine.printRobotState( false , false, false);
 			
 				if(!item.canBeUsed())
 				{

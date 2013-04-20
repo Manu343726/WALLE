@@ -42,7 +42,7 @@ public class MoveInstruction implements Instruction {
 	public void execute() throws InstructionExecutionException{
 		_navigation.move();
 		_engine.addFuel(EXECUTIONFUEL);
-		_engine.printRobotState(RobotEngine.PRINT_ISMOVING);
+		_engine.printRobotState( false , true , false);
 	}
 
         @Override

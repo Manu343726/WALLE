@@ -14,6 +14,7 @@ import java.util.EventObject;
 import tp.pr4.Interpreter;
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
+import tp.pr4.WallEsMessages;
 
 /**
  * 
@@ -24,24 +25,25 @@ public class RobotDriver implements ActionListener, //para los JButton
 				    MouseListener{
 
 	private RobotEngine _engine;
-	@SuppressWarnings("unused")
 	private NavigationModule _nav;
 	private NavigationPanel _navPanel;
 	private InstructionsPanel _instPanel;
+        private RobotPanel _robotPanel;
 	
 	public RobotDriver(){
-		this(null, null, null, null);
+		this(null, null, null, null,null);
 	}
 	
-	public RobotDriver(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions){
-		this.setModel(eng, nav, navPanel, instructions);
+	public RobotDriver(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions, RobotPanel robotPanel){
+		this.setModel(eng, nav, navPanel, instructions, robotPanel);
 	}
 	
-	public void setModel(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions){
+	public void setModel(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions, RobotPanel robotPanel){
 		_engine = eng;
 		_nav = nav;
 		_navPanel = navPanel;
 		_instPanel = instructions;
+                _robotPanel = robotPanel;
 	}
 	
 	private void changeModel(Component c){
@@ -58,13 +60,22 @@ public class RobotDriver implements ActionListener, //para los JButton
 			_engine.comunicateRobot(Interpreter.generateInstruction("pick " + _instPanel.getIdWritten()));
 		}
 		else if(c.getName().equals("jButtonDrop")){
-			
+                    if( _robotPanel.isItemSelected() )
+                        _engine.comunicateRobot( Interpreter.generateInstruction( "drop " + _robotPanel.getSelectedItemId() ) );
+                    else
+                        WallEsMessages.messagesProvider().WriteError("No item selected");
 		}
 		else if(c.getName().equals("jButtonOperate")){
-			
+                    if( _robotPanel.isItemSelected() )
+                        _engine.comunicateRobot( Interpreter.generateInstruction( "operate " + _robotPanel.getSelectedItemId() ) );
+                    else
+                        WallEsMessages.messagesProvider().WriteError("No item selected");
 		}
 		else if(c.getName().equals("placeCell")){
-			_navPanel.setDescriptionText(((PlaceCell) c).getPlace().toString());
+                    PlaceCell cell = (PlaceCell) c;
+                    
+                    if( cell.isActive() )
+			_navPanel.setDescriptionText( cell.getPlaceString() );
 		}
 		else if(c.getName().equals("jMenuQuit")){
 			_engine.requestQuit();

@@ -45,10 +45,11 @@ public class PlaceCell extends JButton implements InterfaceWindow{
 	public boolean isActive(){
 		return _active;
 	}
-
-	public Place getPlace(){
-		return _place;
-	}
+        
+        public String getPlaceString() //No hagas un getPlace() y a ese le hagas un toString(), le estás dando la instancia de Place a todo quisqui
+        {
+            return _place.toString();
+        }
 	
 	public void setCurrentPlace(Place place){
 		_place = place;

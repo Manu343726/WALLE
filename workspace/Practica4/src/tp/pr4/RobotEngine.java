@@ -33,29 +33,6 @@ public class RobotEngine extends Observable{
 
     public static final Direction INITIAL_DIRECTION = Direction.NORTH;
 
-    /***************************************************************************************************\
-     * PARAMETROS DE LA FUNCION "PRINTROBOTSTATE":  													*
-     * 																									*	
-     * La función tiene tres parámetros:																*
-     *  - PrintIsMoving: Indica si se muestra hacia donde se mueve WALL-E								*
-     *  - PrintJump: Indica si se muestra una línea entre "WALL-E is moving..." y "My power is..."		*
-     *  - PringLookingAt: Indica si se muestra hacia donde mira WALL-E									*
-     * 																									*
-     * Éstos tres parámetros son codificados en los tres bits menos significativos de un entero.		*
-     * Puede parecer muy enrevesado, pero lo hago por el simple hecho de que de ésta manera las			*
-     * llamadas a la función quedan mucho más claras, comparadas con "printRobotState(true,true,true)"	*
-     * por ejemplo. 																					*	
-     \**************************************************************************************************/
-    public static final int PRINT_ONLYPOWERANDMATERIAL = 0x0; //000
-    public static final int PRINT_ISMOVING             = 0x4; //100
-    public static final int PRINT_JUMP 	               = 0x2; //010
-    public static final int PRINT_LOOKINGAT            = 0x1; //001	
-    private static final int LSBMASK = 0x1;
-    private static final int TRUE  = 1;
-
-
-
-
     /* CONSTRUCTORS */
 
     /**
@@ -95,24 +72,24 @@ public class RobotEngine extends Observable{
      * Prints the state of the robot
      */
     public void printRobotState(){
-            printRobotState(PRINT_LOOKINGAT);
+            printRobotState(true , false , false);
     }
 
     /**
      * Prints the state of the robot
      * @param params
      */
-    public void printRobotState(int params)
-    { 
-            if((params & LSBMASK) == TRUE) WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
+    public void printRobotState(boolean printIsLookingAt , boolean printIsMoving , boolean printJump)
+    { //Con lo que molaban los bitsets...
+            if( printIsLookingAt ) WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISLOOKINGAT + _navigation.getCurrentHeading().toString());	
 
-            if(((params >> 2) & LSBMASK) == TRUE)
+            if( printIsMoving )
             {
             WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
                 WallEsMessages.messagesProvider().WriteInfo(_navigation.getCurrentPlace().toString());
             }
 
-            if(((params >> 1) & LSBMASK) == TRUE) System.out.println();
+            if( printJump ) WallEsMessages.messagesProvider().WriteInfo("");
 
             WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.MYPOWERIS + _fuelAmount);
             WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.MYRECYCLEDMATERIALIS + _recycledMaterial);
@@ -127,7 +104,7 @@ public class RobotEngine extends Observable{
             _instPanel = new InstructionsPanel();
             _robotPanel = new RobotPanel();//Si lo has puesto como observador de los items (Más abajo), no entiendo para que le metes una instancia 
             _navigationPanel = new NavigationPanel(_navigation);
-            RobotDriver driver = new RobotDriver(this, _navigation, _navigationPanel, _instPanel);
+            RobotDriver driver = new RobotDriver(this, _navigation, _navigationPanel, _instPanel, _robotPanel);
 
             _mainWindow = new MainWindow(this, _robotPanel, _navigationPanel, _instPanel,  driver);
             this.addObserver(_mainWindow);
@@ -136,6 +113,8 @@ public class RobotEngine extends Observable{
 
             _navigationPanel.update(_navigation, true);
             _mainWindow.setVisible(true);
+            
+            reportObservers();//Forzamos un refresco inicial de la vista
         }
         else
         {
@@ -143,7 +122,7 @@ public class RobotEngine extends Observable{
 
             System.out.println(_navigation.getCurrentPlace().toString());
 
-            printRobotState(PRINT_LOOKINGAT);
+            printRobotState();
 
             do{
                 System.out.print(WallEsMessages.HEADER);
