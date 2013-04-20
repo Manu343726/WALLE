@@ -24,11 +24,6 @@ public class RobotEngine extends Observable{
     private ItemContainer    _items;
     private boolean _quit;
 
-    private MainWindow _mainWindow;
-    private RobotPanel _robotPanel;
-    private NavigationPanel _navigationPanel;
-    private InstructionsPanel _instPanel;
-
     public static final int INITVALUES_FUELAMOUNT       = 100;
     public static final int INITVALUES_RECICLEDMATERIAL = 0;
 
@@ -118,7 +113,7 @@ public class RobotEngine extends Observable{
 
             if( printIsMoving )
             {
-            WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
+                WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.ISMOVING + _navigation.getCurrentHeading().toString());
                 WallEsMessages.messagesProvider().WriteInfo(_navigation.getCurrentPlace().toString());
             }
 
