@@ -9,6 +9,13 @@ import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
 import org.apache.commons.cli.*;
+import static tp.pr4.RobotEngine.INITIAL_DIRECTION;
+import tp.pr4.gui.GUILauncher;
+import tp.pr4.gui.InstructionsPanel;
+import tp.pr4.gui.MainWindow;
+import tp.pr4.gui.NavigationPanel;
+import tp.pr4.gui.RobotDriver;
+import tp.pr4.gui.RobotPanel;
 
 public class Main {
     /* Command-line args config: */
@@ -78,7 +85,11 @@ public class Main {
                     WallEsMessages.setAppMode(appMode);//Sets the application messages output mode.
                     
                     engine = new RobotEngine(city , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION); //Sets up the engine
-                    engine.startEngine();
+                    
+                    if(appMode == ApplicationMode.GUI)
+                        GUILauncher.launch( engine );
+                    else
+                        engine.startEngine();
                 }
                 catch(FileNotFoundException ex1){
                         System.err.println("Error reading the map file: " + mapfile + " (No existe el fichero o el directorio)");

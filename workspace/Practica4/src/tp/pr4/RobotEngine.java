@@ -2,6 +2,7 @@ package tp.pr4;
 
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import tp.pr4.gui.*;
@@ -67,6 +68,38 @@ public class RobotEngine extends Observable{
     public boolean quit(){
             return _quit;
     }
+    
+    /***
+     * Adds an observer to the set of observers for the enine items container.
+     * @param o Pointer to the observer.
+     */
+    public void addItemsObserver(Observer o)
+    {
+        _items.addObserver(o);
+    }
+    
+     /***
+     * Adds an observer to the set of observers for the enine navigation module.
+     * @param o Pointer to the observer.
+     */
+    public void addNavigationObserver(Observer o)
+    {
+        _navigation.addObserver(o);
+    }
+    
+    /***
+     * Forces change event.
+     */
+    public void forceRefresh()
+    {
+        reportObservers();
+        _navigation.forceRefresh();
+    }
+    
+    public NavigationModule getNavigationModule()//No me gusta nada, pero era ésto o meter todo el setup de la GUI en el constructor del robot engine ( Ver GUILauncher::launch() )
+    {
+        return _navigation;
+    }
 
     /**
      * Prints the state of the robot
@@ -99,46 +132,26 @@ public class RobotEngine extends Observable{
      * Starts the robot engine. Gets user instructions, processes the instructions and makes the necessary changes
      */
     public void startEngine(){
-        if(WallEsMessages.getAppMode() == ApplicationMode.GUI)
-        {
-            _instPanel = new InstructionsPanel();
-            _robotPanel = new RobotPanel();//Si lo has puesto como observador de los items (Más abajo), no entiendo para que le metes una instancia 
-            _navigationPanel = new NavigationPanel();
-            RobotDriver driver = new RobotDriver(this, _navigation, _navigationPanel, _instPanel, _robotPanel);
+        Scanner sc = new Scanner(System.in);
 
-            _mainWindow = new MainWindow(this, _robotPanel, _navigationPanel, _instPanel,  driver);
-            this.addObserver(_mainWindow);
-            this._items.addObserver(_robotPanel);//Perfecto, totalmente de acuerdo
-            this._navigation.addObserver(_navigationPanel);
+        System.out.println(_navigation.getCurrentPlace().toString());
 
-            _navigationPanel.update(_navigation, new NavigationModuleChangedEventArgs(_navigation.getCurrentPlace(), _navigation.getCurrentPlace() , INITIAL_DIRECTION));
-            _mainWindow.setVisible(true);
-            
-            reportObservers();//Forzamos un refresco inicial de la vista
-        }
+        printRobotState();
+
+        do{
+            System.out.print(WallEsMessages.HEADER);
+
+            comunicateRobot(Interpreter.generateInstruction(sc.nextLine()));
+        }while(!_quit && !_navigation.atSpaceship() && _fuelAmount > 0);
+
+        if(_quit)
+            System.out.print(WallEsMessages.ENDAPPLICATION);
+        else if(_fuelAmount == 0)
+            System.out.print(WallEsMessages.NOFUEL);
         else
-        {
-            Scanner sc = new Scanner(System.in);
+            System.out.print(WallEsMessages.SHIPFINDED);
 
-            System.out.println(_navigation.getCurrentPlace().toString());
-
-            printRobotState();
-
-            do{
-                System.out.print(WallEsMessages.HEADER);
-
-                comunicateRobot(Interpreter.generateInstruction(sc.nextLine()));
-            }while(!_quit && !_navigation.atSpaceship() && _fuelAmount > 0);
-
-            if(_quit)
-                System.out.print(WallEsMessages.ENDAPPLICATION);
-            else if(_fuelAmount == 0)
-                System.out.print(WallEsMessages.NOFUEL);
-            else
-                System.out.print(WallEsMessages.SHIPFINDED);
-
-            sc.close();
-        }
+        sc.close();
     }
     
     /**

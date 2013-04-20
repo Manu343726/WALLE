@@ -122,6 +122,14 @@ public class NavigationModule extends Observable{
         setChanged();
         notifyObservers(args);
     }
+    
+     /***
+     * Forces change event.
+     */
+    public void forceRefresh()
+    {
+        reportObservers( new NavigationModuleChangedEventArgs( _currentPlace , _currentPlace , _currentDirection ) );
+    }
 
     /**
      * The method tries to move the robot following the current direction. 

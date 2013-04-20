@@ -9,12 +9,10 @@ import java.util.Observable;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 import tp.pr4.RobotEngine;
-import tp.pr4.items.ItemContainer;
 import tp.pr4.items.*;
 
 import java.util.*;
