@@ -68,9 +68,9 @@ public abstract class WallEsMessages {
      */
     public static MessagesProvider messagesProvider() throws NoApplicationModeException
     {
-        if( _messagesProvider != null)
-            return _messagesProvider;
-        else
-            throw new NoApplicationModeException();
+        if( _messagesProvider == null)
+            setAppMode( ApplicationMode.CONSOLE );
+        
+        return _messagesProvider;
     }
 }

@@ -21,7 +21,7 @@ public abstract class GUILauncher {
         InstructionsPanel instructionsPanel = new InstructionsPanel();
         RobotPanel robotPanel = new RobotPanel();
         NavigationPanel navigationPanel = new NavigationPanel();
-        RobotDriver driver = new RobotDriver( engine , engine.getNavigationModule() , navigationPanel , instructionsPanel , robotPanel);
+        RobotDriver driver = new RobotDriver( engine , engine.getNavigationModule() /* dolor */ , navigationPanel , instructionsPanel , robotPanel);
         MainWindow window = new MainWindow( engine , robotPanel , navigationPanel , instructionsPanel , driver);
 
         engine.addObserver( window );

@@ -182,11 +182,18 @@ public class RobotEngine extends Observable{
         reportObservers();
     }
 
+    /***
+     * Raises change event.
+     * @param outOfFuel Specifies if the robot is out of fuel ( See NavigationPanel::update() )
+     */
     private void reportObservers(boolean outOfFuel){
         setChanged();
         notifyObservers(outOfFuel);
     }
     
+    /***
+     * Raises change event
+     */
     private void reportObservers()
     {
         reportObservers(false);
