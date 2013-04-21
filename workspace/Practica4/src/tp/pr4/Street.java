@@ -73,10 +73,19 @@ public class Street {
             return result;
 	}
 	
+        /**
+         * Checks if the street is open.
+         * @return True if its open, false if its closed.
+         */
 	public boolean isOpen(){
 		return _isOpen;
 	}
 	
+        /**
+         * tries to open this street by the specified card.
+         * @param card Card with the code to open the street.
+         * @return true if the operation success, false in other case.
+         */
 	public boolean open(CodeCard card){
             /***************************************
              * boolean open() table:               *
@@ -96,6 +105,11 @@ public class Street {
             return goodCode;
 	}
 	
+         /**
+         * tries to close this street by the specified card.
+         * @param card Card with the code to close the street.
+         * @return true if the operation success, false in other case.
+         */
 	public boolean close(CodeCard card){
              /**************************************
              * boolean close() table:              *

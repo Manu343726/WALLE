@@ -54,6 +54,7 @@ public class Place {
 	/**
 	 * Returns the place name and the place description
 	 */
+        @Override
 	public String toString(){
 		if(_itemContainer.numberOfItems() == 0)
 			return (_name + Interpreter.LINE_SEPARATOR +  _description + Interpreter.LINE_SEPARATOR + PLACEEMPTY);
@@ -101,6 +102,10 @@ public class Place {
 		return _itemContainer.getItem(id) != null;
 	}
 	
+        /**
+         * Gets the item name
+         * @return String instance containing the item name.
+         */
 	public String getName(){
 		return this._name;
 	}

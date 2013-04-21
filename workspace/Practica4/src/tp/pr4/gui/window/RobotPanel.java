@@ -37,6 +37,9 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
 	 *
 	 */
     class MyTableModel extends AbstractTableModel{
+        /**
+         * Table model data.
+         */
         class TableData implements Comparable
         {
             String _id;
@@ -91,12 +94,21 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
                 return ((TableData)_data.toArray()[row]).getDescription();      
         }
         
+        /**
+         * Adds item data to the table.
+         * @param item Item to be added.
+         */
         public void addData(Item item)
         {
             _data.add( new TableData( item ) );
             fireTableDataChanged();
         }
         
+        /**
+         * Removes data of a given Item.
+         * @param item Item to be removed.
+         * @return true if the operation success (The item has data in the table). False in other case.
+         */
         public boolean removeData(Item item)
         {
             boolean result = _data.remove( new TableData( item ) );

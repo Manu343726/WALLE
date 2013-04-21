@@ -34,14 +34,33 @@ public class RobotDriver implements ActionListener, //para los JButton
 	private InstructionsPanel _instPanel;
         private RobotPanel _robotPanel;
 	
+        /**
+         * Default ctor.
+         */
 	public RobotDriver(){
 		this(null, null, null, null,null);
 	}
 	
+        /**
+         * Creates a driver with the specified data.
+         * @param eng Application model (Robot engine)
+         * @param nav Application model (Navigation module)
+         * @param navPanel GUI navigation panel.
+         * @param instructions GUI instructions panel.
+         * @param robotPanel  GUI robot panel.
+         */
 	public RobotDriver(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions, RobotPanel robotPanel){
 		this.setModel(eng, nav, navPanel, instructions, robotPanel);
 	}
 	
+         /**
+         * Setups the application events driver.
+         * @param eng Application model (Robot engine)
+         * @param nav Application model (Navigation module)
+         * @param navPanel GUI navigation panel.
+         * @param instructions GUI instructions panel.
+         * @param robotPanel  GUI robot panel.
+         */
 	public void setModel(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions, RobotPanel robotPanel){
 		_engine = eng;
 		_nav = nav;
@@ -50,6 +69,10 @@ public class RobotDriver implements ActionListener, //para los JButton
                 _robotPanel = robotPanel;
 	}
 	
+        /**
+         * Performs application GUI events handling.
+         * @param c GUI component that raised the event.
+         */
 	private void changeModel(Component c){
 		if(c.getName().equals("jButtonMove")){
 			_engine.comunicateRobot(Interpreter.generateInstruction("move"));

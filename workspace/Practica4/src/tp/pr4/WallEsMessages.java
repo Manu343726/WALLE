@@ -43,12 +43,12 @@ public abstract class WallEsMessages {
     private static ApplicationMode  _appMode;
     private static MessagesProvider _messagesProvider; 
     
-    /*
+    /**
      * Returns the application front-end mode
      */
     public static ApplicationMode getAppMode() {return _appMode;}
     
-    /*
+    /**
      * Sets the applicacion front-end mode.
      */
     public static void setAppMode(ApplicationMode appMode)

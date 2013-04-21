@@ -21,6 +21,11 @@ public class NotPredicate<T> extends Predicate<T> {
         _original = original;
     }
     
+    /**
+     * Applies the predicate to a given data.
+     * @param data Data to be applied with.
+     * @return 
+     */
     @Override
     public boolean apply(T data)
     {

@@ -17,11 +17,20 @@ public class GUIMessagesProvider extends MessagesProvider {
     
     private final boolean SHOWINFOMESSAGES;
     
+    /**
+     * Ctor
+     * @param showInfoMessages if is set to false, info messages are not prompted.
+     */
     public GUIMessagesProvider(boolean showInfoMessages)
     {
         SHOWINFOMESSAGES = showInfoMessages;
     }
     
+    /**
+     * Outputs an error by a JOptionPen.
+     * @param message Error message
+     * @param exit If is set to true, app is closed after the message.
+     */
     @Override
     public void WriteError(String message , boolean exit)
     {
@@ -31,6 +40,11 @@ public class GUIMessagesProvider extends MessagesProvider {
             System.exit( 0 );
     }
     
+     /**
+     * Outputs an info by a JOptionPen.
+     * @param message info message
+     * @param exit If is set to true, app is closed after the message.
+     */
     @Override
     public void WriteInfo(String message , boolean exit)
     {
