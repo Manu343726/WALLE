@@ -1,0 +1,5 @@
+Execute this assignment with these parameters:
+usage: tp.pr4.Main [-h] [-i <type>] [-m <mapfile>]
+ -h,--help               Shows this help message
+ -i,--interface <type>   The type of interface: console or swing
+ -m,--map <mapfile>      File with the description of the city

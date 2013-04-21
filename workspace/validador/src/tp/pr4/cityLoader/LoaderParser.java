@@ -76,30 +76,12 @@ public abstract class LoaderParser {
 	 */
 	public static String parseString(Scanner reader) throws WrongCityFormatException
 	{
-            String next = "";
-            String nextNext = "";
-            boolean end = false;
-            
-            if(reader.hasNext())
-            {
-                next = reader.next();
-            
-                if(next.charAt( 0 ) == '"')
-                {
-                    while(reader.hasNext() &&  next.charAt( next.length() - 1 ) != '"' )
-                    {
-                        next += (" " + reader.next());
-                    }
-                    
-                    next = next.substring( 1 , next.length() - 1 );//Quitamos las commillas
-                }
-                
-                return next;
-            }
-            else
-                closeAndThrow(reader);
-
-            return "";//Inalcanzable...
+		if(reader.hasNext())
+			return reader.next();
+		else
+			closeAndThrow(reader);
+		
+		return "";//Inalcanzable...
 	}
 	
 	

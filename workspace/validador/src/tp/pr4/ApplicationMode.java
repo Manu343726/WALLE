@@ -10,10 +10,9 @@ package tp.pr4;
  * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public enum ApplicationMode {
-    CONSOLE,       ///< App uses standard output to output messages.
-    GUI,           ///< App uses a dialog box to output messages.
-    UNKNOWN,       ///< Unknown value.
-    NOT_SPECIFIED; ///< App front-end mode not speficied.
+    CONSOLE, ///< App uses standard output to output messages.
+    GUI,     ///< App uses a dialog box to output messages.
+    UNKNOWN; ///< Unknown value.
     
     public static final String PARSE_STRING_CONSOLE = "console";
     public static final String PARSE_STRING_GUI     = "swing";
@@ -33,12 +32,6 @@ public enum ApplicationMode {
             else
                 return ApplicationMode.UNKNOWN;
         else
-            return ApplicationMode.NOT_SPECIFIED;
+            return ApplicationMode.UNKNOWN;
     }
-    
-    /***
-     * Checks if the app front-end mode is a valid mode.
-     * @return Trye if its a valid front-end mode, false in other case.
-     */
-    public boolean isValid() {return this == CONSOLE || this == GUI; } 
 }

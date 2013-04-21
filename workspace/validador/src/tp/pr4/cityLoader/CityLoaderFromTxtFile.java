@@ -67,8 +67,6 @@ public class CityLoaderFromTxtFile {
 		String placeDescription="";
 		boolean isSpaceship=false;
 		boolean end = false;
-                
-                String isSpaceShip = "";
 		
 		if(LoaderParser.parseMark(reader, "BeginPlaces"))
 		{
@@ -85,7 +83,7 @@ public class CityLoaderFromTxtFile {
 						placeName = LoaderParser.parseString(reader);
 						placeDescription = LoaderParser.parseString(reader).replace("_", " ");
 						
-						switch( LoaderParser.parseString(reader) )
+						switch(LoaderParser.parseString(reader))
 						{
 						case "noSpaceShip" : isSpaceship = false; break;
 						case "spaceShip"   : isSpaceship = true;  break;
@@ -210,8 +208,8 @@ public class CityLoaderFromTxtFile {
 					if((itemIndex == 0 && newItemIndex == 0) || newItemIndex == (itemIndex + 1))
 					{
 						itemId = LoaderParser.parseString(reader);
-						itemDescription = LoaderParser.parseString(reader).replace('_', ' ');//Pues resulta que no lo había hecho...                                                   
-                                                
+						itemDescription = LoaderParser.parseString(reader).replace('_', ' ');//Pues resulta que no lo había hecho...
+						
 						switch(itemType)
 						{
 						case "fuel": 

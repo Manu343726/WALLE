@@ -1,0 +1,66 @@
+Sol
+You are at the center of Madrid
+The place contains these objects:
+   Battery
+   Petrol
+WALL·E is looking at direction NORTH
+      * My power is 100
+      * My reclycled material is 0
+WALL·E> WALL·E says: I am happy! Now I have Petrol
+WALL·E> WALL·E says: I am happy! Now I have Battery
+WALL·E> WALL·E is looking at direction WEST
+      * My power is 95
+      * My reclycled material is 0
+WALL·E> WALL·E is looking at direction SOUTH
+      * My power is 90
+      * My reclycled material is 0
+WALL·E> WALL·E says: Moving in direction SOUTH
+Callao
+In this square you can find a code card
+The place contains these objects:
+   Card
+
+      * My power is 85
+      * My reclycled material is 0
+WALL·E> WALL·E says: I am happy! Now I have Card
+WALL·E> WALL·E says: I am carrying the following items
+   Battery
+   Card
+   Petrol
+WALL·E> Great! I have dropped Battery
+WALL·E> You do not have any Cord.
+WALL·E> WALL·E says: I am carrying the following items
+   Card
+   Petrol
+WALL·E> Callao
+In this square you can find a code card
+The place contains these objects:
+   Battery
+WALL·E> WALL·E is looking at direction WEST
+      * My power is 80
+      * My reclycled material is 0
+WALL·E> WALL·E is looking at direction NORTH
+      * My power is 75
+      * My reclycled material is 0
+WALL·E> WALL·E is looking at direction EAST
+      * My power is 70
+      * My reclycled material is 0
+WALL·E> WALL·E says: Moving in direction EAST
+Colon
+People concentrates here to watch football
+The place contains these objects:
+   Newspapers
+
+      * My power is 65
+      * My reclycled material is 0
+WALL·E> WALL·E is looking at direction NORTH
+      * My power is 60
+      * My reclycled material is 0
+WALL·E> WALL·E> WALL·E says: Moving in direction NORTH
+Exit
+Ok, finally you have found your spaceship...
+The place is empty. There are no objects to pick
+
+      * My power is 55
+      * My reclycled material is 0
+WALL·E says: I am at my spaceship. Bye bye
