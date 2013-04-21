@@ -6,8 +6,7 @@ package tp.pr4;
 
 /**
  * Operations that needs app mode configured throws this exception.
- * @author
- * Laura María de Castro Saturio , Manuel Sánchez Pérez
+ * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class NoApplicationModeException extends RuntimeException {
     /**

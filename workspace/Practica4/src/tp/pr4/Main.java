@@ -9,14 +9,13 @@ import tp.pr4.cityLoader.CityLoaderFromTxtFile;
 import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
 import org.apache.commons.cli.*;
-import static tp.pr4.RobotEngine.INITIAL_DIRECTION;
 import tp.pr4.gui.GUILauncher;
-import tp.pr4.gui.InstructionsPanel;
-import tp.pr4.gui.MainWindow;
-import tp.pr4.gui.NavigationPanel;
-import tp.pr4.gui.RobotDriver;
-import tp.pr4.gui.RobotPanel;
 
+/**
+ * 
+ * @author Laura María de Castro & Manuel Sánchez Pérez
+ *
+ */
 public class Main {
     /* Command-line args config: */
     
@@ -26,7 +25,7 @@ public class Main {
     private static final String COMMANDLINE_ARGS_HELP     = "h";
     
     //Args (Long version):
-    private static final String COMMANDLINE_ARGS_LONG_MAPFILE     = "mapfile";
+    private static final String COMMANDLINE_ARGS_LONG_MAPFILE     = "map";
     private static final String COMMANDLINE_ARGS_LONG_VIEWMODE    = "interface";
     private static final String COMMANDLINE_ARGS_LONG_HELP        = "help";
     
@@ -87,8 +86,8 @@ public class Main {
         }
         else
         {
-            if( appMode.isValid() )
-                if( mapfile != null )
+            if( mapfile != null )
+                if( appMode.isValid()  )
                     try{ 
                         city = loader.loadCity(new FileInputStream( mapfile )); 
                         WallEsMessages.setAppMode(appMode);//Sets the application messages output mode.
@@ -110,16 +109,16 @@ public class Main {
                     }
                 else
                 {
-                    System.err.println( "Map file not specified" );
+                    if( appMode == ApplicationMode.NOT_SPECIFIED )
+                        System.err.println( "Interface not specified" );
+                    else
+                        System.err.println( "Wrong type of interface" );                
 
                     exitCode = 1;
                 }
             else
-            {   
-                if( appMode == ApplicationMode.NOT_SPECIFIED )
-                    System.err.println( "Interface not specified" );
-                else
-                    System.err.println( "Wrong type of interface" );
+            {
+                System.err.println( "Map file not specified" );
 
                 exitCode = 1;
             }
@@ -135,12 +134,11 @@ public class Main {
      */
     public static void main(String[] args) {
         int exitCode = 0;
-        CommandLineParser parser = new BasicParser();
         
         try{ exitCode = initializeApplication(  args , setupInputOptions() ); }
         catch(ParseException ex)
         {
-            System.err.println( "Wrong type of interface" );
+            showBadParams();
             exitCode = 1;
         }
         

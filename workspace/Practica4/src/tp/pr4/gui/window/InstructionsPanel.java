@@ -1,4 +1,4 @@
-package tp.pr4.gui;
+package tp.pr4.gui.window;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -8,7 +8,10 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 /**
- * 
+ * This class represent a panel with several buttons to perform MOVE, TURN,
+ * OPERATE, PICK and DROP actions. Additionally it has a combo box
+ * of turn rotations and a text field to write the name id the item
+ * that the robot wants to pick from the current place
  * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
@@ -25,26 +28,43 @@ public class InstructionsPanel extends JPanel{
 	@SuppressWarnings("rawtypes")
 	private JComboBox _jComboRotation;
 
-	
+	/**
+	 * This method is used to get the direction selected on the panel's combo box
+	 * @return the direction selected
+	 */
 	public String getSelectedDirection(){
 		return (String)_jComboRotation.getSelectedItem();
 	}
 	
+	/**
+	 * This method is used to get the id written on the text field
+	 * @return the text written 
+	 */
 	public String getIdWritten(){
 		return _jTextItem.getText();
 	}
 	
+	
+	/**
+	 * Initializes the panel without driver
+	 */
 	public InstructionsPanel(){
 		initInstructionsPanel();
 	}
 	
+	/**
+	 * Initializes the panel with driver
+	 * @param driver contains the driver in charge of the view.
+	 */
 	public InstructionsPanel(EventListener driver){
 		initInstructionsPanel();
 		setDriver(driver);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-
+	
+    /**
+     * Initializes all panel's components and set them correctly
+     */
 	private void initInstructionsPanel(){
 		_jButtonMove = new JButton();
 		_jButtonTurn = new JButton();
@@ -90,10 +110,13 @@ public class InstructionsPanel extends JPanel{
 		this.add(_jButtonOperate);
 	}
 	
-	//No hace falta funcion de update en este panel
 	
+	/**
+	 * Public method that is responsible for setting the controller on the elements
+	 *  of the view.
+	 * @param driver contains the driver in charge of the view.
+	 */
 	public void setDriver(EventListener driver){
-	//Para los botones el cuadro de texto y el combo box se usa el ActionListener
 		_jButtonMove.addActionListener((ActionListener) driver);
 		_jButtonTurn.addActionListener((ActionListener) driver);
 		_jButtonPick.addActionListener((ActionListener) driver);

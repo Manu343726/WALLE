@@ -5,6 +5,11 @@
 package tp.pr4.gui;
 
 import tp.pr4.RobotEngine;
+import tp.pr4.gui.driver.RobotDriver;
+import tp.pr4.gui.window.InstructionsPanel;
+import tp.pr4.gui.window.MainWindow;
+import tp.pr4.gui.window.NavigationPanel;
+import tp.pr4.gui.window.RobotPanel;
 
 /**
  * Launches the application GUI

@@ -1,4 +1,4 @@
-package tp.pr4.gui;
+package tp.pr4.gui.window;
 
 import javax.swing.ListSelectionModel;
 import java.awt.BorderLayout;
@@ -30,7 +30,12 @@ import tp.pr4.WallEsMessages;
  */
 @SuppressWarnings("serial")
 public class RobotPanel extends JPanel implements InterfaceWindow{
-
+	
+	/**
+	 * This class is used as model of the table that we're going to use as inventory
+	 * @author Laura María de Castro & Manuel Sánchez Pérez
+	 *
+	 */
     class MyTableModel extends AbstractTableModel{
         class TableData implements Comparable
         {
@@ -49,11 +54,10 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
             @Override
             public int compareTo(Object other)
             {
-                return _id.compareToIgnoreCase( ((TableData)other).getId());//mmmm ClassCatException si no lo uso bien? Pero compareTo no debería lanzar exceptionces...
+                return _id.compareToIgnoreCase( ((TableData)other).getId());
             }
         }
         
-        private final int COLUMNSCOUNT = 2;
         
         private String[]   _columnNames = {"Id", "Description"};
         
@@ -90,7 +94,7 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
         public void addData(Item item)
         {
             _data.add( new TableData( item ) );
-            fireTableDataChanged();//La repinta entera, no es lo mas correcto. Pero como es una tabla muy corta, y ahora mismo lo que me importa es que funcione, me da lo mismo...
+            fireTableDataChanged();
         }
         
         public boolean removeData(Item item)
@@ -98,12 +102,14 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
             boolean result = _data.remove( new TableData( item ) );
             
             if( result )
-                fireTableDataChanged();//La repinta entera, no es lo mas correcto. Pero como es una tabla muy corta, y ahora mismo lo que me importa es que funcione, me da lo mismo...
+                fireTableDataChanged();
             
             return result;
         }
     }
 
+    
+    
     private MyTableModel  _tableModel;
     private JTable _table;
     private JLabel _fuelLevelLabel;
@@ -129,15 +135,25 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
             throw new NoSuchElementException("No item selected");
     }
 
+	/**
+	 * Initializes the panel without driver
+	 */
     public RobotPanel(){
             initRobotPanel();
     }
 
+	/**
+	 * Initializes the panel with driver
+	 * @param driver contains the driver in charge of the panel.
+	 */
     public RobotPanel(EventListener driver){
             initRobotPanel();
             setDriver(driver);
     }
 
+    /**
+     * Initializes all panel's components and set them correctly
+     */
     public void initRobotPanel(){
         this.setBorder(new TitledBorder("Robot info"));
 
@@ -169,16 +185,26 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
     }
 
     @Override
+	/**
+	 * Public method that is responsible for setting the controller on the elements
+	 *  of the panel.
+	 * @param driver contains the driver in charge of the view.
+	 */
     public void setDriver(EventListener driver){
             //_table.addMouseListener((MouseListener) driver);//Para que? No lo vas a usar
     }
 
-    //Update captura dos eventos: robotEngine::changed() (Para actualizar los labels de fuel y material) e ItemContainer::changed() (Para actualizar la lista de items). 
-    //Los diferencio mirando si puedo hacer el casting del argumento del evento a ItemContainerChangedEventArgs
+
+	/**
+	 * This method is used to update the view and obtains the info from the models
+	 * @param o contains the model
+	 * @param arg contains the argument passed from the model
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
     @Override
     public void update(Observable o, Object arg) {
         if( arg instanceof ItemContainerChangeEventArgs)
-        {//Es un evento de cambio del item container (Se ha ejecutado la instrucción pick o drop)
+        {
             ItemContainerChangeEventArgs changeData = (ItemContainerChangeEventArgs)arg;
             
             if(changeData.getChangeType() == ItemContainerChangeType.ITEM_ADDED)
@@ -191,9 +217,9 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
             }
         }
         else
-        {//Es un evento de actualización del engine (Cualquier otra cosa: Actualizamos los labels).
+        {
             if(!(boolean)arg)
-            {
+            {//Move, Turn
                 _fuelLevelLabel.setText("Fuel: " + ((RobotEngine) o).getFuel());
                 _recycledMaterialLabel.setText("Recycled: " + ((RobotEngine) o).getRecycledMaterial());
             }

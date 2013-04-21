@@ -1,4 +1,4 @@
-package tp.pr4.gui;
+package tp.pr4.gui.window;
 
 import java.awt.Container;
 
@@ -14,20 +14,22 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 
 
 import tp.pr4.RobotEngine;
+import tp.pr4.gui.driver.RobotDriver;
 
 
 /**
- * This clase represents the main window. The MainWindow contains:
+ * This class represents the main window. The MainWindow contains:
  *   => A menu whit the QUIT action
  *   => An InstructionsPanel with several button to perform MOVE, TURN,
  *      OPERATE, PICK and DROP actions. Additionally it has a combo box
- *      of turn rotations and a text field to write the name od the item
+ *      of turn rotations and a text field to write the name id the item
  *      that the robot wants to pick from the current place
  *   => A RobotPanel that displays the robot information(fuel and recycled material)
  *      and the robot inventory. The user can select the items contained in 
@@ -35,7 +37,7 @@ import tp.pr4.RobotEngine;
  *   => A NavigationPanel that represents the city.It shows the places that
  *      the robot has visited and an icon that represents the robot heading.
  *      The robot heading is updated when the user performs TURN action.
- *      The visible places are upsdated when the robot performs a MOVE action.
+ *      The visible places are updated when the robot performs a MOVE action.
  *      Once a place is visited, the user can click on in in order to display the 
  *      place description(similar to RADAR command)
  * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
@@ -57,17 +59,29 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	private JMenuBar  _jMenuBar;
 	private JMenuItem _jMenuItem;
 	
+	
+  
+	/**
+	 * Initializes the view without driver
+	 */
 	public MainWindow(RobotEngine robotEngine, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
 		super("WALL-E The garbage collector");
 		initMainWindow(robotEngine, robotPanel, navigationPanel, instPanel);
 	}
 	
+	/**
+	 * Initializes the view with driver
+	 * @param driver contains the driver in charge of the view.
+	 */
 	public MainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, RobotDriver driver){
 		super("WALL-E The garbage collector");
 		initMainWindow(robot, robotPanel, navigationPanel, instPanel);
 		setDriver(driver);
 	}
 	
+    /**
+     * Initializes all window's components and set them correctly
+     */
 	public void initMainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
 		_robot = robot;
 		
@@ -99,6 +113,11 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	}
 	
 	@Override
+	/**
+	 * Public method that is responsible for setting the controller on the elements
+	 *  of the view.
+	 * @param driver contains the driver in charge of the view.
+	 */
 	public void setDriver(EventListener driver){
 		_instructionsPanel.setDriver(driver);
 		//_robotPanel.setDriver(driver); no lo vas a usar
@@ -107,13 +126,17 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	}
 	
 
-	//La ventana principal es la observadora del RobotEngine
-	//Por tanto solo trata la instruccion QUIT
-	//Por otro lado llama a robotPanel para que actualize fuel y material reciclado
 	@Override
+	/**
+	 * This method is used to update the view and obtains the info from the models
+	 * @param o contains the model
+	 * @param arg contains the argument passed from the model
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	public void update(Observable o, Object arg) {
 		if(_robot.quit()){
-			System.exit(0); //Esto de cargarnos la aplicación a lo bestia desde aquí no me acaba de convencer...
+			if(JOptionPane.showConfirmDialog(null, "¿Close aplication?") == JOptionPane.YES_OPTION)
+				System.exit(0);	
 		}
 		else{
 			_robotPanel.update(o, arg);

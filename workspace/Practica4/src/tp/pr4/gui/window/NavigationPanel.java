@@ -1,6 +1,7 @@
-package tp.pr4.gui;
+package tp.pr4.gui.window;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -13,11 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import tp.pr4.Direction;
-import tp.pr4.NavigationModule;
 import tp.pr4.NavigationModuleChangeType;
 import tp.pr4.NavigationModuleChangedEventArgs;
 import tp.pr4.Place;
-import tp.pr4.RobotEngine;
 import tp.pr4.WallEsMessages;
 import tp.pr4.utils.*;
 
@@ -46,11 +45,17 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
     private EnumMap<Direction , ImageIcon> headingIcons; //A map with the icons for each heading direction
 
 
+	/**
+	 * Initializes the panel without driver
+	 */
     public NavigationPanel(){
             initNavigationPanel();
     }
 
 
+    /**
+     * Initializes all panel's components and set them correctly
+     */
     public void initNavigationPanel(){
         row = 4;
         col = 5;
@@ -92,6 +97,11 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
         this.add(panelAuxText);
     }
 
+	/**
+	 * Public method that is responsible for setting the controller on the elements
+	 *  of the view.
+	 * @param driver contains the driver in charge of the view.
+	 */
     public void setDriver(EventListener driver){
             for(int i = 0; i < 11; i++){
                     for(int j = 0; j < 11; j++){
@@ -100,6 +110,10 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
             }
     }
 
+    /**
+     * This method is used to calculate the new row and column depending upond the direction of the move
+     * @param dir
+     */
     private void calculateCoords(Direction dir){
             switch(dir){
             case NORTH: row--; break;
@@ -109,6 +123,11 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
             }
     }
 
+    
+	/**
+	 * This method is used to update the previous cell that the robot has visited
+	 * @param previousPlace contains the previous place
+	 */
     private void updatePreviousCell(final Place previousPlace)
     {
         boolean finded = false;
@@ -137,7 +156,12 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
         }
     }
 
-    //Al navPanel le llegan las instrucciones de mov y turn
+	/**
+	 * This method is used to update the view and obtains the info from the models
+	 * @param o contains the model
+	 * @param arg contains the argument passed from the model
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
     @Override
     public void update(Observable o, Object arg) {
         NavigationModuleChangedEventArgs args = (NavigationModuleChangedEventArgs) arg;
@@ -156,6 +180,11 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
         }
     }
 
+    
+    /**
+     * This method is used to set a text on the text area of the panel
+     * @param description contains the text to set
+     */
     public void setDescriptionText(String description){
             this.info.setText(description);
     }

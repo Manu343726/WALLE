@@ -3,7 +3,7 @@ package tp.pr4;
 import java.util.Observable;
 
 
-import tp.pr4.gui.NavigationPanel;
+import tp.pr4.gui.window.NavigationPanel;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.items.Item;
 
@@ -13,6 +13,8 @@ import tp.pr4.items.Item;
  *  It contains the city where the robot looks for garbage, the current place where the robot is, 
  *  and the current direction of the robot. It contains methods to handle the different robot movements 
  *  and to pick and drop items at the current place.
+ *  
+ *  @author Laura María de Castro & Manuel Sánchez Pérez
  */
 
 public class NavigationModule extends Observable{	

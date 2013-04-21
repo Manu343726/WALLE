@@ -1,4 +1,4 @@
-package tp.pr4.gui;
+package tp.pr4.gui.driver;
 
 import java.awt.Component;
 
@@ -15,6 +15,10 @@ import tp.pr4.Interpreter;
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
 import tp.pr4.WallEsMessages;
+import tp.pr4.gui.window.InstructionsPanel;
+import tp.pr4.gui.window.NavigationPanel;
+import tp.pr4.gui.window.PlaceCell;
+import tp.pr4.gui.window.RobotPanel;
 
 /**
  * 
