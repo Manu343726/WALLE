@@ -57,7 +57,7 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
      * Initializes all panel's components and set them correctly
      */
     public void initNavigationPanel(){
-        row = 4;
+        row = 5;
         col = 5;
         cells = new PlaceCell[11][11];
         for(int i = 0; i < 11; i++){

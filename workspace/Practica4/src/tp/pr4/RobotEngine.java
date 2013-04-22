@@ -201,6 +201,13 @@ public class RobotEngine extends Observable{
         _quit = true;
         reportObservers();
     }
+    
+    /**
+     * Aborts the close operation.
+     */
+    public void abortQuit(){
+        _quit = false;
+    }
 
     /***
      * Raises change event.

@@ -137,6 +137,8 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 		if(_robot.quit()){
 			if(JOptionPane.showConfirmDialog(null, "¿Close aplication?") == JOptionPane.YES_OPTION)
 				System.exit(0);	
+                        else
+                            _robot.abortQuit();
 		}
 		else{
 			_robotPanel.update(o, arg);

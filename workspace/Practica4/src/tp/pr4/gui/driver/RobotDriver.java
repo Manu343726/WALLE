@@ -25,8 +25,7 @@ import tp.pr4.gui.window.RobotPanel;
  * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
-public class RobotDriver implements ActionListener, //para los JButton
-				    MouseListener{
+public class RobotDriver implements ActionListener{
 
 	private RobotEngine _engine;
 	private NavigationModule _nav;
@@ -122,35 +121,7 @@ public class RobotDriver implements ActionListener, //para los JButton
 		genericEvent(arg0);
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
 

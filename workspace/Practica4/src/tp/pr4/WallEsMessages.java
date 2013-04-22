@@ -58,7 +58,7 @@ public abstract class WallEsMessages {
         if(_appMode == ApplicationMode.CONSOLE)
             _messagesProvider = new StandardMessagesProvider();
         else
-            _messagesProvider = new GUIMessagesProvider(false);
+            _messagesProvider = new GUIMessagesProvider( false );
     }
     
     /**
