@@ -14,7 +14,7 @@ import java.io.PrintStream;
 public class StandardMessagesProvider extends MessagesProvider {
     private PrintStream _outputStream;
     
-    /*
+    /**
      * Creates a message provider that uses the specified output stream.
      */
     public StandardMessagesProvider(PrintStream outputStream)
@@ -22,7 +22,7 @@ public class StandardMessagesProvider extends MessagesProvider {
         _outputStream = outputStream;
     }
     
-    /*
+    /**
      * Creates a message provider that uses the standard output stream.
      */
     public StandardMessagesProvider()
@@ -30,12 +30,22 @@ public class StandardMessagesProvider extends MessagesProvider {
         _outputStream = System.out;
     }
     
+    /**
+     * Writes an error message through the standard output stream.
+     * @param message A String containing the message.
+     * @param exit If is set to true, application ends after the message.
+     */
     @Override
     public void WriteError(String message , boolean exit)
     {
         WriteInfo( message , exit ); //...
     }
     
+     /**
+     * Writes an info message through the standard output stream.
+     * @param message A String containing the message.
+     * @param exit If is set to true, application ends after the message.
+     */
     @Override
     public void WriteInfo(String message , boolean exit)
     {

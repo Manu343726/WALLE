@@ -43,12 +43,12 @@ public abstract class WallEsMessages {
     private static ApplicationMode  _appMode;
     private static MessagesProvider _messagesProvider; 
     
-    /*
+    /**
      * Returns the application front-end mode
      */
     public static ApplicationMode getAppMode() {return _appMode;}
     
-    /*
+    /**
      * Sets the applicacion front-end mode.
      */
     public static void setAppMode(ApplicationMode appMode)
@@ -58,7 +58,7 @@ public abstract class WallEsMessages {
         if(_appMode == ApplicationMode.CONSOLE)
             _messagesProvider = new StandardMessagesProvider();
         else
-            _messagesProvider = new GUIMessagesProvider(false);
+            _messagesProvider = new GUIMessagesProvider( false );
     }
     
     /**

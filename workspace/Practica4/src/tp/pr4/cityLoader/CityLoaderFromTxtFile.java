@@ -68,11 +68,13 @@ public class CityLoaderFromTxtFile {
 		boolean isSpaceship=false;
 		boolean end = false;
                 
+                boolean error = false;
+                
                 String isSpaceShip = "";
 		
 		if(LoaderParser.parseMark(reader, "BeginPlaces"))
 		{
-			while(!end && reader.hasNext())
+			while(!end && reader.hasNext() && !error)
 			{
 				end = LoaderParser.parseMark(reader, "EndPlaces"); //Place
 				
@@ -93,7 +95,7 @@ public class CityLoaderFromTxtFile {
 						}
 					}	
 					else
-						LoaderParser.closeAndThrow(reader); //Place inicial no tiene indice cero o los indices no son consecutivos
+						error = true; //Place inicial no tiene indice cero o los indices no son consecutivos
 				
 					places.add(new Place(placeName,isSpaceship,placeDescription));
 				}
@@ -101,10 +103,13 @@ public class CityLoaderFromTxtFile {
 				placeIndex = newPlaceIndex;
 			}
 			
-			if(!end) LoaderParser.closeAndThrow(reader);
+			error = !end;
 		}
 		else
-			LoaderParser.closeAndThrow(reader);
+			error = true;
+                
+                if( error )
+                    LoaderParser.closeAndThrow(reader);
 	}
 	
 	private void loadStreets(ArrayList<Street> streets,ArrayList<Place> places, Scanner reader)throws WrongCityFormatException
@@ -116,10 +121,12 @@ public class CityLoaderFromTxtFile {
 		String streetCode="";
 		int beginIndex=0,endIndex=1;
 		boolean end = false;
+                
+                boolean error = false;
 		
 		if(LoaderParser.parseMark(reader, "BeginStreets"))
 		{
-			while(!end && reader.hasNext())
+			while(!end && reader.hasNext() && !error)
 			{
 				end = LoaderParser.parseMark(reader, "EndStreets"); //Street
 				
@@ -156,16 +163,16 @@ public class CityLoaderFromTxtFile {
 										streetCode = "????";
 								}
 								else
-									LoaderParser.closeAndThrow(reader);
+									error = true;
 							}
 							else
-								LoaderParser.closeAndThrow(reader);
+								error = true;
 						}
 						else
-							LoaderParser.closeAndThrow(reader);
+							error = true;
 					}
 					else
-						LoaderParser.closeAndThrow(reader);//Street inicial no tiene indice cero o los indices no son consecutivos
+						error = true;//Street inicial no tiene indice cero o los indices no son consecutivos
 						
 					
 					streets.add(new Street(places.get(beginIndex),streetDirection,places.get(endIndex),streetOpen,streetCode));
@@ -174,12 +181,13 @@ public class CityLoaderFromTxtFile {
 				streetIndex = newStreetIndex;
 			}
 			
-			if(!end) LoaderParser.closeAndThrow(reader);
+			error = !end;
 		}
 		else
-			LoaderParser.closeAndThrow(reader);
+			error = true;
 		
-		end=end;
+                if( error )
+                    LoaderParser.closeAndThrow( reader );
 	}
 	
 	private void loadItems(ArrayList<Place> places,Scanner reader) throws WrongCityFormatException

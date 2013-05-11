@@ -10,7 +10,7 @@ package tp.pr4;
  * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public abstract class MessagesProvider {
-    /*
+    /**
      * Outputs an error message
      * @param message A string containing the message
      */
@@ -19,14 +19,14 @@ public abstract class MessagesProvider {
         WriteError(message , false);
     }
     
-     /*
+     /**
      * Outputs an error message
      * @param message A string containing the message
      * @param exit If true, program will be exit after the message.
      */
     public abstract void WriteError(String message , boolean exit);
     
-    /*
+    /**
      * Outputs an info message
      * @param message A string containing the message
      * @param exit If true, program will be exit after the message.
@@ -36,7 +36,7 @@ public abstract class MessagesProvider {
         WriteInfo(message , false);
     }
     
-        /*
+     /**
      * Outputs an info message
      * @param message A string containing the message
      */

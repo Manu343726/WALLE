@@ -27,7 +27,7 @@ public class OrPredicate<T> extends Predicate<T> {
     /**
      * Applies the predicate toa given data
      * @param data
-     * @return 
+     * @return Predicate value for the data.
      */
     @Override
     public boolean apply(T data)

@@ -44,18 +44,34 @@ public class RobotEngine extends Observable{
 
     /* PUBLIC METHODS */
 
+    /**
+     * Gets WALLE's fuel ammount.
+     * @return 
+     */
     public int getFuel(){
             return _fuelAmount;
     }
 
+    /**
+     * Gets WALLE's recicled material count.
+     * @return 
+     */
     public int getRecycledMaterial(){
             return _recycledMaterial;
     }
 
+    /**
+     * Gets WALLE's heading street.
+     * @return 
+     */
     public Street getHeadingStreet(){
             return _navigation.getHeadingStreet();
     }
 
+    /**
+     * Request engine exit.
+     * @return 
+     */
     public boolean quit(){
             return _quit;
     }
@@ -87,6 +103,10 @@ public class RobotEngine extends Observable{
         _navigation.forceRefresh();
     }
     
+    /***
+     * Gets a pointer to WALLE's navigation module (HORRRRIBLE)
+     * @return 
+     */
     public NavigationModule getNavigationModule()//No me gusta nada, pero era ésto o meter todo el setup de la GUI en el constructor del robot engine ( Ver GUILauncher::launch() )
     {
         return _navigation;
@@ -180,6 +200,13 @@ public class RobotEngine extends Observable{
     public void requestQuit(){
         _quit = true;
         reportObservers();
+    }
+    
+    /**
+     * Aborts the close operation.
+     */
+    public void abortQuit(){
+        _quit = false;
     }
 
     /***
