@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Filter<T> implements Iterator<T> {
     private Predicate<T> _predicate;
-    private Iterator<T> _underlyingIterator;
+    protected Iterator<T> _underlyingIterator;
     private T _cachedValue;
     
     /**
