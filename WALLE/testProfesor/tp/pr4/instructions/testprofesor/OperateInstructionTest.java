@@ -1,5 +1,9 @@
 package tp.pr4.instructions.testprofesor;
 
+import tp.pr5.items.Garbage;
+import tp.pr5.items.CodeCard;
+import tp.pr5.items.ItemContainer;
+import tp.pr5.items.Fuel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,17 +12,16 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr4.City;
-import tp.pr4.Direction;
-import tp.pr4.NavigationModule;
-import tp.pr4.Place;
-import tp.pr4.RobotEngine;
-import tp.pr4.Street;
-import tp.pr4.instructions.Instruction;
-import tp.pr4.instructions.OperateInstruction;
-import tp.pr4.instructions.exceptions.InstructionExecutionException;
-import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
-import tp.pr4.items.*;
+import tp.pr5.City;
+import tp.pr5.Direction;
+import tp.pr5.NavigationModule;
+import tp.pr5.Place;
+import tp.pr5.RobotEngine;
+import tp.pr5.Street;
+import tp.pr5.instructions.Instruction;
+import tp.pr5.instructions.OperateInstruction;
+import tp.pr5.instructions.exceptions.InstructionExecutionException;
+import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.testprofesor.MockItem;
 import tp.pr4.testprofesor.MockCodeCard;
 import tp.pr4.testprofesor.MockPlace;

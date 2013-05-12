@@ -1,11 +1,11 @@
 package tp.pr4.testprofesor;
 
-import tp.pr4.City;
-import tp.pr4.Direction;
-import tp.pr4.Interpreter;
-import tp.pr4.Place;
-import tp.pr4.RobotEngine;
-import tp.pr4.Street;
+import tp.pr5.City;
+import tp.pr5.Direction;
+import tp.pr5.Interpreter;
+import tp.pr5.Place;
+import tp.pr5.RobotEngine;
+import tp.pr5.Street;
 
 public class MockRobotEngine extends RobotEngine {
 	

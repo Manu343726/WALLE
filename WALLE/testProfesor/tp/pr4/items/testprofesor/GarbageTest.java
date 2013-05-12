@@ -8,9 +8,9 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr4.Direction;
-import tp.pr4.RobotEngine;
-import tp.pr4.items.Garbage;
+import tp.pr5.Direction;
+import tp.pr5.RobotEngine;
+import tp.pr5.items.Garbage;
 import tp.pr4.testprofesor.MockCity;
 
 public class GarbageTest {

@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr4.items.Item;
-import tp.pr4.Place;
+import tp.pr5.items.Item;
+import tp.pr5.Place;
 import tp.pr4.items.testprofesor.MockItem;
 
 public class PlaceTest {

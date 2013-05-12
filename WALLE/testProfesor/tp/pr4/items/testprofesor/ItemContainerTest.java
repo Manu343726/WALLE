@@ -10,8 +10,8 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr4.items.Item;
-import tp.pr4.items.ItemContainer;
+import tp.pr5.items.Item;
+import tp.pr5.items.ItemContainer;
 
 public class ItemContainerTest {
 

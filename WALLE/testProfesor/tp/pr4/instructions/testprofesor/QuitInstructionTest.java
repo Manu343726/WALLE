@@ -7,10 +7,10 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr4.instructions.QuitInstruction;
-import tp.pr4.instructions.Instruction;
-import tp.pr4.instructions.exceptions.InstructionExecutionException;
-import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr5.instructions.QuitInstruction;
+import tp.pr5.instructions.Instruction;
+import tp.pr5.instructions.exceptions.InstructionExecutionException;
+import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.testprofesor.MockRobotEngine;
 
 

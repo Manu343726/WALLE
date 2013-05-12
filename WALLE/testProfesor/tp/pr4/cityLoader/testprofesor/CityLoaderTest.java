@@ -7,8 +7,8 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import tp.pr4.cityLoader.CityLoaderFromTxtFile;
-import tp.pr4.cityLoader.cityLoaderExceptions.WrongCityFormatException;
+import tp.pr5.cityLoader.CityLoaderFromTxtFile;
+import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
 
 public class CityLoaderTest {

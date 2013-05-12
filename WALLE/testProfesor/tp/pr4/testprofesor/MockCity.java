@@ -1,7 +1,7 @@
 package tp.pr4.testprofesor;
 
-import tp.pr4.City;
-import tp.pr4.Street;
+import tp.pr5.City;
+import tp.pr5.Street;
 
 public class MockCity extends City {
 

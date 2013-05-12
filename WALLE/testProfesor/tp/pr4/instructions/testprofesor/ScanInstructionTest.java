@@ -6,13 +6,13 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp.pr4.NavigationModule;
-import tp.pr4.RobotEngine;
-import tp.pr4.instructions.Instruction;
-import tp.pr4.instructions.ScanInstruction;
-import tp.pr4.instructions.exceptions.InstructionExecutionException;
-import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
-import tp.pr4.items.ItemContainer;
+import tp.pr5.NavigationModule;
+import tp.pr5.RobotEngine;
+import tp.pr5.instructions.Instruction;
+import tp.pr5.instructions.ScanInstruction;
+import tp.pr5.instructions.exceptions.InstructionExecutionException;
+import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
+import tp.pr5.items.ItemContainer;
 import tp.pr4.items.testprofesor.MockItem;
 import tp.pr4.testprofesor.MockRobotEngine;
 

@@ -1,8 +1,8 @@
 package tp.pr4.items.testprofesor;
 
-import tp.pr4.items.Item;
-import tp.pr4.NavigationModule;
-import tp.pr4.RobotEngine;
+import tp.pr5.items.Item;
+import tp.pr5.NavigationModule;
+import tp.pr5.RobotEngine;
 
 public class MockItem extends Item {
 	public static final String DEF_NAME = "MockItem";

@@ -1,6 +1,6 @@
 package tp.pr4.testprofesor;
 
-import tp.pr4.Place;
+import tp.pr5.Place;
 
 public class MockPlace extends Place {
 	public static final String DEF_NAME = "MockPlaceName";
