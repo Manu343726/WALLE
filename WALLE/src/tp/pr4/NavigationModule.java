@@ -1,11 +1,10 @@
 package tp.pr4;
 
-import java.util.Observable;
-
-
+import tp.pr4.utils.events.WALLE.NavigationModuleChangedEventArgs;
 import tp.pr4.gui.window.NavigationPanel;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.items.Item;
+import tp.pr4.utils.events.*;
 
 /***CLASS NAVIGATION MODULE***/
 /**
@@ -17,7 +16,7 @@ import tp.pr4.items.Item;
  *  @author Laura María de Castro & Manuel Sánchez Pérez
  */
 
-public class NavigationModule extends Observable{	
+public class NavigationModule extends Event<NavigationModuleChangedEventArgs>{	
     private City      _city;
     private Place     _currentPlace;
     private Direction _currentDirection;
@@ -121,8 +120,7 @@ public class NavigationModule extends Observable{
      */
     public void reportObservers(NavigationModuleChangedEventArgs args)
     {
-        setChanged();
-        notifyObservers(args);
+        this.RaiseEvent(args);
     }
     
      /***

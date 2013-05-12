@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 
 import tp.pr4.RobotEngine;
 import tp.pr4.gui.driver.RobotDriver;
+import tp.pr4.utils.events.*;
+import tp.pr4.utils.events.WALLE.*;
 
 
 /**
@@ -45,7 +47,8 @@ import tp.pr4.gui.driver.RobotDriver;
  */
 
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame implements InterfaceWindow{
+public class MainWindow extends JFrame implements InterfaceWindow,
+                                                  EventHandler<RobotEngineChangeEventArgs>{
 	
 	private RobotEngine _robot;
 	
@@ -84,6 +87,8 @@ public class MainWindow extends JFrame implements InterfaceWindow{
      */
 	public void initMainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
 		_robot = robot;
+                _robot.AddHandler( robotPanel );
+                _robot.AddHandler( this );
 		
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,17 +138,18 @@ public class MainWindow extends JFrame implements InterfaceWindow{
 	 * @param arg contains the argument passed from the model
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
-	public void update(Observable o, Object arg) {
-		if(_robot.quit()){
-			if(JOptionPane.showConfirmDialog(null, "¿Close aplication?") == JOptionPane.YES_OPTION)
-				System.exit(0);	
+        public void update(Observable o, Object arg) {
+	}
+        
+        @Override
+        public void update(EventSender sender , RobotEngineChangeEventArgs args)
+        {
+            if( args.getChangeType() == RobotEngineChangeType.QUIT_REQUESTED )
+                if(JOptionPane.showConfirmDialog(null, "¿Close aplication?") == JOptionPane.YES_OPTION)
+                            System.exit(0);	
                         else
                             _robot.abortQuit();
-		}
-		else{
-			_robotPanel.update(o, arg);
-		}
-	}
+        }
 	
 
 }

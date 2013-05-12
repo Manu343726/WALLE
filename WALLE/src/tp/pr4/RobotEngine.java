@@ -1,19 +1,21 @@
 package tp.pr4;
 
-
-import java.util.Observable;
-import java.util.Observer;
+import tp.pr4.utils.events.WALLE.ItemContainerChangeEventArgs;
+import tp.pr4.utils.events.WALLE.NavigationModuleChangedEventArgs;
 import java.util.Scanner;
 
 import tp.pr4.instructions.Instruction;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
-import tp.pr4.items.ItemContainer;
+import tp.pr4.items.*;
+
+import tp.pr4.utils.events.*;
+import tp.pr4.utils.events.WALLE.*;
 
 /***CLASS NAVIGATION MODULE***/
 /***
  * Represents the simulation engine. It process and execute user instructions.
  */
-public class RobotEngine extends Observable{
+public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
     private int              _recycledMaterial;
     private int              _fuelAmount;
     private NavigationModule _navigation;
@@ -80,18 +82,18 @@ public class RobotEngine extends Observable{
      * Adds an observer to the set of observers for the enine items container.
      * @param o Pointer to the observer.
      */
-    public void addItemsObserver(Observer o)
+    public void addItemsObserver(EventHandler<ItemContainerChangeEventArgs> handler)
     {
-        _items.addObserver(o);
+        _items.AddHandler( handler );
     }
     
      /***
      * Adds an observer to the set of observers for the enine navigation module.
      * @param o Pointer to the observer.
      */
-    public void addNavigationObserver(Observer o)
+    public void addNavigationObserver(EventHandler<NavigationModuleChangedEventArgs> handler)
     {
-        _navigation.addObserver(o);
+        _navigation.AddHandler( handler );
     }
     
     /***
@@ -99,7 +101,9 @@ public class RobotEngine extends Observable{
      */
     public void forceRefresh()
     {
-        reportObservers();
+        this.RaiseEvent( new RobotEngineChangeEventArgs( RobotEngineChangeType.FUEL_CHANGE     , _fuelAmount ) );
+        this.RaiseEvent( new RobotEngineChangeEventArgs( RobotEngineChangeType.MATERIAL_CHANGE , _recycledMaterial ) );
+        
         _navigation.forceRefresh();
     }
     
@@ -110,6 +114,15 @@ public class RobotEngine extends Observable{
     public NavigationModule getNavigationModule()//No me gusta nada, pero era ésto o meter todo el setup de la GUI en el constructor del robot engine ( Ver GUILauncher::launch() )
     {
         return _navigation;
+    }
+    
+    /***
+     * Gets a pointer to WALLE's items container (HORRRRIBLE)
+     * @return 
+     */
+    public ItemContainer getItemContainer()//No me gusta nada, pero era ésto o meter todo el setup de la GUI en el constructor del robot engine ( Ver GUILauncher::launch() )
+    {
+        return _items;
     }
 
     /**
@@ -175,7 +188,7 @@ public class RobotEngine extends Observable{
         if(_fuelAmount < 0)
             _fuelAmount = 0;
 
-        reportObservers( _fuelAmount == 0);
+        this.RaiseEvent( new RobotEngineChangeEventArgs(RobotEngineChangeType.FUEL_CHANGE, _fuelAmount) );
     }
 
     /**
@@ -184,7 +197,7 @@ public class RobotEngine extends Observable{
     */
     public void addRecycledMaterial(int weight){
         _recycledMaterial += weight;
-        reportObservers();
+        this.RaiseEvent( new RobotEngineChangeEventArgs(RobotEngineChangeType.MATERIAL_CHANGE,_recycledMaterial));
     }
 
     /**
@@ -199,7 +212,7 @@ public class RobotEngine extends Observable{
     */
     public void requestQuit(){
         _quit = true;
-        reportObservers();
+        this.RaiseEvent( new RobotEngineChangeEventArgs(RobotEngineChangeType.QUIT_REQUESTED, RobotEngineChangeEventArgs.UNMEANING_VALUE));
     }
     
     /**
@@ -207,23 +220,6 @@ public class RobotEngine extends Observable{
      */
     public void abortQuit(){
         _quit = false;
-    }
-
-    /***
-     * Raises change event.
-     * @param outOfFuel Specifies if the robot is out of fuel ( See NavigationPanel::update() )
-     */
-    private void reportObservers(boolean outOfFuel){
-        setChanged();
-        notifyObservers(outOfFuel);
-    }
-    
-    /***
-     * Raises change event
-     */
-    private void reportObservers()
-    {
-        reportObservers(false);
     }
 
     /**

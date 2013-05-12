@@ -1,5 +1,7 @@
 package tp.pr4.gui.window;
 
+import tp.pr4.utils.events.WALLE.*;
+import tp.pr4.utils.events.*;
 import javax.swing.ListSelectionModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,11 +14,11 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
-import tp.pr4.RobotEngine;
 import tp.pr4.items.*;
 
 import java.util.*;
 import javax.swing.JScrollPane;
+import org.w3c.dom.events.Event;
 import tp.pr4.WallEsMessages;
 
 
@@ -29,46 +31,24 @@ import tp.pr4.WallEsMessages;
  *
  */
 @SuppressWarnings("serial")
-public class RobotPanel extends JPanel implements InterfaceWindow{
+public class RobotPanel extends JPanel implements InterfaceWindow,
+                                                  EventHandler<RobotEngineChangeEventArgs>{
 	
 	/**
 	 * This class is used as model of the table that we're going to use as inventory
 	 * @author Laura María de Castro & Manuel Sánchez Pérez
 	 *
 	 */
-    class MyTableModel extends AbstractTableModel{
-        /**
-         * Table model data.
-         */
-        class TableData implements Comparable
-        {
-            String _id;
-            String _description;
-            
-            public String getId() { return _id; }
-            public String getDescription() { return _description; }
-            
-            public TableData(Item item)
-            {
-                _id = item.getId();
-                _description = item.getDescription();
-            }
-            
-            @Override
-            public int compareTo(Object other)
-            {
-                return _id.compareToIgnoreCase( ((TableData)other).getId());
-            }
-        }
-        
-        
+    class MyTableModel extends AbstractTableModel implements EventHandler<ItemContainerChangeEventArgs>{    
+    
         private String[]   _columnNames = {"Id", "Description"};
         
-        Collection<TableData> _data;
+        ItemContainer _container;
         
-        public MyTableModel()
+        public MyTableModel( ItemContainer container )
         {
-            _data = new TreeSet<>();
+            _container = container;
+            _container.AddHandler(this);
         }
 
         @Override
@@ -78,7 +58,7 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
 
         @Override
         public int getRowCount(){
-                return _data.size();
+                return _container.numberOfItems();
         }
 
         @Override
@@ -89,34 +69,18 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
         @Override
         public Object getValueAt(int row, int col){
             if(col == 0)
-                return ((TableData)_data.toArray()[row]).getId();
+                return _container.getItem(row).getId();
             else
-                return ((TableData)_data.toArray()[row]).getDescription();      
+                return _container.getItem(row).getDescription();      
         }
         
-        /**
-         * Adds item data to the table.
-         * @param item Item to be added.
-         */
-        public void addData(Item item)
+        @Override
+        public void update(EventSender sender , ItemContainerChangeEventArgs args)
         {
-            _data.add( new TableData( item ) );
-            fireTableDataChanged();
-        }
-        
-        /**
-         * Removes data of a given Item.
-         * @param item Item to be removed.
-         * @return true if the operation success (The item has data in the table). False in other case.
-         */
-        public boolean removeData(Item item)
-        {
-            boolean result = _data.remove( new TableData( item ) );
-            
-            if( result )
-                fireTableDataChanged();
-            
-            return result;
+            if(args.getChangeType() == ItemContainerChangeType.ITEM_ADDED)
+                this.fireTableRowsInserted(args.getItemIndex() , args.getItemIndex());
+            else if( args.getChangeType() == ItemContainerChangeType.ITEM_DELETED )
+                this.fireTableRowsDeleted(args.getItemIndex() , args.getItemIndex());           
         }
     }
 
@@ -150,26 +114,26 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
 	/**
 	 * Initializes the panel without driver
 	 */
-    public RobotPanel(){
-            initRobotPanel();
+    public RobotPanel( ItemContainer items ){
+            initRobotPanel( items );
     }
 
 	/**
 	 * Initializes the panel with driver
 	 * @param driver contains the driver in charge of the panel.
 	 */
-    public RobotPanel(EventListener driver){
-            initRobotPanel();
+    public RobotPanel(EventListener driver , ItemContainer items ){
+            initRobotPanel( items );
             setDriver(driver);
     }
 
     /**
      * Initializes all panel's components and set them correctly
      */
-    public void initRobotPanel(){
+    public void initRobotPanel(ItemContainer items ){
         this.setBorder(new TitledBorder("Robot info"));
 
-        _tableModel = new MyTableModel();
+        _tableModel = new MyTableModel( items );
         _fuelLevelLabel = new JLabel();
         _recycledMaterialLabel = new JLabel();
 
@@ -215,28 +179,17 @@ public class RobotPanel extends JPanel implements InterfaceWindow{
 	 */
     @Override
     public void update(Observable o, Object arg) {
-        if( arg instanceof ItemContainerChangeEventArgs)
-        {
-            ItemContainerChangeEventArgs changeData = (ItemContainerChangeEventArgs)arg;
-            
-            if(changeData.getChangeType() == ItemContainerChangeType.ITEM_ADDED)
-            {//Pick
-                _tableModel.addData( changeData.getItem() );//Ya se encarga el tableModel de poner todo bonito...
-            }
-            else
-            {//Drop
-                _tableModel.removeData(  changeData.getItem() );
-            }
-        }
-        else
-        {
-            if(!(boolean)arg)
-            {//Move, Turn
-                _fuelLevelLabel.setText("Fuel: " + ((RobotEngine) o).getFuel());
-                _recycledMaterialLabel.setText("Recycled: " + ((RobotEngine) o).getRecycledMaterial());
-            }
+
+    }
+    
+    public void update(EventSender sender , RobotEngineChangeEventArgs args)
+    {
+        if( args.getChangeType() == RobotEngineChangeType.FUEL_CHANGE )
+            if(args.getValue() > 0)
+                _fuelLevelLabel.setText("Fuel: " + args.getValue());
             else
                 WallEsMessages.messagesProvider().WriteError( WallEsMessages.NOFUEL , true);
-        }
+        else if( args.getChangeType() == RobotEngineChangeType.MATERIAL_CHANGE )
+            _recycledMaterialLabel.setText("Recycled: " + args.getValue());
     }
 }

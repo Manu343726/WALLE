@@ -14,8 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import tp.pr4.Direction;
-import tp.pr4.NavigationModuleChangeType;
-import tp.pr4.NavigationModuleChangedEventArgs;
+import tp.pr4.utils.events.WALLE.*;
+import tp.pr4.utils.events.*;
 import tp.pr4.Place;
 import tp.pr4.WallEsMessages;
 import tp.pr4.utils.*;
@@ -34,7 +34,8 @@ import tp.pr4.utils.*;
  *
  */
 @SuppressWarnings("serial")
-public class NavigationPanel extends JPanel implements InterfaceWindow{
+public class NavigationPanel extends JPanel implements InterfaceWindow,
+                                                       EventHandler<NavigationModuleChangedEventArgs>{
 
     private int row; //Current row
     private int col; //Current column
@@ -164,8 +165,12 @@ public class NavigationPanel extends JPanel implements InterfaceWindow{
 	 */
     @Override
     public void update(Observable o, Object arg) {
-        NavigationModuleChangedEventArgs args = (NavigationModuleChangedEventArgs) arg;
 
+    }
+    
+    @Override
+    public void update(EventSender sender , NavigationModuleChangedEventArgs args)
+    {
         if( args.getChangeType() == NavigationModuleChangeType.CHANGE_CURRENTDIRECTION ) //Has happened a turn instruction
             labelRobotHeading.setIcon(headingIcons.get( args.getCurrentDirection() ));
         else if( args.getChangeType() == NavigationModuleChangeType.CHANGE_CURRENTPLACE )//Has happened a move instruction

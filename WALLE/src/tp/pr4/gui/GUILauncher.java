@@ -24,14 +24,13 @@ public abstract class GUILauncher {
     public static void launch(RobotEngine engine)
     {
         InstructionsPanel instructionsPanel = new InstructionsPanel();
-        RobotPanel robotPanel = new RobotPanel();
+        RobotPanel robotPanel = new RobotPanel( engine.getItemContainer() );
         NavigationPanel navigationPanel = new NavigationPanel();
         RobotDriver driver = new RobotDriver( engine , engine.getNavigationModule() /* dolor */ , navigationPanel , instructionsPanel , robotPanel);
         MainWindow window = new MainWindow( engine , robotPanel , navigationPanel , instructionsPanel , driver);
 
-        engine.addObserver( window );
-        engine.addItemsObserver( robotPanel );
-        engine.addNavigationObserver( navigationPanel );
+        engine.AddHandler(window );
+        engine.addNavigationObserver(navigationPanel );
 
         engine.forceRefresh();
         

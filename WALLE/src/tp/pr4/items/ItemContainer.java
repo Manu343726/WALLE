@@ -1,14 +1,18 @@
 package tp.pr4.items;
 
+import tp.pr4.utils.events.WALLE.ItemContainerChangeEventArgs;
+import tp.pr4.utils.events.WALLE.ItemContainerChangeType;
 import tp.pr4.Interpreter;
 import java.util.*;
+import tp.pr4.utils.events.*;
+import tp.pr4.utils.events.WALLE.*;
 
 /**
  * This class represents a WALLE's item container
  * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
-public class ItemContainer extends Observable{
+public class ItemContainer extends Event<ItemContainerChangeEventArgs>{
 	private TreeMap<String,Item> _itemCollection;
 	
 	/**
@@ -32,7 +36,7 @@ public class ItemContainer extends Observable{
                 _itemCollection.put(item.getId(),item);
             
             if(result)
-                raiseUpdateEvent( new ItemContainerChangeEventArgs(ItemContainerChangeType.ITEM_ADDED, item ) );
+                this.RaiseEvent( new ItemContainerChangeEventArgs(ItemContainerChangeType.ITEM_ADDED, item , indexOf( item.getId() )) );
             
             return result;
 	}
@@ -58,6 +62,21 @@ public class ItemContainer extends Observable{
 	public Item getItem(String id){
             return _itemCollection.get(id);
 	}
+        
+        /**
+	 * Gets a item from the container
+	 * @param index item index
+	 * @return True only if the container contains the ithem. False in other case.
+	 */
+        public Item getItem( int index ) throws NoSuchElementException
+        {
+            return (Item)_itemCollection.values().toArray()[index];
+        }
+        
+        public int indexOf(String id)
+        {
+            return Arrays.asList( _itemCollection.keySet().toArray() ).indexOf(id);
+        }
 	
 	/**
 	 * Returns the container size
@@ -73,10 +92,11 @@ public class ItemContainer extends Observable{
 	 * @return An Item instance. Retuns null if the container not contains any item with these id.
 	 */
 	public Item pickItem(String id){
+            int index = indexOf( id );
             Item result = _itemCollection.remove(id);
             
             if(result != null)
-                raiseUpdateEvent( new ItemContainerChangeEventArgs(ItemContainerChangeType.ITEM_DELETED, result ) );
+                this.RaiseEvent( new ItemContainerChangeEventArgs(ItemContainerChangeType.ITEM_DELETED, result , index ) );
             
             return result;
 	}
@@ -94,14 +114,4 @@ public class ItemContainer extends Observable{
 		
 		return words;
 	}
-        
-        /**
-         * Notifies a container change
-         * @param args Event argumments
-         */
-        private void raiseUpdateEvent(ItemContainerChangeEventArgs args)
-        {
-            setChanged();
-            notifyObservers(args);
-        }
 }
