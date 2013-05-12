@@ -20,6 +20,8 @@ import tp.pr5.utils.RemoveableFilter;
  * 
  * @remarks This class is a specialitation of Event class for non-args events. Java generics has not "template specialitation"-like feature (Java generics are
  * basically syntactic sugar). This makes that this class is a copy-paste based class... 
+ *
+ * Based on cpp_lib32 high-level events implementation: https://github.com/Manu343726/cpp_lib32/blob/BigRefactoring/code/headers/dl32Events.h
  */
 public class NonArgsEvent implements EventSender{
      private List<NonArgsEventHandler> _handlers;

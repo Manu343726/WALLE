@@ -106,6 +106,7 @@ public class NavigationPanel extends JPanel implements InterfaceWindow,
 	 *  of the view.
 	 * @param driver contains the driver in charge of the view.
 	 */
+    @Override
     public void setDriver(EventListener driver){
             for(int i = 0; i < 11; i++){
                     for(int j = 0; j < 11; j++){

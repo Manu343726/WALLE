@@ -18,6 +18,8 @@ import java.util.List;
  * 
  * @author
  * Manu343726
+ * 
+ * Based on cpp_lib32 high-level events implementation: https://github.com/Manu343726/cpp_lib32/blob/BigRefactoring/code/headers/dl32Events.h
  */
 public class Event<ARGS> implements EventSender{
     private List<EventHandler<ARGS>> _handlers;
