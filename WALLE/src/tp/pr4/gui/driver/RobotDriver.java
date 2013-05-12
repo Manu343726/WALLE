@@ -14,7 +14,7 @@ import java.util.EventObject;
 import tp.pr4.Interpreter;
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
-import tp.pr4.WallEsMessages;
+import tp.pr4.messaging.WallEsMessages;
 import tp.pr4.gui.window.InstructionsPanel;
 import tp.pr4.gui.window.NavigationPanel;
 import tp.pr4.gui.window.PlaceCell;

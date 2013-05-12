@@ -1,6 +1,6 @@
 package tp.pr4.instructions.exceptions;
 
-import tp.pr4.WallEsMessages;
+import tp.pr4.messaging.WallEsMessages;
 
 @SuppressWarnings("serial")
 /**

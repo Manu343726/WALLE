@@ -2,7 +2,7 @@ package tp.pr4.instructions;
 
 import tp.pr4.NavigationModule;
 import tp.pr4.RobotEngine;
-import tp.pr4.WallEsMessages;
+import tp.pr4.messaging.WallEsMessages;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;
 import tp.pr4.instructions.exceptions.WrongInstructionFormatException;
 import tp.pr4.items.Item;

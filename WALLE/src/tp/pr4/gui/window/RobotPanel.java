@@ -19,7 +19,7 @@ import tp.pr4.items.*;
 import java.util.*;
 import javax.swing.JScrollPane;
 import org.w3c.dom.events.Event;
-import tp.pr4.WallEsMessages;
+import tp.pr4.messaging.WallEsMessages;
 
 
 /**

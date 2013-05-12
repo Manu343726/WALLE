@@ -1,5 +1,6 @@
 package tp.pr4;
 
+import tp.pr4.messaging.WallEsMessages;
 import tp.pr4.utils.events.WALLE.NavigationModuleChangedEventArgs;
 import tp.pr4.gui.window.NavigationPanel;
 import tp.pr4.instructions.exceptions.InstructionExecutionException;

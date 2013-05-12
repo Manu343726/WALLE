@@ -1,6 +1,7 @@
 
 package tp.pr4;
 
+import tp.pr4.messaging.WallEsMessages;
 import java.io.FileInputStream;
 
 import java.io.FileNotFoundException;

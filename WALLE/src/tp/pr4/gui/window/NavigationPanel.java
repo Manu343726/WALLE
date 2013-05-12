@@ -17,7 +17,7 @@ import tp.pr4.Direction;
 import tp.pr4.utils.events.WALLE.*;
 import tp.pr4.utils.events.*;
 import tp.pr4.Place;
-import tp.pr4.WallEsMessages;
+import tp.pr4.messaging.WallEsMessages;
 import tp.pr4.utils.*;
 
 

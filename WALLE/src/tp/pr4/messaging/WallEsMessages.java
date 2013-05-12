@@ -1,4 +1,6 @@
-package tp.pr4;
+package tp.pr4.messaging;
+
+import tp.pr4.ApplicationMode;
 
 /***CLASS WALLES MESSAGES***/
 /**
