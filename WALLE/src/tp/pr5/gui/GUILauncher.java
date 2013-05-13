@@ -17,7 +17,7 @@ import tp.pr5.gui.window.RobotPanel;
  * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public abstract class GUILauncher {
-    /***
+    /**
      * Launches the application GUI
      * @param engine Pointer to the game model.
      */
@@ -29,8 +29,8 @@ public abstract class GUILauncher {
         RobotDriver driver = new RobotDriver( engine , engine.getNavigationModule() /* dolor */ , navigationPanel , instructionsPanel , robotPanel);
         MainWindow window = new MainWindow( engine , robotPanel , navigationPanel , instructionsPanel , driver);
 
-        engine.AddHandler(window );
-        engine.addNavigationObserver(navigationPanel );
+        engine.AddHandler( window );
+        engine.addNavigationObserver( navigationPanel );
 
         engine.forceRefresh();
         

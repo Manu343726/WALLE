@@ -186,6 +186,7 @@ public class RobotPanel extends JPanel implements InterfaceWindow,
 
     }
     
+    @Override
     public void update(EventSender sender , RobotEngineChangeEventArgs args)
     {
         if( args.getChangeType() == RobotEngineChangeType.FUEL_CHANGE )
