@@ -1,5 +1,7 @@
 package tp.pr5.messaging;
 
+import tp.pr5.gui.ConsoleAndGUIMessagesProvider;
+import tp.pr5.gui.GUIMessagesProvider;
 import tp.pr5.ApplicationMode;
 
 /***CLASS WALLES MESSAGES***/

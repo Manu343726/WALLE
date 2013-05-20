@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp.pr5.messaging;
+package tp.pr5.gui;
 
 import javax.swing.JOptionPane;
+import tp.pr5.messaging.MessagesProvider;
 
 /**
  * Represents a message provider that uses a message dialog.

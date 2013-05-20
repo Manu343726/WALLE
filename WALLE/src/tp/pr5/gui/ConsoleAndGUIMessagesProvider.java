@@ -2,7 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp.pr5.messaging;
+package tp.pr5.gui;
+
+import tp.pr5.messaging.MessagesProvider;
+import tp.pr5.messaging.MessagesProvider;
+import tp.pr5.messaging.StandardMessagesProvider;
+import tp.pr5.messaging.StandardMessagesProvider;
 
 /**
  * This class provides a message provider that executes both modes, GUI and console.

@@ -25,7 +25,7 @@ import tp.pr5.gui.window.RobotPanel;
  * @author Laura María de Castro Saturio , Manuel Sánchez Pérez
  *
  */
-public class RobotDriver implements ActionListener{
+public class GUIController implements ActionListener{
 
 	private RobotEngine _engine;
 	private NavigationModule _nav;
@@ -36,7 +36,7 @@ public class RobotDriver implements ActionListener{
         /**
          * Default ctor.
          */
-	public RobotDriver(){
+	public GUIController(){
 		this(null, null, null, null,null);
 	}
 	
@@ -48,7 +48,7 @@ public class RobotDriver implements ActionListener{
          * @param instructions GUI instructions panel.
          * @param robotPanel  GUI robot panel.
          */
-	public RobotDriver(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions, RobotPanel robotPanel){
+	public GUIController(RobotEngine eng, NavigationModule nav, NavigationPanel navPanel, InstructionsPanel instructions, RobotPanel robotPanel){
 		this.setModel(eng, nav, navPanel, instructions, robotPanel);
 	}
 	

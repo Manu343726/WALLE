@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 
 
 import tp.pr5.RobotEngine;
-import tp.pr5.gui.driver.RobotDriver;
+import tp.pr5.gui.driver.GUIController;
 
 
 /**
@@ -78,7 +78,7 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 	 * Initializes the view with driver
 	 * @param driver contains the driver in charge of the view.
 	 */
-	public MainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, RobotDriver driver){
+	public MainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, GUIController driver){
 		super("WALL-E The garbage collector");
 		initMainWindow(robot, robotPanel, navigationPanel, instPanel);
 		setDriver(driver);
