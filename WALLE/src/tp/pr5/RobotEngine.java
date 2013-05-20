@@ -158,27 +158,9 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
     /**
      * Starts the robot engine. Gets user instructions, processes the instructions and makes the necessary changes
      */
+    @Deprecated
     public void startEngine(){
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println(_navigation.getCurrentPlace().toString());
-
-        printRobotState();
-
-        do{
-            System.out.print(WallEsMessages.HEADER);
-
-            comunicateRobot(Interpreter.generateInstruction(sc.nextLine()));
-        }while(!_quit && !_navigation.atSpaceship() && _fuelAmount > 0);
-
-        if(_quit)
-            System.out.print(WallEsMessages.ENDAPPLICATION);
-        else if(_fuelAmount == 0)
-            System.out.print(WallEsMessages.NOFUEL);
-        else
-            System.out.print(WallEsMessages.SHIPFINDED);
-
-        sc.close();
     }
     
     /**
@@ -224,6 +206,12 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
     public void abortQuit(){
         _quit = false;
     }
+    
+    /**
+     * Checks if the game is over (Quit was requested, WALLE is at spaceship, or WALLE has not enough fuel).
+     * @return True if the game is over. False iin other case.
+     */
+    public boolean isOver() { return !(!_quit && !_navigation.atSpaceship() && _fuelAmount > 0); }
 
     /**
     * It executes an instruction. 
