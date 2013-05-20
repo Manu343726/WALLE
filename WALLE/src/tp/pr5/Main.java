@@ -95,7 +95,7 @@ public class Main {
 
                         engine = new RobotEngine(city , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION); //Sets up the engine
 
-                        if(appMode == ApplicationMode.GUI)
+                        if(appMode == ApplicationMode.GUI || appMode == ApplicationMode.BOTH)
                             GUILauncher.launch( engine );
                         else
                             engine.startEngine();

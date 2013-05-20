@@ -12,11 +12,13 @@ package tp.pr5;
 public enum ApplicationMode {
     CONSOLE,       ///< App uses standard output to output messages.
     GUI,           ///< App uses a dialog box to output messages.
+    BOTH,          ///< App uses standard output and dialog boxes to display messages,
     UNKNOWN,       ///< Unknown value.
     NOT_SPECIFIED; ///< App front-end mode not speficied.
     
     public static final String PARSE_STRING_CONSOLE = "console";
     public static final String PARSE_STRING_GUI     = "swing";
+    public static final String PARSE_STRING_BOTH    = "both";
     
     /**
      * Parses a string to a ApplicationMode enum value.
@@ -30,6 +32,8 @@ public enum ApplicationMode {
                 return ApplicationMode.CONSOLE;
             else if( str.equalsIgnoreCase( PARSE_STRING_GUI ) )
                 return ApplicationMode.GUI;
+            else if( str.equalsIgnoreCase( PARSE_STRING_BOTH ))
+                return ApplicationMode.BOTH;
             else
                 return ApplicationMode.UNKNOWN;
         else
@@ -40,5 +44,5 @@ public enum ApplicationMode {
      * Checks if the app front-end mode is a valid mode.
      * @return Trye if its a valid front-end mode, false in other case.
      */
-    public boolean isValid() {return this == CONSOLE || this == GUI; } 
+    public boolean isValid() {return this != UNKNOWN && this != NOT_SPECIFIED; } 
 }
