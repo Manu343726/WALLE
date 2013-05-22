@@ -4,10 +4,7 @@
  */
 package tp.pr5.console;
 
-import java.util.EventListener;
-import java.util.Observable;
 import tp.pr5.RobotEngine;
-import tp.pr5.gui.window.InterfaceWindow;
 import tp.pr5.messaging.WallEsMessages;
 import tp.pr5.utils.events.*;
 import tp.pr5.utils.events.WALLE.*;
@@ -45,6 +42,8 @@ public class ConsoleView
         @Override
         public void update(EventSender sender, NavigationModuleChangedEventArgs args) 
         {
+            System.err.println( "NavigationModule updated!!!" );
+            
             if( args.getChangeType() == NavigationModuleChangeType.CHANGE_CURRENTPLACE_EXIT )
                 WallEsMessages.messagesProvider().WriteInfo( WallEsMessages.SHIPFINDED , true);
         
@@ -61,7 +60,7 @@ public class ConsoleView
      * RobotEngineChangedEvent handler class.
      */
     private class _ItemContainerChangedHandler implements EventHandler<ItemContainerChangeEventArgs>
-    {   
+    {
         @Override
         public void update(EventSender sender, ItemContainerChangeEventArgs args) 
         {

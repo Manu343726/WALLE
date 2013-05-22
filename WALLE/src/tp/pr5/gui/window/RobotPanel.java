@@ -22,7 +22,6 @@ import javax.swing.table.AbstractTableModel;
 
 import java.util.*;
 import javax.swing.JScrollPane;
-import org.w3c.dom.events.Event;
 import tp.pr5.messaging.WallEsMessages;
 
 
