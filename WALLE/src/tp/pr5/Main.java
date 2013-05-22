@@ -10,6 +10,7 @@ import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
 import org.apache.commons.cli.*;
+import tp.pr5.console.ConsoleLauncher;
 import tp.pr5.gui.GUILauncher;
 
 /**
@@ -76,6 +77,7 @@ public class Main {
         City city;
         CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
         RobotEngine engine;
+        UserInterfaceLauncher launcher;
         
         String mapfile = cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
         ApplicationMode appMode = ApplicationMode.parse( cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_VIEWMODE ) );
@@ -96,9 +98,15 @@ public class Main {
                         engine = new RobotEngine(city , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION); //Sets up the engine
 
                         if(appMode == ApplicationMode.GUI || appMode == ApplicationMode.BOTH)
-                            GUILauncher.launch( engine );
+                        {
+                            launcher = new GUILauncher();
+                            launcher.launch( engine );
+                        }
                         else
-                            engine.startEngine();
+                        {
+                            launcher = new ConsoleLauncher();
+                            launcher.launch( engine );
+                        }
                     }
                     catch(FileNotFoundException ex1){
                             System.err.println("Error reading the map file: " + mapfile + " (No existe el fichero o el directorio)");

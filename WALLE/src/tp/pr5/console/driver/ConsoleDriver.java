@@ -29,22 +29,15 @@ public class ConsoleDriver {
     {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(_navigation.getCurrentPlace().toString());
+        _engine.forceRefresh();
 
         _engine.printRobotState();
 
         do{
-            System.out.print(WallEsMessages.HEADER);
+            System.out.print( WallEsMessages.HEADER );
 
-            _engine.comunicateRobot(Interpreter.generateInstruction(sc.nextLine()));
-        }while( _engine.isOver() );
-
-        if(_quit)
-            WallEsMessages.messagesProvider().WriteInfo( WallEsMessages.ENDAPPLICATION );
-        else if(_fuelAmount == 0)
-            WallEsMessages.messagesProvider().WriteInfo( WallEsMessages.NOFUEL );
-        else
-            WallEsMessages.messagesProvider().WriteInfo( WallEsMessages.SHIPFINDED );
+            _engine.comunicateRobot( Interpreter.generateInstruction( sc.nextLine() ) );
+        }while( !_engine.isOver() );
 
         sc.close();
     }

@@ -5,6 +5,7 @@
 package tp.pr5.gui;
 
 import tp.pr5.RobotEngine;
+import tp.pr5.UserInterfaceLauncher;
 import tp.pr5.gui.driver.GUIController;
 import tp.pr5.gui.window.InstructionsPanel;
 import tp.pr5.gui.window.MainWindow;
@@ -16,12 +17,13 @@ import tp.pr5.gui.window.RobotPanel;
  * @author
  * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
-public abstract class GUILauncher {
+public class GUILauncher implements UserInterfaceLauncher {
     /**
      * Launches the application GUI
      * @param engine Pointer to the game model.
      */
-    public static void launch(RobotEngine engine)
+    @Override
+    public void launch(RobotEngine engine)
     {
         InstructionsPanel instructionsPanel = new InstructionsPanel();
         RobotPanel robotPanel = new RobotPanel( engine.getItemContainer() );
