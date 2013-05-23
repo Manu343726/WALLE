@@ -113,7 +113,7 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 		_mainPanel = new JPanel(new BorderLayout());
 		_mainPanel.add(panelAux, "North");
 		_mainPanel.add(_navPanel, "Center");
-
+                //InfoLabel al sur!!!!
 		
 		this.setContentPane(_mainPanel);
 		setVisible(true);
