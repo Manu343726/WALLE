@@ -1,17 +1,14 @@
 
 package tp.pr5;
 
-import tp.pr5.messaging.WallEsMessages;
 import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
 
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
 import org.apache.commons.cli.*;
-import tp.pr5.console.ConsoleLauncher;
-import tp.pr5.gui.GUILauncher;
+import tp.pr5.messaging.WallEsMessages;
 
 /**
  * 
@@ -69,15 +66,12 @@ public class Main {
      * Sets up the application
      * @param cmd Command line input. 
      */
-    public static int initializeApplication(String args[] , Options options) throws ParseException
+    public static int initializeApplication(String args[] , Options options) throws ParseException, FileNotFoundException
     {
         CommandLine cmd = new BasicParser().parse( options , args);
         
         int exitCode = 0;
-        City city;
         CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
-        RobotEngine engine;
-        UserInterfaceLauncher launcher;
         
         String mapfile = cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
         ApplicationMode appMode = ApplicationMode.parse( cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_VIEWMODE ) );
@@ -90,23 +84,11 @@ public class Main {
         else
         {
             if( mapfile != null )
-                if( appMode.isValid()  )
+                if( appMode.isValid() )
                     try{ 
-                        city = loader.loadCity(new FileInputStream( mapfile )); 
                         WallEsMessages.setAppMode(appMode);//Sets the application messages output mode.
 
-                        engine = new RobotEngine(city , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION); //Sets up the engine
-
-                        if(appMode == ApplicationMode.GUI || appMode == ApplicationMode.BOTH)
-                        {
-                            launcher = new GUILauncher();
-                            launcher.launch( engine , 100 );
-                        }
-                        else
-                        {
-                            launcher = new ConsoleLauncher();
-                            launcher.launch( engine );
-                        }
+                        ViewLaunchFactory.getLauncher(appMode).launch( new RobotEngine(loader.loadCity(new FileInputStream( mapfile )) , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION) , 4);   
                     }
                     catch(FileNotFoundException ex1){
                             System.err.println("Error reading the map file: " + mapfile + " (No existe el fichero o el directorio)");
