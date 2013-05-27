@@ -129,10 +129,10 @@ public class NavigationPanel extends JPanel implements InterfaceWindow,
     }
 
     
-	/**
-	 * This method is used to update the previous cell that the robot has visited
-	 * @param previousPlace contains the previous place
-	 */
+    /**
+     * This method is used to update the previous cell that the robot has visited
+     * @param previousPlace contains the previous place
+     */
     private void updatePreviousCell(final Place previousPlace)
     {
         boolean finded = false;
@@ -179,7 +179,9 @@ public class NavigationPanel extends JPanel implements InterfaceWindow,
             labelRobotHeading.setIcon(headingIcons.get( args.getCurrentDirection() ));
         else if( args.getChangeType() == NavigationModuleChangeType.CHANGE_CURRENTPLACE )//Has happened a move instruction
         {    
-            calculateCoords( args.getCurrentDirection() );
+            if(!args.getCurrentPlace().equals( args.getPreviousPlace() ) )
+                calculateCoords( args.getCurrentDirection() );
+            
             updatePreviousCell( args.getPreviousPlace() );
             cells[row][col].setCurrentPlace( args.getCurrentPlace() );
         }

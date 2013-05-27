@@ -14,4 +14,11 @@ public interface UserInterfaceLauncher {
      * @param engine Game model.
      */
     public void launch( RobotEngine engine );
+    
+    /**
+     * Launches the application user interface with the speficied engine as model.
+     * @param engine Game model.
+     * @param count Number of interfaces to launch.
+     */
+    public void launch( RobotEngine engine , int count );
 }

@@ -25,6 +25,7 @@ import javax.swing.SwingConstants;
 
 
 import tp.pr5.RobotEngine;
+import tp.pr5.gui.InfoLabelUpdater;
 import tp.pr5.gui.driver.GUIController;
 
 
@@ -52,8 +53,6 @@ import tp.pr5.gui.driver.GUIController;
 public class MainWindow extends JFrame implements InterfaceWindow,
                                                   EventHandler<RobotEngineChangeEventArgs>{
 	
-	private RobotEngine _robot;
-	
 	private Container   _mainPanel;
 	
 	private InstructionsPanel _instructionsPanel;
@@ -69,29 +68,27 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 	/**
 	 * Initializes the view without driver
 	 */
-	public MainWindow(RobotEngine robotEngine, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
+	public MainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
 		super("WALL-E The garbage collector");
-		initMainWindow(robotEngine, robotPanel, navigationPanel, instPanel);
+		initMainWindow(robotPanel, navigationPanel, instPanel);
 	}
 	
 	/**
 	 * Initializes the view with driver
 	 * @param driver contains the driver in charge of the view.
 	 */
-	public MainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, GUIController driver){
+	public MainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, GUIController driver){
 		super("WALL-E The garbage collector");
-		initMainWindow(robot, robotPanel, navigationPanel, instPanel);
+		initMainWindow(robotPanel, navigationPanel, instPanel);
 		setDriver(driver);
 	}
 	
     /**
      * Initializes all window's components and set them correctly
      */
-	public void initMainWindow(RobotEngine robot, RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
-		_robot = robot;
-                _robot.AddHandler( robotPanel );
-                _robot.AddHandler( this );
-		
+	public void initMainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
+		InfoLabelPanel info_panel = new InfoLabelPanel();
+                
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_mainPanel = this.getContentPane();
@@ -108,12 +105,15 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 		_jMenu.add(_jMenuItem);
 		_jMenuItem.setName("jMenuQuit");
 		
+                
 		JSplitPane panelAux = new JSplitPane(SwingConstants.VERTICAL, _instructionsPanel, _robotPanel);
 		
 		_mainPanel = new JPanel(new BorderLayout());
 		_mainPanel.add(panelAux, "North");
 		_mainPanel.add(_navPanel, "Center");
-                //InfoLabel al sur!!!!
+                _mainPanel.add( info_panel , "South" );
+                
+                InfoLabelUpdater.getInstance().AddHandler(info_panel);
 		
 		this.setContentPane(_mainPanel);
 		setVisible(true);
@@ -150,7 +150,7 @@ public class MainWindow extends JFrame implements InterfaceWindow,
                 if(JOptionPane.showConfirmDialog(null, "¿Close aplication?") == JOptionPane.YES_OPTION)
                             System.exit(0);	
                         else
-                            _robot.abortQuit();
+                            args.abortQuit();
         }
 	
 

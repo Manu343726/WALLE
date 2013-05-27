@@ -196,8 +196,13 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
     * Requests the end of the simulation
     */
     public void requestQuit(){
+        RobotEngineChangeEventArgs args = new RobotEngineChangeEventArgs(RobotEngineChangeType.QUIT_REQUESTED, RobotEngineChangeEventArgs.UNMEANING_VALUE);
+        
         _quit = true;
-        this.RaiseEvent( new RobotEngineChangeEventArgs(RobotEngineChangeType.QUIT_REQUESTED, RobotEngineChangeEventArgs.UNMEANING_VALUE));
+        
+        this.RaiseEvent ( args );
+        
+        _quit = !args.quitAborted();
     }
     
     /**

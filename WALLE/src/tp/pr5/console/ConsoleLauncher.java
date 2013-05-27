@@ -17,6 +17,17 @@ public class ConsoleLauncher implements UserInterfaceLauncher {
     /**
      * Launches the application user interface with the speficied engine as model.
      * @param engine Game model.
+     * @param count Number of interfaces to launch.
+     */
+    @Override
+    public void launch(RobotEngine engine , int count)
+    {
+        launch( engine );
+    }
+    
+    /**
+     * Launches the application user interface with the speficied engine as model.
+     * @param engine Game model.
      */
     @Override
     public void launch(RobotEngine engine) {

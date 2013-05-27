@@ -18,6 +18,19 @@ import tp.pr5.gui.window.RobotPanel;
  * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
 public class GUILauncher implements UserInterfaceLauncher {
+    
+    /**
+     * Launches the application user interface with the speficied engine as model.
+     * @param engine Game model.
+     * @param count Number of interfaces to launch.
+     */
+    @Override
+    public void launch(RobotEngine engine , int count)
+    {
+        for(int i = 0 ; i < count ; ++i)
+            launch( engine );
+    }
+    
     /**
      * Launches the application GUI
      * @param engine Pointer to the game model.
@@ -29,8 +42,9 @@ public class GUILauncher implements UserInterfaceLauncher {
         RobotPanel robotPanel = new RobotPanel( engine.getItemContainer() );
         NavigationPanel navigationPanel = new NavigationPanel();
         GUIController driver = new GUIController( engine , engine.getNavigationModule() /* dolor */ , navigationPanel , instructionsPanel , robotPanel);
-        MainWindow window = new MainWindow( engine , robotPanel , navigationPanel , instructionsPanel , driver);
+        MainWindow window = new MainWindow(robotPanel , navigationPanel , instructionsPanel , driver);
 
+        engine.AddHandler( robotPanel );
         engine.AddHandler( window );
         engine.addNavigationObserver( navigationPanel );
 

@@ -100,7 +100,7 @@ public class Main {
                         if(appMode == ApplicationMode.GUI || appMode == ApplicationMode.BOTH)
                         {
                             launcher = new GUILauncher();
-                            launcher.launch( engine );
+                            launcher.launch( engine , 100 );
                         }
                         else
                         {
