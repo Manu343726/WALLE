@@ -127,7 +127,7 @@ public class Main {
         int exitCode = 0;
         
         try{ exitCode = initializeApplication(  args , setupInputOptions() ); }
-        catch(ParseException ex)
+        catch(ParseException | FileNotFoundException ex)
         {
             showBadParams();
             exitCode = 1;
