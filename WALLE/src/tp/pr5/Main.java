@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import tp.pr5.cityLoader.CityLoaderFromTxtFile;
 import tp.pr5.cityLoader.cityLoaderExceptions.WrongCityFormatException;
 
+
 import org.apache.commons.cli.*;
 import tp.pr5.messaging.WallEsMessages;
 
@@ -38,6 +39,25 @@ public class Main {
     private static final String COMMANDLINE_ARGS_ARGNAME_VIEWMODE = COMMANDLINE_ARGS_VIEWMODE;
     private static final String COMMANDLINE_ARGS_ARGNAME_HELP     = COMMANDLINE_ARGS_HELP;
     
+    private static class InputArgs
+    {
+        private boolean _has_help;
+        private String _map_file;
+        private ApplicationMode _app_mode;
+        
+        public boolean hasHelp()    { return _has_help; }
+        public boolean hasMapFile() { return _map_file != null; }
+        public String mapFile()     { return _map_file; }
+        public ApplicationMode applicationMode() { return _app_mode; }
+        
+        public InputArgs(boolean has_help , String map_file , ApplicationMode app_mode)
+        {
+            _has_help = has_help;
+            _map_file = map_file;
+            _app_mode = app_mode;
+        }
+    }
+    
     /**
      * Sets up the input options set.
      * @return An instance of the Options class containing the configured command-line options. 
@@ -66,7 +86,7 @@ public class Main {
      * Sets up the application
      * @param cmd Command line input. 
      */
-    public static int initializeApplication(String args[] , Options options) throws ParseException, FileNotFoundException
+    public static InputArgs parseArgs(String args[] , Options options) throws ParseException, FileNotFoundException
     {
         CommandLine cmd = new BasicParser().parse( options , args);
         
@@ -75,47 +95,8 @@ public class Main {
         
         String mapfile = cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
         ApplicationMode appMode = ApplicationMode.parse( cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_VIEWMODE ) );
-
-        if( cmd.hasOption( COMMANDLINE_ARGS_ARGNAME_HELP ) )
-        {
-            System.out.println( "Execute this assignment with these parameters:" );
-            new HelpFormatter().printHelp( "tp.pr4.Main [-h] [-i <type>] [-m <mapfile>]", options );
-        }
-        else
-        {
-            if( mapfile != null )
-                if( appMode.isValid() )
-                    try{ 
-                        WallEsMessages.setAppMode(appMode);//Sets the application messages output mode.
-
-                        ViewLaunchFactory.getLauncher(appMode).launch( new RobotEngine(loader.loadCity(new FileInputStream( mapfile )) , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION) , 4);   
-                    }
-                    catch(FileNotFoundException ex1){
-                            System.err.println("Error reading the map file: " + mapfile + " (No existe el fichero o el directorio)");
-                            exitCode = 2;
-                    }
-                    catch(WrongCityFormatException ex2){
-                            System.err.println("Error reading the map file: " + mapfile + "(Formato incorrecto)");
-                            exitCode = 2;
-                    }
-                else
-                {
-                    if( appMode == ApplicationMode.NOT_SPECIFIED )
-                        System.err.println( "Interface not specified" );
-                    else
-                        System.err.println( "Wrong type of interface" );                
-
-                    exitCode = 1;
-                }
-            else
-            {
-                System.err.println( "Map file not specified" );
-
-                exitCode = 1;
-            }
-        }
         
-        return exitCode;
+        return new InputArgs( cmd.hasOption( COMMANDLINE_ARGS_ARGNAME_HELP ) , mapfile , appMode);
     }
     
     /**
@@ -125,9 +106,56 @@ public class Main {
      */
     public static void main(String[] args) {
         int exitCode = 0;
+        InputArgs input_args = null;
+        CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
+        Options options = setupInputOptions();
         
-        try{ exitCode = initializeApplication(  args , setupInputOptions() ); }
-        catch(ParseException | FileNotFoundException ex)
+        try
+        {
+            input_args = parseArgs(  args , setupInputOptions() ); 
+            
+            if( input_args.hasHelp() )
+            {
+                System.out.println( "Execute this assignment with these parameters:" );
+                new HelpFormatter().printHelp( "tp.pr4.Main [-h] [-i <type>] [-m <mapfile>]", options );
+            }
+            else
+            {
+                if( input_args.hasMapFile() )
+                {
+                    if( input_args.applicationMode().isValid() )
+                    {
+                        WallEsMessages.setAppMode( input_args.applicationMode() );//Sets the application messages output mode.
+
+                        ViewLaunchFactory.getLauncher( input_args.applicationMode() ).launch( new RobotEngine(loader.loadCity(new FileInputStream( input_args.mapFile() )) , loader.getInitialPlace() , RobotEngine.INITIAL_DIRECTION) , 4);   
+                    }       
+                    else
+                    {
+                        if( input_args.applicationMode() == ApplicationMode.NOT_SPECIFIED )
+                            System.err.println( "Interface not specified" );
+                        else
+                            System.err.println( "Wrong type of interface" );                
+
+                        exitCode = 1;
+                    }
+                }
+                else
+                {
+                    System.err.println( "Map file not specified" );
+
+                    exitCode = 1;
+                }  
+            }
+        }
+        catch(FileNotFoundException ex1){
+            System.err.println("Error reading the map file: " + input_args.mapFile() + " (No existe el fichero o el directorio)");
+            exitCode = 2;
+        }
+        catch(WrongCityFormatException ex2){
+            System.err.println("Error reading the map file: " + input_args.mapFile() + "(Formato incorrecto)");
+            exitCode = 2;
+        }
+        catch(ParseException ex3)
         {
             showBadParams();
             exitCode = 1;
