@@ -13,6 +13,7 @@ public class RobotEngineChangeEventArgs {
     private RobotEngineChangeType _type;
     private Integer _value; //Uso el wrapper de int para reducir el número de boxing/unboxing
     private String _message; //Mensaje para los eventos MESSAGE_POSTED
+    private boolean _abort_quit;
     
     public static int UNMEANING_VALUE = 0;
     
@@ -26,6 +27,7 @@ public class RobotEngineChangeEventArgs {
         _type = change;
         _value = value;
         _message = null;
+        _abort_quit = false;
     }
     
     /**
@@ -38,6 +40,7 @@ public class RobotEngineChangeEventArgs {
         _type = change;
         //Value guarda basura
         _message = message;
+        _abort_quit=false;
     }
     
     //NOTA: Implemento éste último constructor por extensibilidad y comodidad, pero en el engine uso el anterior por claridad y similitud con respecto al resto de llamadas a raiseEvent().
@@ -66,4 +69,14 @@ public class RobotEngineChangeEventArgs {
      * @return A string containing the message if type is RobotEngineChangeType::MESSAGE_POSTED. null otherwise.
      */
     public String getMessage() { return _message; }
+    /**
+     * Aborts quit request.
+     */
+    public void abortQuit() { _abort_quit = true; }
+    
+    /**
+     * Checks if quit request was aborted
+     * @return True if quit was aborted. False in other case.
+     */
+    public boolean quitAborted() { return _abort_quit; }
 }

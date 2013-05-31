@@ -163,6 +163,8 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
         throw new UnsupportedOperationException();
     }
     
+    public void requestStart() {}
+    
     /**
     * Adds an amount of fuel to the robot (it can be negative)
     * @param fuel Amount of fuel added to the robot
@@ -196,8 +198,13 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
     * Requests the end of the simulation
     */
     public void requestQuit(){
+        RobotEngineChangeEventArgs args = new RobotEngineChangeEventArgs(RobotEngineChangeType.QUIT_REQUESTED, RobotEngineChangeEventArgs.UNMEANING_VALUE);
+        
         _quit = true;
-        this.RaiseEvent( new RobotEngineChangeEventArgs(RobotEngineChangeType.QUIT_REQUESTED, RobotEngineChangeEventArgs.UNMEANING_VALUE));
+        
+        this.RaiseEvent ( args );
+        
+        _quit = !args.quitAborted();
     }
     
     /**
