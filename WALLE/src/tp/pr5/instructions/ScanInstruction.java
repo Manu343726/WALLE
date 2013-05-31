@@ -1,5 +1,6 @@
 package tp.pr5.instructions;
 
+import tp.pr5.Interpreter;
 import tp.pr5.NavigationModule;
 import tp.pr5.RobotEngine;
 import tp.pr5.messaging.WallEsMessages;
@@ -47,10 +48,7 @@ public class ScanInstruction implements Instruction {
 		if(_id.equals(""))
 		{
 			if(_items.numberOfItems() > 0)
-			{
-				WallEsMessages.messagesProvider().WriteInfo(WallEsMessages.IAMCARRYING);
-				WallEsMessages.messagesProvider().WriteInfo(_items.toString());
-			}
+				_engine.saySomeInfo(WallEsMessages.IAMCARRYING + Interpreter.LINE_SEPARATOR + _items.toString());
 			else
 				throw new InstructionExecutionException(WallEsMessages.INVENTORYEMPTY);
 		}

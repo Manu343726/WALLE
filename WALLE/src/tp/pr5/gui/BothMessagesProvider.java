@@ -14,7 +14,7 @@ import tp.pr5.messaging.StandardMessagesProvider;
  * @author
  * Manu343726
  */
-public class ConsoleAndGUIMessagesProvider extends MessagesProvider { 
+public class BothMessagesProvider extends MessagesProvider { 
     private GUIMessagesProvider _gui_provider;
     private StandardMessagesProvider _console_provider;
     
@@ -22,7 +22,7 @@ public class ConsoleAndGUIMessagesProvider extends MessagesProvider {
      * Ctor
      * @param showInfoMessages if is set to false, info messages are not prompted in graphical messages provider.
      */
-    public ConsoleAndGUIMessagesProvider(boolean showInfoMessages)
+    public BothMessagesProvider(boolean showInfoMessages)
     {
         _gui_provider = new GUIMessagesProvider(showInfoMessages);
         _console_provider = new StandardMessagesProvider();

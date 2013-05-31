@@ -5,10 +5,10 @@
 package tp.pr5.utils.events.WALLE;
 
 /**
- *
+ * Set of robot engine events types.
  * @author
  * Manu343726
  */
 public enum RobotEngineChangeType {
-    MATERIAL_CHANGE , FUEL_CHANGE , QUIT_REQUESTED
+    MATERIAL_CHANGE , FUEL_CHANGE , QUIT_REQUESTED , MESSAGE_POSTED
 }

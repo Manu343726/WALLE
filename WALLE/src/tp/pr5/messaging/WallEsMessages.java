@@ -1,6 +1,6 @@
 package tp.pr5.messaging;
 
-import tp.pr5.gui.ConsoleAndGUIMessagesProvider;
+import tp.pr5.gui.BothMessagesProvider;
 import tp.pr5.gui.GUIMessagesProvider;
 import tp.pr5.ApplicationMode;
 
@@ -67,7 +67,7 @@ public abstract class WallEsMessages {
             case GUI:
                 _messagesProvider = new GUIMessagesProvider( false );           break;
             case BOTH:
-                _messagesProvider = new ConsoleAndGUIMessagesProvider( false ); break;
+                _messagesProvider = new BothMessagesProvider( false ); break;
         }
     }
     

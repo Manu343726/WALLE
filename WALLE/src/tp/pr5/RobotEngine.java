@@ -160,7 +160,7 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
      */
     @Deprecated
     public void startEngine(){
-
+        throw new UnsupportedOperationException();
     }
     
     /**
@@ -227,10 +227,37 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
             try{
                     instruction.execute();
             }catch(InstructionExecutionException ex){
-                    WallEsMessages.messagesProvider().WriteError(ex.getMessage());
+                    this.saySomeError(ex.getMessage());
             }
         }
         else
-            WallEsMessages.messagesProvider().WriteError(WallEsMessages.NOTUNDERSTAND);
+            this.saySomeError(WallEsMessages.NOTUNDERSTAND);
     }
+    
+    /**
+     * Robot engine sends a message to its observers.
+     * @param message A string containing the message.
+     * @param is_an_error A flag that indicates if the message is an error message. True if it is, false if not.
+     */
+    public void saySomething(String message , boolean is_an_error)
+    {
+        if( is_an_error )
+            WallEsMessages.messagesProvider().WriteError( message );
+        else
+            WallEsMessages.messagesProvider().WriteInfo( message );
+        
+        this.RaiseEvent( new RobotEngineChangeEventArgs( RobotEngineChangeType.MESSAGE_POSTED , message ) );
+    }
+    
+    /**
+     * Robot engine sends an error message to its observers.
+     * @param message A string containing the message.
+     */
+    public void saySomeError(String message) { saySomething( message , true ); }
+    
+    /**
+     * Robot engine sends an information message to its observers.
+     * @param message A string containing the message.
+     */
+    public void saySomeInfo(String message) { saySomething( message , false ); }
 }
