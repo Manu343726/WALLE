@@ -58,6 +58,7 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 	private InstructionsPanel _instructionsPanel;
 	private RobotPanel        _robotPanel;
 	private NavigationPanel   _navPanel;
+        private InfoLabelPanel    _infoPanel;
 
 	private JMenu     _jMenu;
 	private JMenuBar  _jMenuBar;
@@ -68,27 +69,25 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 	/**
 	 * Initializes the view without driver
 	 */
-	public MainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
+	public MainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel , InfoLabelPanel infoPanel){
 		super("WALL-E The garbage collector");
-		initMainWindow(robotPanel, navigationPanel, instPanel);
+		initMainWindow(robotPanel, navigationPanel, instPanel, infoPanel);
 	}
 	
 	/**
 	 * Initializes the view with driver
 	 * @param driver contains the driver in charge of the view.
 	 */
-	public MainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel, GUIController driver){
+	public MainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel , InfoLabelPanel infoPanel, GUIController driver){
 		super("WALL-E The garbage collector");
-		initMainWindow(robotPanel, navigationPanel, instPanel);
+		initMainWindow(robotPanel, navigationPanel, instPanel,infoPanel);
 		setDriver(driver);
 	}
 	
     /**
      * Initializes all window's components and set them correctly
      */
-	public void initMainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel){
-		InfoLabelPanel info_panel = new InfoLabelPanel();
-                
+	public void initMainWindow(RobotPanel robotPanel, NavigationPanel navigationPanel, InstructionsPanel instPanel , InfoLabelPanel infoPanel){
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_mainPanel = this.getContentPane();
@@ -96,6 +95,7 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 		_instructionsPanel = instPanel;
 		_robotPanel = robotPanel;
 		_navPanel = navigationPanel;
+                _infoPanel = infoPanel;
 		
 		_jMenuBar = new JMenuBar();
 		setJMenuBar(_jMenuBar);
@@ -111,9 +111,7 @@ public class MainWindow extends JFrame implements InterfaceWindow,
 		_mainPanel = new JPanel(new BorderLayout());
 		_mainPanel.add(panelAux, "North");
 		_mainPanel.add(_navPanel, "Center");
-                _mainPanel.add( info_panel , "South" );
-                
-                InfoLabelUpdater.getInstance().AddHandler(info_panel);
+                _mainPanel.add( _infoPanel , "South" );
 		
 		this.setContentPane(_mainPanel);
 		setVisible(true);

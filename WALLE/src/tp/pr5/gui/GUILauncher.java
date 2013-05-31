@@ -7,6 +7,7 @@ package tp.pr5.gui;
 import tp.pr5.RobotEngine;
 import tp.pr5.UserInterfaceLauncher;
 import tp.pr5.gui.driver.GUIController;
+import tp.pr5.gui.window.InfoLabelPanel;
 import tp.pr5.gui.window.InstructionsPanel;
 import tp.pr5.gui.window.MainWindow;
 import tp.pr5.gui.window.NavigationPanel;
@@ -41,10 +42,12 @@ public class GUILauncher implements UserInterfaceLauncher {
         InstructionsPanel instructionsPanel = new InstructionsPanel();
         RobotPanel robotPanel = new RobotPanel( engine.getItemContainer() );
         NavigationPanel navigationPanel = new NavigationPanel();
+        InfoLabelPanel infoPanel = new InfoLabelPanel();
         GUIController driver = new GUIController( engine , engine.getNavigationModule() /* dolor */ , navigationPanel , instructionsPanel , robotPanel);
-        MainWindow window = new MainWindow(robotPanel , navigationPanel , instructionsPanel , driver);
+        MainWindow window = new MainWindow(robotPanel , navigationPanel , instructionsPanel , infoPanel , driver);
 
         engine.AddHandler( robotPanel );
+        engine.AddHandler( infoPanel );
         engine.AddHandler( window );
         engine.addNavigationObserver( navigationPanel );
 

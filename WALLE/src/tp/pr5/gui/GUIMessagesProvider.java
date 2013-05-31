@@ -37,7 +37,7 @@ public class GUIMessagesProvider extends MessagesProvider {
     {
         JOptionPane.showMessageDialog(null, message , MESSAGEBOXTITLE_ERROR , JOptionPane.ERROR_MESSAGE);
         
-        InfoLabelUpdater.getInstance().updateInfo(message);
+        //(Deprecated)InfoLabelUpdater.getInstance().updateInfo(message);
         
         if( exit )
             System.exit( 0 );
@@ -53,7 +53,7 @@ public class GUIMessagesProvider extends MessagesProvider {
     {
         if(SHOWINFOMESSAGES || exit) //Un pequeño apaño... 
         {
-            InfoLabelUpdater.getInstance().updateInfo(message);
+            //(Deprecated)InfoLabelUpdater.getInstance().updateInfo(message);
             
             JOptionPane.showMessageDialog(null, message , MESSAGEBOXTITLE_INFO , JOptionPane.INFORMATION_MESSAGE);
         

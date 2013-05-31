@@ -89,13 +89,13 @@ public class GUIController implements ActionListener{
                     if( _robotPanel.isItemSelected() )
                         _engine.comunicateRobot( Interpreter.generateInstruction( "drop " + _robotPanel.getSelectedItemId() ) );
                     else
-                        WallEsMessages.messagesProvider().WriteError("No item selected");
+                        _engine.saySomeError("No item selected");
 		}
 		else if(c.getName().equals("jButtonOperate")){
                     if( _robotPanel.isItemSelected() )
                         _engine.comunicateRobot( Interpreter.generateInstruction( "operate " + _robotPanel.getSelectedItemId() ) );
                     else
-                        WallEsMessages.messagesProvider().WriteError("No item selected");
+                        _engine.saySomeError("No item selected");
 		}
 		else if(c.getName().equals("placeCell")){
                     PlaceCell cell = (PlaceCell) c;

@@ -247,13 +247,16 @@ public class RobotEngine extends Event<RobotEngineChangeEventArgs>{
      * @param is_an_error A flag that indicates if the message is an error message. True if it is, false if not.
      */
     public void saySomething(String message , boolean is_an_error)
-    {
+    {        
+        //NOTA: Primero lanzo el evento y luego llamo al message provider. El motivo es que en modo GUI, 
+        //      el message provider abre un message box, lo que "bloquea" la ejecución hasta que dicha message box es cerrada.
+        //      Ésto provoca que el info label se actualice después de cerrar el message box, lo que me resultaba algo molesto. (ES UNA MERA CUESTIÓN ESTÉTICA, DE ÉSTA MANERA AMBOS APARECEN "AL MISMO TIEMPO")
+        this.RaiseEvent( new RobotEngineChangeEventArgs( RobotEngineChangeType.MESSAGE_POSTED , message ) );
+        
         if( is_an_error )
             WallEsMessages.messagesProvider().WriteError( message );
         else
             WallEsMessages.messagesProvider().WriteInfo( message );
-        
-        this.RaiseEvent( new RobotEngineChangeEventArgs( RobotEngineChangeType.MESSAGE_POSTED , message ) );
     }
     
     /**

@@ -11,13 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import tp.pr5.utils.events.EventHandler;
 import tp.pr5.utils.events.EventSender;
+import tp.pr5.utils.events.WALLE.RobotEngineChangeEventArgs;
+import tp.pr5.utils.events.WALLE.RobotEngineChangeType;
 
 /**
  * Swing panel for information label.
  * @author
  * Manuel Sánchez
  */
-public class InfoLabelPanel extends JPanel implements EventHandler<String> {
+public class InfoLabelPanel extends JPanel implements EventHandler<RobotEngineChangeEventArgs> {
     private JLabel _info_label;
     
     /**
@@ -36,7 +38,8 @@ public class InfoLabelPanel extends JPanel implements EventHandler<String> {
     }
     
     @Override
-    public void update(EventSender sender, String args) {
-        _info_label.setText(args);
+    public void update(EventSender sender, RobotEngineChangeEventArgs args) {
+        if( args.getChangeType() == RobotEngineChangeType.MESSAGE_POSTED )
+            _info_label.setText( args.getMessage() );
     }   
 }

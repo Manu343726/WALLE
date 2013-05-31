@@ -10,6 +10,7 @@ import tp.pr5.Direction;
  * This class manages input from the graphical user inteface.
  * @author usuario_local
  */
+@Deprecated //Multiview implemented with one-controller-per-window method, not shared controller. Multiple views input manager (aka global variable with last inputs) is not needed.
 public class GUIInputManager {
     private static GUIInputManager _instance; //Singleton instance
     
