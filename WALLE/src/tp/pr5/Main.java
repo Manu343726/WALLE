@@ -31,13 +31,13 @@ public class Main {
     
     //Args description:
     private static final String COMMANDLINE_ARGS_DESCRIPTION_MAPFILE  = "File with the description of the city";
-    private static final String COMMANDLINE_ARGS_DESCRIPTION_VIEWMODE = "The type of the interface: console or swing";
+    private static final String COMMANDLINE_ARGS_DESCRIPTION_VIEWMODE = "The type of interface: console, swing or both";
     private static final String COMMANDLINE_ARGS_DESCRIPTION_HELP     = "Shows this help message";
     
     //Options names:
-    private static final String COMMANDLINE_ARGS_ARGNAME_MAPFILE  = COMMANDLINE_ARGS_MAPFILE;
-    private static final String COMMANDLINE_ARGS_ARGNAME_VIEWMODE = COMMANDLINE_ARGS_VIEWMODE;
-    private static final String COMMANDLINE_ARGS_ARGNAME_HELP     = COMMANDLINE_ARGS_HELP;
+    private static final String COMMANDLINE_ARGS_ARGNAME_MAPFILE  = "mapfile";
+    private static final String COMMANDLINE_ARGS_ARGNAME_VIEWMODE = "type";
+    private static final String COMMANDLINE_ARGS_ARGNAME_HELP     = "help";
     
     private static class InputArgs
     {
@@ -86,17 +86,17 @@ public class Main {
      * Sets up the application
      * @param cmd Command line input. 
      */
-    public static InputArgs parseArgs(String args[] , Options options) throws ParseException, FileNotFoundException
+    private static InputArgs parseArgs(String args[] , Options options) throws ParseException, FileNotFoundException
     {
         CommandLine cmd = new BasicParser().parse( options , args);
         
         int exitCode = 0;
         CityLoaderFromTxtFile loader = new CityLoaderFromTxtFile();
         
-        String mapfile = cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_MAPFILE );
-        ApplicationMode appMode = ApplicationMode.parse( cmd.getOptionValue( COMMANDLINE_ARGS_ARGNAME_VIEWMODE ) );
+        String mapfile = cmd.getOptionValue( COMMANDLINE_ARGS_LONG_MAPFILE );
+        ApplicationMode appMode = ApplicationMode.parse( cmd.getOptionValue( COMMANDLINE_ARGS_LONG_VIEWMODE ) );
         
-        return new InputArgs( cmd.hasOption( COMMANDLINE_ARGS_ARGNAME_HELP ) , mapfile , appMode);
+        return new InputArgs( cmd.hasOption( COMMANDLINE_ARGS_LONG_HELP ) , mapfile , appMode);
     }
     
     /**

@@ -25,7 +25,6 @@ import javax.swing.SwingConstants;
 
 
 import tp.pr5.RobotEngine;
-import tp.pr5.gui.InfoLabelUpdater;
 import tp.pr5.gui.driver.GUIController;
 
 

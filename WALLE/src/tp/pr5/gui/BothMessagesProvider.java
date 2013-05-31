@@ -4,10 +4,8 @@
  */
 package tp.pr5.gui;
 
-import tp.pr5.messaging.MessagesProvider;
-import tp.pr5.messaging.MessagesProvider;
-import tp.pr5.messaging.StandardMessagesProvider;
-import tp.pr5.messaging.StandardMessagesProvider;
+import tp.pr5.messaging.*;
+import tp.pr5.console.*;
 
 /**
  * This class provides a message provider that executes both modes, GUI and console.
@@ -16,7 +14,7 @@ import tp.pr5.messaging.StandardMessagesProvider;
  */
 public class BothMessagesProvider extends MessagesProvider { 
     private GUIMessagesProvider _gui_provider;
-    private StandardMessagesProvider _console_provider;
+    private ConsoleMessagesProvider _console_provider;
     
     /**
      * Ctor
@@ -25,7 +23,7 @@ public class BothMessagesProvider extends MessagesProvider {
     public BothMessagesProvider(boolean showInfoMessages)
     {
         _gui_provider = new GUIMessagesProvider(showInfoMessages);
-        _console_provider = new StandardMessagesProvider();
+        _console_provider = new ConsoleMessagesProvider();
     }
     
     /**

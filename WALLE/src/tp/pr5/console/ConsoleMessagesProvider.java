@@ -2,22 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp.pr5.messaging;
+package tp.pr5.console;
 
 import java.io.PrintStream;
+import tp.pr5.messaging.MessagesProvider;
 
 /**
  * Represents a message provider that uses the standard output stream
  * @author
  * Laura María de Castro Saturio , Manuel Sánchez Pérez
  */
-public class StandardMessagesProvider extends MessagesProvider {
+public class ConsoleMessagesProvider extends MessagesProvider {
     private PrintStream _outputStream;
     
     /**
      * Creates a message provider that uses the specified output stream.
      */
-    public StandardMessagesProvider(PrintStream outputStream)
+    public ConsoleMessagesProvider(PrintStream outputStream)
     {
         _outputStream = outputStream;
     }
@@ -25,7 +26,7 @@ public class StandardMessagesProvider extends MessagesProvider {
     /**
      * Creates a message provider that uses the standard output stream.
      */
-    public StandardMessagesProvider()
+    public ConsoleMessagesProvider()
     {
         _outputStream = System.out;
     }

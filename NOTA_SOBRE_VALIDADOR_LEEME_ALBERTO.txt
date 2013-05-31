@@ -1,0 +1,15 @@
+La ejecución de los tests 8 y 9 me da una correspondencia de poco más del 95%. 
+
+No me he matado en hacer la salida exacta (Soy consciente de que hay algunas cosillas que debería haber cambiado, como el formato de descripción de place).
+Pero me gustaría explicar por que el texto de final de juego (Cuando WALLE encuentra la nave, al final del test) sale diferente.
+
+Es debido al orden de lanzamiento/captura de los eventos que van de modelo a vista (MVC activo).
+En éste caso concreto, cuando el usuario ejecuta move, dicho comando provoca la actualización de current place del navigation module, el cual responde lanzando un
+evento de actualización, con tipo CHANGE_PLACE (En éste caso, en el cual el place de destino contiene la nave, el evento es CHANGE_CURRENTPLACE_EXIT). Dicho evento
+es capturado, entre otros, por ConsoleView (Si estas ejecutando en modo consola), el cual pinta bye bye y esas cosas. 
+Si se ve la implementación de MoveInstruction::execute(), se verá que la llamada a robotEngine::addFuel() va después de la llamada a navigation::move(), es decir,
+EL REFRESCO DE LA CONSOLA OCURRE ANTES DE LA ACTUALIZACION DEL FUEL. Por ese motivo muestra 60, no 55.
+Lo mismo ocurre con el formato (El salto de línea sale en orden inverso). 
+
+He tenido en cuenta todas éstas cosas, pero he decidido no modificarlo porque dicha modificación implicaría un cambio interno bastante importante del orden de actualización 
+(Captura/lanzamiento de updates), algo que me parece demasiado para un detalle que básicamente es una cuestión estética. 

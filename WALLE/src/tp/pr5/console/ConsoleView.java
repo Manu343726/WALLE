@@ -38,6 +38,16 @@ public class ConsoleView
     private class _NavigationModuleChangedHandler implements EventHandler<NavigationModuleChangedEventArgs>
     {
         private boolean _startup_refresh = true;
+        private RobotEngine _engine;
+        
+        /**
+         * Initialices navigation changes handler with the speficied engine.
+         * @param engine Reference to the application model.
+         */
+        public _NavigationModuleChangedHandler(RobotEngine engine)
+        {
+            _engine = engine;
+        }
         
         @Override
         public void update(EventSender sender, NavigationModuleChangedEventArgs args) 
@@ -45,7 +55,11 @@ public class ConsoleView
             System.err.println( "NavigationModule updated!!!" );
             
             if( args.getChangeType() == NavigationModuleChangeType.CHANGE_CURRENTPLACE_EXIT )
+            {
+                _engine.printRobotState(false, true, false);//HORROR VALIDADOR DE LOS HUEEEEVOS
+                //WallEsMessages.messagesProvider().WriteInfo( args.getCurrentPlace().toString() );//Validador de los cojones
                 WallEsMessages.messagesProvider().WriteInfo( WallEsMessages.SHIPFINDED , true);
+            }
         
             if( _startup_refresh && args.getChangeType() == NavigationModuleChangeType.CHANGE_CURRENTPLACE )
             {
@@ -70,7 +84,7 @@ public class ConsoleView
     
     public ConsoleView( RobotEngine engine )
     {
-        engine.addNavigationObserver( new _NavigationModuleChangedHandler() );
+        engine.addNavigationObserver( new _NavigationModuleChangedHandler( engine ) );
         engine.addItemsObserver( new _ItemContainerChangedHandler() );
         engine.AddHandler( new _RobotEngineChangedHandler() );  
     }

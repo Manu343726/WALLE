@@ -3,6 +3,7 @@ package tp.pr5.messaging;
 import tp.pr5.gui.BothMessagesProvider;
 import tp.pr5.gui.GUIMessagesProvider;
 import tp.pr5.ApplicationMode;
+import tp.pr5.console.ConsoleMessagesProvider;
 
 /***CLASS WALLES MESSAGES***/
 /**
@@ -63,7 +64,7 @@ public abstract class WallEsMessages {
         switch( appMode )
         {
             case CONSOLE:
-                _messagesProvider = new StandardMessagesProvider( System.out ); break;
+                _messagesProvider = new ConsoleMessagesProvider( System.out ); break;
             case GUI:
                 _messagesProvider = new GUIMessagesProvider( false );           break;
             case BOTH:
