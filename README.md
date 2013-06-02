@@ -15,6 +15,7 @@ Validador
 ----------
 
 El repositorio incluye un archivo zip (Grupo65.zip) en su directorio raiz, totalmente listo para ser validado.
+Además se incluye una serie de anotaciones sobre los resultados de los tests (Archivo "NOTA_SOBRE_VALIDADOR_LEEME_ALBERTO.txt"). 
 
 Backup de las prácticas:
 ------------------------

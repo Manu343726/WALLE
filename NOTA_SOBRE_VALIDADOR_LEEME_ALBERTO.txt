@@ -13,3 +13,5 @@ Lo mismo ocurre con el formato (El salto de línea sale en orden inverso).
 
 He tenido en cuenta todas éstas cosas, pero he decidido no modificarlo porque dicha modificación implicaría un cambio interno bastante importante del orden de actualización 
 (Captura/lanzamiento de updates), algo que me parece demasiado para un detalle que básicamente es una cuestión estética. 
+
+PD: No se si has leido el README del repo, si no es así, por favor leelo. Contiene una descripción de la organización del repo, donde está cada cosa, etc.
