@@ -25,3 +25,5 @@ https://www.dropbox.com/sh/tvfh9u69wl6de0d/Qb92cplzhy
 
 He marcado el repositorio como público para que puedas acceder en el caso de que hubiera algún problema con el zip de la entrega (No debería). Así puedes acceder a la lista de versiones de la práctica (Rama master).
 https://github.com/Manu343726/WALLE
+
+**Nota: He eliminado los metadatos del repositorio (.git) para que el repo cupiera en el zip (Los metadatos ocupaban cerca de 9MB)**
