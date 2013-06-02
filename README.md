@@ -20,7 +20,8 @@ Además se incluye una serie de anotaciones sobre los resultados de los tests (A
 Backup de las prácticas:
 ------------------------
 
-Además del repositorio, las prácticas están sincronizadas en mi cuenta de dropbox: https://www.dropbox.com/sh/tvfh9u69wl6de0d/Qb92cplzhy
+Además del repositorio, las prácticas están sincronizadas en mi cuenta de dropbox: 
+https://www.dropbox.com/sh/tvfh9u69wl6de0d/Qb92cplzhy
 
 He marcado el repositorio como público para que puedas acceder en el caso de que hubiera algún problema con el zip de la entrega (No debería). Así puedes acceder a la lista de versiones de la práctica (Rama master).
 https://github.com/Manu343726/WALLE
